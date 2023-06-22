@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `enabled` TINYINT NOT NULL,
   `user_id` INT NOT NULL,
   `blog_id` INT NOT NULL,
-  `inreplyto_id` INT NULL,
+  `inreplyto_id` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_comment_user1_idx` (`user_id` ASC),
   INDEX `fk_comment_blog1_idx` (`blog_id` ASC),
@@ -509,8 +509,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `journeyjournalsdb`;
-INSERT INTO `comment` (`id`, `title`, `body`, `created_at`, `updated_at`, `enabled`, `user_id`, `blog_id`, `inreplyto_id`) VALUES (1, 'Awesome!', 'Great pics! I want to visit one day.', '2023-06-21 11:11:11', NULL, 1, 1, 1, NULL);
-INSERT INTO `comment` (`id`, `title`, `body`, `created_at`, `updated_at`, `enabled`, `user_id`, `blog_id`, `inreplyto_id`) VALUES (2, 'Oh, Buenos Aires!', 'The mere mention of this vibrant city fills me with an irresistible desire to explore its eclectic neighborhoods, dance to the passionate beats of tango, indulge in mouthwatering empanadas, and get lost in the enchanting blend of European charm and Latin American flair. From its stunning architecture to its lively street art scene, Buenos Aires beckons me with promises of unforgettable experiences and a vibrant cultural tapestry that I simply cannot resist.', '2023-06-22 15:33:36', NULL, 1, 2, 2, NULL);
+INSERT INTO `comment` (`id`, `title`, `body`, `created_at`, `updated_at`, `enabled`, `user_id`, `blog_id`, `inreplyto_id`) VALUES (1, 'Awesome!', 'Great pics! I want to visit one day.', '2023-06-21 11:11:11', NULL, 1, 1, 1, null);
+INSERT INTO `comment` (`id`, `title`, `body`, `created_at`, `updated_at`, `enabled`, `user_id`, `blog_id`, `inreplyto_id`) VALUES (2, 'Oh, Buenos Aires!', 'The mere mention of this vibrant city fills me with an irresistible desire to explore its eclectic neighborhoods, dance to the passionate beats of tango, indulge in mouthwatering empanadas, and get lost in the enchanting blend of European charm and Latin American flair. From its stunning architecture to its lively street art scene, Buenos Aires beckons me with promises of unforgettable experiences and a vibrant cultural tapestry that I simply cannot resist.', '2023-06-22 15:33:36', NULL, 1, 2, 1, 1);
 
 COMMIT;
 
