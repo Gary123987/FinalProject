@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +19,10 @@ public class Category {
 	
 	private String name;
 	
+	public Category() {
+		super();
+	}
+	
 	@ManyToMany(mappedBy = "categories")
 	private List<Blog> blogs;
 
@@ -28,10 +33,24 @@ public class Category {
 	public void setBlogs(List<Blog> blogs) {
 		this.blogs = blogs;
 	}
+	
+	public void addBlog(Blog blog) {
+		if(blogs == null) {blogs = new ArrayList<>();}
+		if(!blogs.contains(blog)) {
+			blogs.add(blog);
+			blog.addCategory(this);
+		}
 
-	public Category() {
-		super();
 	}
+
+	public void removeBlog(Blog blog) {
+		if(blogs != null && blogs.contains(blog)) {
+			blogs.remove(blog);
+			blog.removeCategory(this);
+		}
+
+	}
+
 
 	public int getId() {
 		return id;

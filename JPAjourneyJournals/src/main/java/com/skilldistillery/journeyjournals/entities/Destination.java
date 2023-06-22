@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,43 +17,46 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Destination {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String city;
-	
-	@Column(name="state_province")
+
+	@Column(name = "state_province")
 	private String state;
-	
+
 	private String name;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	private String description;
-	
+
 	private boolean enabled;
-	
+
 	@ManyToOne
-	@JoinColumn(name="country_id")
+	@JoinColumn(name = "country_id")
 	private Country country;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User userCreated;
-	
+
 	@ManyToMany
-	@JoinTable(name = "favorite_destination", joinColumns = @JoinColumn(name="destination_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	@JoinTable(name = "favorite_destination", joinColumns = @JoinColumn(name = "destination_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersFavorited;
-	
-	@OneToMany(mappedBy = "destination")	
+
+	@OneToMany(mappedBy = "destination")
 	private List<DestinationImage> images;
-	
+
 	@OneToMany(mappedBy = "destination")
 	private List<Place> places;
 
+	public Destination() {
+		super();
+	}
 
 	public List<Place> getPlaces() {
 		return places;
@@ -62,12 +66,57 @@ public class Destination {
 		this.places = places;
 	}
 
+	public void addPlace(Place place) {
+		if (places == null) {
+			places = new ArrayList<>();
+		}
+		if (!places.contains(place)) {
+			places.add(place);
+			if (place.getDestination() != null) {
+				place.getDestination().removePlace(place);
+			}
+			place.setDestination(this);
+		}
+
+	}
+
+	public void removePlace(Place place) {
+		if (places != null && places.contains(place)) {
+			places.remove(place);
+			place.setDestination(this);
+		}
+
+	}
+
 	public List<DestinationImage> getImages() {
 		return images;
 	}
 
 	public void setImages(List<DestinationImage> images) {
 		this.images = images;
+	}
+	
+
+	public void addImage(DestinationImage image) {
+		if (images == null) {
+			images = new ArrayList<>();
+		}
+		if (!images.contains(image)) {
+			images.add(image);
+			if (image.getDestination() != null) {
+				image.getDestination().removeImage(image);
+			}
+			image.setDestination(this);
+		}
+
+	}
+
+	public void removeImage(DestinationImage image) {
+		if (images != null && images.contains(image)) {
+			images.remove(image);
+			image.setDestination(this);
+		}
+
 	}
 
 	public User getUserCreated() {
@@ -85,6 +134,23 @@ public class Destination {
 	public void setUsersFavorited(List<User> usersFavorited) {
 		this.usersFavorited = usersFavorited;
 	}
+	
+	public void addUser(User user) {
+		if(usersFavorited == null) {usersFavorited = new ArrayList<>();}
+		if(!usersFavorited.contains(user)) {
+			usersFavorited.add(user);
+			user.addDestination(this);
+		}
+
+	}
+
+	public void removeUser(User user) {
+		if(usersFavorited != null && usersFavorited.contains(user)) {
+			usersFavorited.remove(user);
+			user.removeDestination(this);
+		}
+
+	}
 
 	public Country getCountry() {
 		return country;
@@ -92,10 +158,6 @@ public class Destination {
 
 	public void setCountry(Country country) {
 		this.country = country;
-	}
-
-	public Destination() {
-		super();
 	}
 
 	public int getId() {
@@ -176,7 +238,5 @@ public class Destination {
 		Destination other = (Destination) obj;
 		return id == other.id;
 	}
-	
-	
 
 }

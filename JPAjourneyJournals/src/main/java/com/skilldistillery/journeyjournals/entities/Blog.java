@@ -2,6 +2,7 @@ package com.skilldistillery.journeyjournals.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,53 +23,56 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Blog {
-	
+
 	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String title;
-	
+
 	private String description;
-	
-	@Column(name="trip_start")
+
+	@Column(name = "trip_start")
 	private LocalDate tripStart;
 
-	@Column(name="trip_end")
+	@Column(name = "trip_end")
 	private LocalDate tripEnd;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
+
 	@UpdateTimestamp
-	@Column(name="updated_at")
+	@Column(name = "updated_at")
 	private LocalDateTime updatedAt;
-	
+
 	private boolean enabled;
 
 	@CreationTimestamp
-	@Column(name="created_at")
+	@Column(name = "created_at")
 	private LocalDateTime createdAt;
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@OneToOne
-	@JoinColumn(name="place_id")
+	@JoinColumn(name = "place_id")
 	private Place place;
-	
+
 	@ManyToMany
-	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name="blog_id"), inverseJoinColumns = @JoinColumn(name="category_id"))
+	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name = "blog_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
-	
+
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
-	
-	@OneToMany(mappedBy="blog")
+
+	@OneToMany(mappedBy = "blog")
 	private List<BlogRating> ratings;
-	
-	
+
+	public Blog() {
+		super();
+	}
+
 	public List<BlogRating> getRatings() {
 		return ratings;
 	}
@@ -77,20 +81,81 @@ public class Blog {
 		this.ratings = ratings;
 	}
 
+	public void addBlogRating(BlogRating rating) {
+		if (ratings == null) {
+			ratings = new ArrayList<>();
+		}
+		if (!ratings.contains(rating)) {
+			ratings.add(rating);
+			if (rating.getBlog() != null) {
+				rating.getBlog().removeBlogRating(rating);
+			}
+			rating.setBlog(this);
+		}
+
+	}
+
+	public void removeBlogRating(BlogRating rating) {
+		if (ratings != null && ratings.contains(rating)) {
+			ratings.remove(rating);
+			rating.setBlog(this);
+		}
+
+	}
+
 	public List<Comment> getComments() {
 		return comments;
-	}
-	
-	public List<Category> getCategories() {
-		return categories;
-	}
-	
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
 	}
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public void addComment(Comment comment) {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+			if (comment.getBlog() != null) {
+				comment.getBlog().removeComment(comment);
+			}
+			comment.setBlog(this);
+		}
+
+	}
+
+	public void removeComment(Comment comment) {
+		if (comments != null && comments.contains(comment)) {
+			comments.remove(comment);
+			comment.setBlog(this);
+		}
+
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
+	public void addCategory(Category category) {
+		if(categories == null) {categories = new ArrayList<>();}
+		if(!categories.contains(category)) {
+			categories.add(category);
+			category.addBlog(this);
+		}
+
+	}
+
+	public void removeCategory(Category category) {
+		if(categories != null && categories.contains(category)) {
+			categories.remove(category);
+			category.removeBlog(this);
+		}
+
 	}
 
 	public Place getPlace() {
@@ -107,11 +172,6 @@ public class Blog {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-
-	public Blog() {
-		super();
 	}
 
 	public int getId() {
@@ -209,8 +269,5 @@ public class Blog {
 		Blog other = (Blog) obj;
 		return id == other.id;
 	}
-	
-	
-	
-	
+
 }

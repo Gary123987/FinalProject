@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +24,10 @@ public class Continent {
 	@OneToMany(mappedBy = "continent")
 	private List<Country> countries;
 
+	public Continent() {
+		super();
+	}
+
 	public List<Country> getCountries() {
 		return countries;
 	}
@@ -31,8 +36,27 @@ public class Continent {
 		this.countries = countries;
 	}
 
-	public Continent() {
-		super();
+	
+	public void addCountry(Country country) {
+		if (countries == null) {
+			countries  = new ArrayList<>();
+		}
+		if (!countries.contains(country)) {
+			countries.add(country);
+			if (country.getContinent()!= null) {
+				country.getContinent().removeCountry(country);
+			}
+			country.setContinent(this);
+		}
+
+	}
+
+	public void removeCountry(Country country) {
+		if (countries != null && countries.contains(country)) {
+			countries.remove(country);
+			country.setContinent(this);
+		}
+
 	}
 
 	public int getId() {

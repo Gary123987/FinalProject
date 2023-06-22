@@ -1,6 +1,7 @@
 package com.skilldistillery.journeyjournals.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,79 +20,104 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class User {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String username;
-	
-	@Column(name="first_name")
+
+	@Column(name = "first_name")
 	private String firstName;
-	
-	@Column(name="last_name")
+
+	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private String password;
-	
+
 	private String about;
-	
-	@Column(name="image_url")
+
+	@Column(name = "image_url")
 	private String imageUrl;
-	
-	@Column(name="created_at")
+
+	@Column(name = "created_at")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
-	@Column(name="updated_at")
+
+	@Column(name = "updated_at")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Blog> blogs;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
-	
-	@OneToMany(mappedBy="userCreated")
+
+	@OneToMany(mappedBy = "userCreated")
 	private List<Destination> destinationsCreated;
-	
-	@ManyToMany(mappedBy="usersFavorited")
+
+	@ManyToMany(mappedBy = "usersFavorited")
 	private List<Destination> favoriteDestinations;
-	
+
 	@ManyToMany
-	@JoinTable(name = "user_follower", joinColumns = @JoinColumn(name="followed_id"), inverseJoinColumns = @JoinColumn(name="follower_id"))
+	@JoinTable(name = "user_follower", joinColumns = @JoinColumn(name = "followed_id"), inverseJoinColumns = @JoinColumn(name = "follower_id"))
 	private List<User> following;
-	
-	@ManyToMany(mappedBy="following")
+
+	@ManyToMany(mappedBy = "following")
 	private List<User> followers;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<Place> placesCreated;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<DestinationImage> destinationImages;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<PlaceImage> placeImages;
-	
-	public List<PlaceImage> getPlaceImages() {
-		return placeImages;
-	}
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<BlogRating> blogRatings;
-	
-	@OneToMany(mappedBy="user")
+
+	@OneToMany(mappedBy = "user")
 	private List<PlaceRating> placeRatings;
-	
+
+	private String role;
+
+	private boolean enabled;
+
+	public User() {
+		super();
+	}
+
 	public List<BlogRating> getBlogRatings() {
 		return blogRatings;
 	}
 
 	public void setBlogRatings(List<BlogRating> blogRatings) {
 		this.blogRatings = blogRatings;
+	}
+
+	public void addBlogRating(BlogRating rating) {
+		if (blogRatings == null) {
+			blogRatings = new ArrayList<>();
+		}
+		if (!blogRatings.contains(rating)) {
+			blogRatings.add(rating);
+			if (rating.getUser() != null) {
+				rating.getUser().removeBlogRating(rating);
+			}
+			rating.setUser(this);
+		}
+
+	}
+
+	public void removeBlogRating(BlogRating rating) {
+		if (blogRatings != null && blogRatings.contains(rating)) {
+			blogRatings.remove(rating);
+			rating.setUser(this);
+		}
+
 	}
 
 	public List<PlaceRating> getPlaceRatings() {
@@ -102,16 +128,86 @@ public class User {
 		this.placeRatings = placeRatings;
 	}
 
+	public void addPlaceRating(PlaceRating rating) {
+		if (placeRatings == null) {
+			placeRatings = new ArrayList<>();
+		}
+		if (!placeRatings.contains(rating)) {
+			placeRatings.add(rating);
+			if (rating.getUser() != null) {
+				rating.getUser().removePlaceRating(rating);
+			}
+			rating.setUser(this);
+		}
+
+	}
+
+	public void removePlaceRating(PlaceRating rating) {
+		if (placeRatings != null && placeRatings.contains(rating)) {
+			placeRatings.remove(rating);
+			rating.setUser(this);
+		}
+
+	}
+
+	public List<PlaceImage> getPlaceImages() {
+		return placeImages;
+	}
+
 	public void setPlaceImages(List<PlaceImage> placeImages) {
 		this.placeImages = placeImages;
 	}
-	
+
+	public void addPlaceImage(PlaceImage image) {
+		if (placeImages == null) {
+			placeImages = new ArrayList<>();
+		}
+		if (!placeImages.contains(image)) {
+			placeImages.add(image);
+			if (image.getUser() != null) {
+				image.getUser().removePlaceImage(image);
+			}
+			image.setUser(this);
+		}
+
+	}
+
+	public void removePlaceImage(PlaceImage image) {
+		if (placeImages != null && placeImages.contains(image)) {
+			placeImages.remove(image);
+			image.setUser(this);
+		}
+
+	}
+
 	public List<DestinationImage> getDestinationImages() {
 		return destinationImages;
 	}
 
 	public void setDestinationImages(List<DestinationImage> destinationImages) {
 		this.destinationImages = destinationImages;
+	}
+
+	public void addDestinationImage(DestinationImage image) {
+		if (destinationImages == null) {
+			destinationImages = new ArrayList<>();
+		}
+		if (!destinationImages.contains(image)) {
+			destinationImages.add(image);
+			if (image.getUser() != null) {
+				image.getUser().removeDestinationImage(image);
+			}
+			image.setUser(this);
+		}
+
+	}
+
+	public void removeDestinationImage(DestinationImage image) {
+		if (destinationImages != null && destinationImages.contains(image)) {
+			destinationImages.remove(image);
+			image.setUser(this);
+		}
+
 	}
 
 	public List<Place> getPlacesCreated() {
@@ -122,12 +218,53 @@ public class User {
 		this.placesCreated = placesCreated;
 	}
 
+	
+	public void addPlace(Place place) {
+		if (placesCreated == null) {
+			placesCreated = new ArrayList<>();
+		}
+		if (!placesCreated.contains(place)) {
+			placesCreated.add(place);
+			if (place.getUser() != null) {
+				place.getUser().removePlace(place);
+			}
+			place.setUser(this);
+		}
+
+	}
+
+	public void removePlace(Place place) {
+		if (placesCreated != null && placesCreated.contains(place)) {
+			placesCreated.remove(place);
+			place.setUser(this);
+		}
+
+	}
 	public List<User> getFollowing() {
 		return following;
 	}
 
 	public void setFollowing(List<User> following) {
 		this.following = following;
+	}
+	
+	public void addFollowing(User user) {
+		if (following == null) {
+			following = new ArrayList<>();
+		}
+		if (!following.contains(user)) {
+			following.add(user);
+			user.addFollowers(this);
+		}
+
+	}
+
+	public void removeFollowing(User user) {
+		if (following != null && following.contains(user)) {
+			following.remove(user);
+			user.removeFollowers(this);
+		}
+
 	}
 
 	public List<User> getFollowers() {
@@ -136,6 +273,25 @@ public class User {
 
 	public void setFollowers(List<User> followers) {
 		this.followers = followers;
+	}
+	
+	public void addFollowers(User user) {
+		if (followers == null) {
+			followers = new ArrayList<>();
+		}
+		if (!followers.contains(user)) {
+			followers.add(user);
+			user.addFollowing(this);
+		}
+
+	}
+
+	public void removeFollowers(User user) {
+		if (followers != null && followers.contains(user)) {
+			followers.remove(user);
+			user.removeFollowing(this);
+		}
+
 	}
 
 	public List<Destination> getFavoriteDestinations() {
@@ -146,12 +302,53 @@ public class User {
 		this.favoriteDestinations = favoriteDestinations;
 	}
 
+	public void addDestination(Destination des) {
+		if (favoriteDestinations == null) {
+			favoriteDestinations = new ArrayList<>();
+		}
+		if (!favoriteDestinations.contains(des)) {
+			favoriteDestinations.add(des);
+			des.addUser(this);
+		}
+
+	}
+
+	public void removeDestination(Destination des) {
+		if (favoriteDestinations != null && favoriteDestinations.contains(des)) {
+			favoriteDestinations.remove(des);
+			des.removeUser(this);
+		}
+
+	}
+
 	public List<Destination> getDestinationsCreated() {
 		return destinationsCreated;
 	}
 
 	public void setDestinationsCreated(List<Destination> destinationsCreated) {
 		this.destinationsCreated = destinationsCreated;
+	}
+	
+	public void addDesstinationsCreated(Destination des) {
+		if (destinationsCreated == null) {
+			destinationsCreated = new ArrayList<>();
+		}
+		if (!destinationsCreated.contains(des)) {
+			destinationsCreated.add(des);
+			if (des.getUserCreated() != null) {
+				des.getUserCreated().removeDestinaionCreated(des);
+			}
+			des.setUserCreated(this);
+		}
+
+	}
+
+	public void removeDestinaionCreated(Destination des) {
+		if (destinationsCreated != null && destinationsCreated.contains(des)) {
+			destinationsCreated.remove(des);
+			des.setUserCreated(this);
+		}
+
 	}
 
 	public List<Comment> getComments() {
@@ -162,6 +359,28 @@ public class User {
 		this.comments = comments;
 	}
 
+	public void addComment(Comment comment) {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+			if (comment.getUser() != null) {
+				comment.getUser().removeComment(comment);
+			}
+			comment.setUser(this);
+		}
+
+	}
+
+	public void removeComment(Comment comment) {
+		if (comments != null && comments.contains(comment)) {
+			comments.remove(comment);
+			comment.setUser(this);
+		}
+
+	}
+
 	public List<Blog> getBlogs() {
 		return blogs;
 	}
@@ -170,12 +389,26 @@ public class User {
 		this.blogs = blogs;
 	}
 
-	private String role;
-	
-	private boolean enabled;
+	public void addBlog(Blog blog) {
+		if (blogs == null) {
+			blogs = new ArrayList<>();
+		}
+		if (!blogs.contains(blog)) {
+			blogs.add(blog);
+			if (blog.getUser() != null) {
+				blog.getUser().removeBlog(blog);
+			}
+			blog.setUser(this);
+		}
 
-	public User() {
-		super();
+	}
+
+	public void removeBlog(Blog blog) {
+		if (blogs != null && blogs.contains(blog)) {
+			blogs.remove(blog);
+			blog.setUser(this);
+		}
+
 	}
 
 	public int getId() {
@@ -234,7 +467,6 @@ public class User {
 		this.imageUrl = imageUrl;
 	}
 
-
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -267,8 +499,6 @@ public class User {
 		this.enabled = enabled;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
@@ -292,7 +522,5 @@ public class User {
 		User other = (User) obj;
 		return id == other.id;
 	}
-	
-	
 
 }

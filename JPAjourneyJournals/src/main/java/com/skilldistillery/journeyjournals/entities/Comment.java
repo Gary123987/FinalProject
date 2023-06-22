@@ -1,6 +1,7 @@
 package com.skilldistillery.journeyjournals.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,9 +46,6 @@ public class Comment {
 	@JoinColumn(name="blog_id")
 	private Blog blog;
 	
-	public Comment getParentComment() {
-		return parentComment;
-	}
 	
 	@ManyToOne
 	@JoinColumn(name="inreplyto_id")
@@ -56,9 +54,10 @@ public class Comment {
 	@OneToMany(mappedBy = "parentComment")
 	private List<Comment> replies;
 
-	public void setParentComment(Comment parentComment) {
-		this.parentComment = parentComment;
+	public Comment() {
+		super();
 	}
+
 
 	public List<Comment> getReplies() {
 		return replies;
@@ -68,6 +67,28 @@ public class Comment {
 		this.replies = replies;
 	}
 
+	public void addReplies(Comment comment) {
+		if (replies == null) {
+			replies = new ArrayList<>();
+		}
+		if (!replies.contains(comment)) {
+			replies.add(comment);
+			if (comment.getParentComment() != null) {
+				comment.getParentComment().removeReplies(comment);
+			}
+			comment.setParentComment(this);
+		}
+
+	}
+
+	public void removeReplies(Comment comment) {
+		if (replies != null && replies.contains(comment)) {
+			replies.remove(comment);
+			comment.setParentComment(this);
+		}
+
+	}
+	
 
 	public Blog getBlog() {
 		return blog;
@@ -85,9 +106,6 @@ public class Comment {
 		this.user = user;
 	}
 
-	public Comment() {
-		super();
-	}
 
 	public int getId() {
 		return id;
@@ -135,6 +153,14 @@ public class Comment {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
 	}
 
 	@Override

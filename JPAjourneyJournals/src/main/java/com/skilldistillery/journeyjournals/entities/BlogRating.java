@@ -47,6 +47,10 @@ public class BlogRating {
 	@MapsId(value="blogId")
 	private Blog blog;
 
+	public BlogRating() {
+		super();
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -63,9 +67,6 @@ public class BlogRating {
 		this.blog = blog;
 	}
 
-	public BlogRating() {
-		super();
-	}
 
 	public BlogRatingId getId() {
 		return id;

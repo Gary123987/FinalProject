@@ -47,6 +47,10 @@ public class PlaceRating {
 	@MapsId(value="placeId")
 	private Place place;
 
+	public PlaceRating() {
+		super();
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -61,10 +65,6 @@ public class PlaceRating {
 
 	public void setPlace(Place place) {
 		this.place = place;
-	}
-
-	public PlaceRating() {
-		super();
 	}
 
 	public PlaceRatingId getId() {

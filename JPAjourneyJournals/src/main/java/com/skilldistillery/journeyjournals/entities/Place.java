@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,6 +59,28 @@ public class Place {
 	public void setRatings(List<PlaceRating> ratings) {
 		this.ratings = ratings;
 	}
+	
+	public void addPlaceRating(PlaceRating rating) {
+		if (ratings == null) {
+			ratings = new ArrayList<>();
+		}
+		if (!ratings.contains(rating)) {
+			ratings.add(rating);
+			if (rating.getPlace() != null) {
+				rating.getPlace().removePlaceRating(rating);
+			}
+			rating.setPlace(this);
+		}
+
+	}
+
+	public void removePlaceRating(PlaceRating rating) {
+		if (ratings != null && ratings.contains(rating)) {
+			ratings.remove(rating);
+			rating.setPlace(this);
+		}
+
+	}
 
 	public List<PlaceImage> getImages() {
 		return images;
@@ -65,6 +88,28 @@ public class Place {
 
 	public void setImages(List<PlaceImage> images) {
 		this.images = images;
+	}
+	
+	public void addPlaceImage(PlaceImage image) {
+		if (images == null) {
+			images = new ArrayList<>();
+		}
+		if (!images.contains(image)) {
+			images.add(image);
+			if (image.getPlace() != null) {
+				image.getPlace().removePlaceImage(image);
+			}
+			image.setPlace(this);
+		}
+
+	}
+
+	public void removePlaceImage(PlaceImage image) {
+		if (images != null && images.contains(image)) {
+			images.remove(image);
+			image.setPlace(this);
+		}
+
 	}
 
 	public User getUser() {
