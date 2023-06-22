@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Place {
@@ -27,6 +28,18 @@ public class Place {
 	private String imageUrl;
 	
 	private boolean enabled;
+	
+	@OneToOne(mappedBy = "place")
+	private Blog blog;
+	
+
+	public Blog getBlog() {
+		return blog;
+	}
+
+	public void setBlog(Blog blog) {
+		this.blog = blog;
+	}
 
 	public Place() {
 		super();

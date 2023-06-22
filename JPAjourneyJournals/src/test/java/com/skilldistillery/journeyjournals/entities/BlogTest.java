@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
-	
+class BlogTest {
+
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Blog blog;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,21 +31,22 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		blog = em.find(Blog.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		blog = null;
 	}
 
 	@Test
 	void test() {
-		assertNotNull(user);
-		assertEquals("admin", user.getUsername());
-		assertTrue(user.getBlogs().size() > 0);
-		assertTrue(user.getBlogs().contains(em.find(Blog.class, 1)));
+		assertNotNull(blog);
+		assertEquals("Things to do in Los Angeles", blog.getTitle());
+		assertEquals(blog.getUser(), em.find(User.class, 1));
+		assertEquals(blog.getPlace().getName(), "Los Angeles");
+		assertTrue(blog.getCategories().contains(em.find(Category.class, 1)));
 	}
 
 }

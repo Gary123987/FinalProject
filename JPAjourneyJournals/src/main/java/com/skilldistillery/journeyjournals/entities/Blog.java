@@ -2,6 +2,7 @@ package com.skilldistillery.journeyjournals.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -37,10 +43,47 @@ public class Blog {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
 	@CreationTimestamp
 	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	@OneToOne
+	@JoinColumn(name="place_id")
+	private Place place;
+	
+	@ManyToMany
+	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name="blog_id"), inverseJoinColumns = @JoinColumn(name="category_id"))
+	private List<Category> categories;
+	
+	
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	private boolean enabled;
 
 	public Blog() {
