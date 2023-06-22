@@ -5,6 +5,19 @@
     
     <!-- Begin entities -->
 	
+	<class>com.skilldistillery.journeyjournals.entities.Blog</class>
+	<class>com.skilldistillery.journeyjournals.entities.BlogRating</class>
+	<class>com.skilldistillery.journeyjournals.entities.BlogRatingId</class>
+	<class>com.skilldistillery.journeyjournals.entities.Category</class>
+	<class>com.skilldistillery.journeyjournals.entities.Comment</class>
+	<class>com.skilldistillery.journeyjournals.entities.Continent</class>
+	<class>com.skilldistillery.journeyjournals.entities.Country</class>
+	<class>com.skilldistillery.journeyjournals.entities.Destination</class>
+	<class>com.skilldistillery.journeyjournals.entities.DestinationImage</class>
+	<class>com.skilldistillery.journeyjournals.entities.Place</class>
+	<class>com.skilldistillery.journeyjournals.entities.PlaceImage</class>
+	<class>com.skilldistillery.journeyjournals.entities.PlaceRating</class>
+	<class>com.skilldistillery.journeyjournals.entities.PlaceRatingId</class>
 	<class>com.skilldistillery.journeyjournals.entities.User</class>
 	
 

@@ -8,46 +8,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-public class User {
-	
+@Table(name="place_image")
+public class PlaceImage {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int id;
-	
-	private String username;
-	
-	@Column(name="first_name")
-	private String firstName;
-	
-	@Column(name="last_name")
-	private String lastName;
-	
-	private String password;
-	
-	private String about;
 	
 	@Column(name="image_url")
 	private String imageUrl;
-	
-	@Column(name="created_at")
+
 	@CreationTimestamp
+	@Column(name="created_at")
 	private LocalDateTime createdAt;
 	
-	@Column(name="updated_at")
 	@UpdateTimestamp
+	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
-	
-	private String role;
 	
 	private boolean enabled;
 
-	public User() {
+	public PlaceImage() {
 		super();
 	}
 
@@ -59,46 +46,6 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getAbout() {
-		return about;
-	}
-
-	public void setAbout(String about) {
-		this.about = about;
-	}
-
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -106,7 +53,6 @@ public class User {
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
 
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
@@ -124,14 +70,6 @@ public class User {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -140,13 +78,10 @@ public class User {
 		this.enabled = enabled;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", password=" + password + ", about=" + about + ", imageUrl=" + imageUrl + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", role=" + role + ", enabled=" + enabled + "]";
+		return "PlaceImage [id=" + id + ", imageUrl=" + imageUrl + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", enabled=" + enabled + "]";
 	}
 
 	@Override
@@ -162,10 +97,11 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		PlaceImage other = (PlaceImage) obj;
 		return id == other.id;
 	}
 	
 	
-
+	
+	
 }
