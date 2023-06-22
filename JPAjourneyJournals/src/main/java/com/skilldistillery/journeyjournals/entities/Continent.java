@@ -1,11 +1,13 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Continent {
@@ -17,6 +19,17 @@ public class Continent {
 	private String name;
 	
 	private String description;
+	
+	@OneToMany(mappedBy = "continent")
+	private List<Country> countries;
+
+	public List<Country> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(List<Country> countries) {
+		this.countries = countries;
+	}
 
 	public Continent() {
 		super();

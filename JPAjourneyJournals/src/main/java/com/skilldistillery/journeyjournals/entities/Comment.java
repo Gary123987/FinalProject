@@ -45,12 +45,29 @@ public class Comment {
 	@JoinColumn(name="blog_id")
 	private Blog blog;
 	
+	public Comment getParentComment() {
+		return parentComment;
+	}
+	
 	@ManyToOne
 	@JoinColumn(name="inreplyto_id")
 	private Comment parentComment;
 	
-	@OneToMany(mappedBy = "reply")
+	@OneToMany(mappedBy = "parentComment")
 	private List<Comment> replies;
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
+	public List<Comment> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Comment> replies) {
+		this.replies = replies;
+	}
+
 
 	public Blog getBlog() {
 		return blog;

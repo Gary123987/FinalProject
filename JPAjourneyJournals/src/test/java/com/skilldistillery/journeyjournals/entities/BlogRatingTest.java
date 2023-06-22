@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CommentTest {
+class BlogRatingTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Comment comment;
+	private BlogRating blogRating;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,27 +31,21 @@ class CommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		comment = em.find(Comment.class, 1);
+		blogRating = em.find(BlogRating.class, new BlogRatingId(1, 1));
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		comment = null;
+		blogRating = null;
 	}
 
 	@Test
 	void test() {
-		assertNotNull(comment);
-		assertEquals(comment.getTitle(), "Awesome!");
-		assertEquals(comment.getUser(), em.find(User.class, 1));
-		assertEquals(comment.getBlog(), em.find(Blog.class, 1));
-		assertTrue(comment.getReplies().contains(em.find(Comment.class, 2)));
-	}
-	@Test
-	void test2() {
-		Comment comment2 = em.find(Comment.class, 2);
-		assertEquals(comment2.getParentComment(), comment);
+		assertNotNull(blogRating);
+		assertEquals(blogRating.getBlog(), em.find(Blog.class, 1));
+		assertEquals(blogRating.getRatingValue(), 5);
+		assertEquals(blogRating.getUser(), em.find(User.class, 1));
 	}
 
 }

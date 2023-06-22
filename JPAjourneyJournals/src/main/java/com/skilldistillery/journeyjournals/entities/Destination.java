@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Destination {
@@ -28,6 +34,65 @@ public class Destination {
 	private String description;
 	
 	private boolean enabled;
+	
+	@ManyToOne
+	@JoinColumn(name="country_id")
+	private Country country;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User userCreated;
+	
+	@ManyToMany
+	@JoinTable(name = "favorite_destination", joinColumns = @JoinColumn(name="destination_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
+	private List<User> usersFavorited;
+	
+	@OneToMany(mappedBy = "destination")	
+	private List<DestinationImage> images;
+	
+	@OneToMany(mappedBy = "destination")
+	private List<Place> places;
+
+
+	public List<Place> getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(List<Place> places) {
+		this.places = places;
+	}
+
+	public List<DestinationImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<DestinationImage> images) {
+		this.images = images;
+	}
+
+	public User getUserCreated() {
+		return userCreated;
+	}
+
+	public void setUserCreated(User userCreated) {
+		this.userCreated = userCreated;
+	}
+
+	public List<User> getUsersFavorited() {
+		return usersFavorited;
+	}
+
+	public void setUsersFavorited(List<User> usersFavorited) {
+		this.usersFavorited = usersFavorited;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 
 	public Destination() {
 		super();

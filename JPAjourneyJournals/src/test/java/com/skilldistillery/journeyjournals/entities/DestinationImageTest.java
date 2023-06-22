@@ -1,6 +1,10 @@
 package com.skilldistillery.journeyjournals.entities;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,11 +16,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CommentTest {
-
+class DestinationImageTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Comment comment;
+	private DestinationImage destinationImage;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,27 +34,23 @@ class CommentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		comment = em.find(Comment.class, 1);
+		destinationImage = em.find(DestinationImage.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		comment = null;
+		destinationImage = null;
 	}
 
 	@Test
 	void test() {
-		assertNotNull(comment);
-		assertEquals(comment.getTitle(), "Awesome!");
-		assertEquals(comment.getUser(), em.find(User.class, 1));
-		assertEquals(comment.getBlog(), em.find(Blog.class, 1));
-		assertTrue(comment.getReplies().contains(em.find(Comment.class, 2)));
+		assertNotNull(destinationImage);
+		assertEquals(destinationImage.getCreatedAt().getYear(), 2023);
+		assertEquals(destinationImage.getDestination(), em.find(Destination.class, 1));
+		assertEquals(destinationImage.getUser(), em.find(User.class, 1));
 	}
-	@Test
-	void test2() {
-		Comment comment2 = em.find(Comment.class, 2);
-		assertEquals(comment2.getParentComment(), comment);
-	}
+	
+
 
 }

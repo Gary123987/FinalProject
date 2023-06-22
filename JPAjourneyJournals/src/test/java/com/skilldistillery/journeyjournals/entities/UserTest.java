@@ -47,6 +47,20 @@ class UserTest {
 		assertTrue(user.getBlogs().size() > 0);
 		assertTrue(user.getBlogs().contains(em.find(Blog.class, 1)));
 		assertTrue(user.getComments().contains(em.find(Comment.class, 1)));
+		assertTrue(user.getDestinationsCreated().contains(em.find(Destination.class, 1)));
+		assertTrue(user.getFavoriteDestinations().contains(em.find(Destination.class, 1)));
+		assertTrue(user.getFollowers().contains(em.find(User.class, 2)));
+		assertTrue(user.getPlacesCreated().contains(em.find(Place.class, 1)));
+		assertTrue(user.getDestinationImages().contains(em.find(DestinationImage.class, 1)));
+		assertTrue(user.getPlaceImages().contains(em.find(PlaceImage.class, 1)));
+		assertEquals(user.getBlogRatings().get(0).getRatingValue(), 5);
+		assertEquals(user.getPlaceRatings().get(0).getRatingValue(), 5);
+	}
+	
+	@Test
+	void test2 () {
+		User user2 = em.find(User.class, 2);
+		assertTrue(user2.getFollowing().contains(user));
 	}
 
 }

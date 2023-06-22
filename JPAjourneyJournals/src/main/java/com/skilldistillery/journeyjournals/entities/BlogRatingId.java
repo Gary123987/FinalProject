@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 
 @Embeddable
 public class BlogRatingId implements Serializable {
@@ -16,6 +19,7 @@ public class BlogRatingId implements Serializable {
 	
 	@Column(name="blog_id")
 	private int blogId;
+	
 
 	public BlogRatingId() {
 		super();

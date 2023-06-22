@@ -48,6 +48,7 @@ class BlogTest {
 		assertEquals(blog.getPlace().getName(), "Los Angeles");
 		assertTrue(blog.getCategories().contains(em.find(Category.class, 1)));
 		assertTrue(blog.getComments().contains(em.find(Comment.class, 1)));
+		assertEquals(5, blog.getRatings().get(0).getRatingValue());
 	}
 
 }

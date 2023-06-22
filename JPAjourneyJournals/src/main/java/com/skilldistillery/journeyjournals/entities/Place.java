@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -32,6 +36,52 @@ public class Place {
 	@OneToOne(mappedBy = "place")
 	private Blog blog;
 	
+	@ManyToOne
+	@JoinColumn(name="destination_id")
+	private Destination destination;
+	
+	@ManyToOne
+	@JoinColumn(name= "user_id")
+	private User user;
+	
+	@OneToMany(mappedBy="place")
+	private List<PlaceImage> images;
+	
+	@OneToMany(mappedBy="place")
+	private List<PlaceRating> ratings;
+	
+
+	public List<PlaceRating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<PlaceRating> ratings) {
+		this.ratings = ratings;
+	}
+
+	public List<PlaceImage> getImages() {
+		return images;
+	}
+
+	public void setImages(List<PlaceImage> images) {
+		this.images = images;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Destination getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Destination destination) {
+		this.destination = destination;
+	}
 
 	public Blog getBlog() {
 		return blog;

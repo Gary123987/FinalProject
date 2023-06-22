@@ -44,13 +44,7 @@ public class Blog {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
-	public List<Category> getCategories() {
-		return categories;
-	}
-
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
+	private boolean enabled;
 
 	@CreationTimestamp
 	@Column(name="created_at")
@@ -71,9 +65,28 @@ public class Blog {
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
 	
+	@OneToMany(mappedBy="blog")
+	private List<BlogRating> ratings;
 	
+	
+	public List<BlogRating> getRatings() {
+		return ratings;
+	}
+
+	public void setRatings(List<BlogRating> ratings) {
+		this.ratings = ratings;
+	}
+
 	public List<Comment> getComments() {
 		return comments;
+	}
+	
+	public List<Category> getCategories() {
+		return categories;
+	}
+	
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 
 	public void setComments(List<Comment> comments) {
@@ -96,7 +109,6 @@ public class Blog {
 		this.user = user;
 	}
 
-	private boolean enabled;
 
 	public Blog() {
 		super();

@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -51,6 +54,106 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 	
+	@OneToMany(mappedBy="userCreated")
+	private List<Destination> destinationsCreated;
+	
+	@ManyToMany(mappedBy="usersFavorited")
+	private List<Destination> favoriteDestinations;
+	
+	@ManyToMany
+	@JoinTable(name = "user_follower", joinColumns = @JoinColumn(name="followed_id"), inverseJoinColumns = @JoinColumn(name="follower_id"))
+	private List<User> following;
+	
+	@ManyToMany(mappedBy="following")
+	private List<User> followers;
+	
+	@OneToMany(mappedBy="user")
+	private List<Place> placesCreated;
+	
+	@OneToMany(mappedBy="user")
+	private List<DestinationImage> destinationImages;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlaceImage> placeImages;
+	
+	public List<PlaceImage> getPlaceImages() {
+		return placeImages;
+	}
+	
+	@OneToMany(mappedBy="user")
+	private List<BlogRating> blogRatings;
+	
+	@OneToMany(mappedBy="user")
+	private List<PlaceRating> placeRatings;
+	
+	public List<BlogRating> getBlogRatings() {
+		return blogRatings;
+	}
+
+	public void setBlogRatings(List<BlogRating> blogRatings) {
+		this.blogRatings = blogRatings;
+	}
+
+	public List<PlaceRating> getPlaceRatings() {
+		return placeRatings;
+	}
+
+	public void setPlaceRatings(List<PlaceRating> placeRatings) {
+		this.placeRatings = placeRatings;
+	}
+
+	public void setPlaceImages(List<PlaceImage> placeImages) {
+		this.placeImages = placeImages;
+	}
+	
+	public List<DestinationImage> getDestinationImages() {
+		return destinationImages;
+	}
+
+	public void setDestinationImages(List<DestinationImage> destinationImages) {
+		this.destinationImages = destinationImages;
+	}
+
+	public List<Place> getPlacesCreated() {
+		return placesCreated;
+	}
+
+	public void setPlacesCreated(List<Place> placesCreated) {
+		this.placesCreated = placesCreated;
+	}
+
+	public List<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(List<User> following) {
+		this.following = following;
+	}
+
+	public List<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(List<User> followers) {
+		this.followers = followers;
+	}
+
+	public List<Destination> getFavoriteDestinations() {
+		return favoriteDestinations;
+	}
+
+	public void setFavoriteDestinations(List<Destination> favoriteDestinations) {
+		this.favoriteDestinations = favoriteDestinations;
+	}
+
+	public List<Destination> getDestinationsCreated() {
+		return destinationsCreated;
+	}
+
+	public void setDestinationsCreated(List<Destination> destinationsCreated) {
+		this.destinationsCreated = destinationsCreated;
+	}
+
 	public List<Comment> getComments() {
 		return comments;
 	}

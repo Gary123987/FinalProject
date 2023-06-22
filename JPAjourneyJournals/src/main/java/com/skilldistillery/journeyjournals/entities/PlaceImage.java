@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,6 +34,30 @@ public class PlaceImage {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
+	@ManyToOne
+	@JoinColumn(name="place_id")
+	private Place place;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
 	private boolean enabled;
 
 	public PlaceImage() {
