@@ -549,12 +549,42 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `blog_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `journeyjournalsdb`;
+INSERT INTO `blog_category` (`category_id`, `blog_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `place_rating`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `journeyjournalsdb`;
 INSERT INTO `place_rating` (`rating_value`, `created_at`, `updated_at`, `enabled`, `user_id`, `place_id`, `rating_comment`) VALUES (5, '2023-06-21 11:11:11', NULL, 1, 1, 1, 'Cool!');
 INSERT INTO `place_rating` (`rating_value`, `created_at`, `updated_at`, `enabled`, `user_id`, `place_id`, `rating_comment`) VALUES (5, '2023-06-22 17:32:12', NULL, 1, 2, 2, 'Very Nice!');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_follower`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `journeyjournalsdb`;
+INSERT INTO `user_follower` (`followed_id`, `follower_id`) VALUES (2, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `favorite_destination`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `journeyjournalsdb`;
+INSERT INTO `favorite_destination` (`destination_id`, `user_id`) VALUES (1, 1);
 
 COMMIT;
 
