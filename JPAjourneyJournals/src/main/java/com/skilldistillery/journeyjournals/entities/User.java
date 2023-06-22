@@ -48,6 +48,17 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Blog> blogs;
 	
+	@OneToMany(mappedBy = "user")
+	private List<Comment> comments;
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public List<Blog> getBlogs() {
 		return blogs;
 	}

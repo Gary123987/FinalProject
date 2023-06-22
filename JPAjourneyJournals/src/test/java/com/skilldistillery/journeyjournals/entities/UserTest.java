@@ -46,6 +46,7 @@ class UserTest {
 		assertEquals("admin", user.getUsername());
 		assertTrue(user.getBlogs().size() > 0);
 		assertTrue(user.getBlogs().contains(em.find(Blog.class, 1)));
+		assertTrue(user.getComments().contains(em.find(Comment.class, 1)));
 	}
 
 }

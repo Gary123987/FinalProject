@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -67,7 +68,18 @@ public class Blog {
 	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name="blog_id"), inverseJoinColumns = @JoinColumn(name="category_id"))
 	private List<Category> categories;
 	
+	@OneToMany(mappedBy = "blog")
+	private List<Comment> comments;
 	
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public Place getPlace() {
 		return place;
 	}
