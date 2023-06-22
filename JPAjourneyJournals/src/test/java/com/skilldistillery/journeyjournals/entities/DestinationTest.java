@@ -44,7 +44,7 @@ class DestinationTest {
 	void test() {
 		assertNotNull(destination);
 		assertEquals(destination.getName(), "Los Angeles");
-		assertEquals(destination.getCountry(), em.find(Country.class, 1));
+		assertEquals(destination.getCountry(), em.find(Country.class, 172));
 		assertEquals(destination.getUserCreated(), em.find(User.class, 1));
 		assertTrue(destination.getUsersFavorited().contains(em.find(User.class, 1)));
 		assertTrue(destination.getImages().contains(em.find(DestinationImage.class, 1)));

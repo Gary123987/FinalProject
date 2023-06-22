@@ -31,7 +31,7 @@ class ContinentTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		continent = em.find(Continent.class, 1);
+		continent = em.find(Continent.class, 4);
 	}
 
 	@AfterEach
@@ -44,7 +44,7 @@ class ContinentTest {
 	void test() {
 		assertNotNull(continent);
 		assertEquals(continent.getName(), "North America");
-		assertTrue(continent.getCountries().contains(em.find(Country.class, 1)));
+		assertTrue(continent.getCountries().contains(em.find(Country.class, 172)));
 	}
 
 }

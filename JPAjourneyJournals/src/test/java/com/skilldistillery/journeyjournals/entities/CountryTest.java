@@ -43,9 +43,9 @@ class CountryTest {
 	@Test
 	void test() {
 		assertNotNull(country);
-		assertEquals(country.getName(), "United States");
-		assertEquals(country.getContinent(), em.find(Continent.class, 1));
-		assertTrue(country.getDestinations().contains(em.find(Destination.class, 1)));
+		assertEquals(country.getName(), "Antarctica");
+		assertEquals(country.getContinent(), em.find(Continent.class, 7));
+		assertTrue(country.getDestinations().contains(em.find(Destination.class, 3)));
 	}
 
 }
