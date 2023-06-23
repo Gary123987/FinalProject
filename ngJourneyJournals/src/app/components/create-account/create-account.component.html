@@ -1,0 +1,10 @@
+<form >
+  <input type="text" name="firstName" [(ngModel)] = "newUser.firstName" placeholder="first name"/> <br>
+  <input type="text" name="lastName" [(ngModel)] = "newUser.lastName" placeholder="last name"/> <br>
+  <input type="text" name="username" [(ngModel)] = "newUser.username" placeholder="username"/><br>
+  <input type="password" name="password" [(ngModel)] = "newUser.password" placeholder="password"/><br>
+  <input type="text" name="about" [(ngModel)] = "newUser.about" placeholder="about me"/><br>
+  <input type="text" name="imageUrl" [(ngModel)] = "newUser.imageUrl" placeholder="image (URL)" /><br>
+
+  <button type="submit" (click)="register(newUser)">Create Account</button>
+</form>

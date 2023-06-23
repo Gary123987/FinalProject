@@ -1,7 +1,10 @@
 export class User {
 
   id : number;
-  email :string;
+  firstName: string;
+  lastName: string;
+  about :string;
+  imageUrl: string;
   username:string;
   password:string;
   enabled: boolean;
@@ -10,14 +13,20 @@ export class User {
 
   constructor(
     id : number = 0,
-    email :string = '',
+    firstName: string = '',
+    lastName: string = '',
+    about :string = '',
+    imageUrl: string = '',
     username:string = '',
     password:string = '',
     enabled: boolean = true,
     role: string = ''
   ){
     this.id = id,
-    this.email = email,
+    this.firstName = firstName,
+    this.lastName = lastName,
+    this.about = about,
+    this.imageUrl = imageUrl,
     this.username = username,
     this.password = password,
     this.enabled = enabled,

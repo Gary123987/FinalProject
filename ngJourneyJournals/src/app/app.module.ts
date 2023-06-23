@@ -10,6 +10,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserHomeComponent } from './components/user-home/user-home.component';
     HomeComponent,
     LogoutComponent,
     NotfoundComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    CreateAccountComponent
   ],
   imports: [
     BrowserModule,
