@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Blog {
@@ -63,7 +63,6 @@ public class Blog {
 	@JoinColumn(name = "place_id")
 	private Place place;
 
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name = "blog_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
@@ -72,7 +71,7 @@ public class Blog {
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"blog"})
 	@OneToMany(mappedBy = "blog")
 	private List<BlogRating> ratings;
 

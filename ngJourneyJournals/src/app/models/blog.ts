@@ -21,11 +21,6 @@ export class Blog {
   user : User | null;
   place : Place | null;
 
-
-
-
-
-
   constructor(
   id = 0,
   title = '',
