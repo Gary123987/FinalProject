@@ -1,2 +1,12 @@
-<p>user-home works!</p>
+<ul *ngFor="let blog of blogs">
+<li>{{blog.title}}</li>
+<li>{{blog.description}}</li>
+<li>{{blog.tripStart}}</li>
+<li>{{blog.tripEnd}}</li>
+<ul *ngFor="let comment of blog.comments">
+  <li>{{comment.title}}</li>
 
+
+</ul>
+
+</ul>

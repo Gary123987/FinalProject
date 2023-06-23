@@ -27,7 +27,7 @@ public class BlogController {
 	@Autowired
 	private BlogService blogServ;
 	
-	@GetMapping("userBlogs")
+	@GetMapping("blogsUser")
 	private List<Blog> findBlogsByUser(HttpServletResponse res, Principal principal) {
 		List<Blog> blogs = blogServ.indexByUser(principal.getName());
 		
@@ -38,12 +38,12 @@ public class BlogController {
 		return blogs;
 	}
 	
-	@GetMapping("allBlogs")
+	@GetMapping("blogsAll")
 	private List<Blog> findAllBlogs() {
 		return blogServ.index();
 	}
 	
-	@GetMapping("blog/{id}")
+	@GetMapping("blogs/{id}")
 	private Blog findBlogById(@PathVariable int id, HttpServletResponse res) {
 		Blog blog = blogServ.show(id);
 		if(blog == null) {
@@ -53,7 +53,7 @@ public class BlogController {
 		return blog;
 	}
 	
-	@PostMapping("createBlogs")
+	@PostMapping("blogsCreate")
 	private Blog createBlogs(@RequestBody Blog blog, Principal principal, HttpServletResponse res) {
 		try {
 			Blog blogCreated = blogServ.create(principal.getName(), blog);
@@ -65,7 +65,7 @@ public class BlogController {
 		}	
 	}
 	
-	@PutMapping("updateBlogs/{id}")
+	@PutMapping("blogsUpdate/{id}")
 	private Blog updateBlogs(@RequestBody Blog blog, Principal principal, HttpServletResponse res, @PathVariable int id) {
 		 Blog newBlog = blogServ.update(principal.getName(), id, blog);
 		 if (newBlog == null) {
@@ -75,7 +75,7 @@ public class BlogController {
 		 return newBlog;
 	}
 	
-	@DeleteMapping("deleteBlogs/{id}")
+	@DeleteMapping("blogsDelete/{id}")
 	private void deleteBlogs(@PathVariable int id, Principal principal, HttpServletResponse res) {
 		boolean worked = blogServ.destroy(principal.getName(), id);
 		if (worked) {
