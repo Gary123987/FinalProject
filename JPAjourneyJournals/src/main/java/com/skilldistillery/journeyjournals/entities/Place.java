@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Place {
 	
@@ -34,8 +36,10 @@ public class Place {
 	
 	private boolean enabled;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "place")
 	private Blog blog;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="destination_id")
@@ -45,9 +49,11 @@ public class Place {
 	@JoinColumn(name= "user_id")
 	private User user;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="place")
 	private List<PlaceImage> images;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="place")
 	private List<PlaceRating> ratings;
 	

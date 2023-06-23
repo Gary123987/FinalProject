@@ -34,6 +34,7 @@ public class DestinationImage {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="destination_id")
 	private Destination destination;

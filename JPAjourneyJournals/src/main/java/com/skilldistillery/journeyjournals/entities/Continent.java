@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Continent {
 	
@@ -21,6 +23,8 @@ public class Continent {
 	
 	private String description;
 	
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "continent")
 	private List<Country> countries;
 

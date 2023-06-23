@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Country {
 	
@@ -21,6 +23,7 @@ public class Country {
 	
 	private String name;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="continent_id")
 	private Continent continent;
@@ -29,6 +32,7 @@ public class Country {
 		super();
 	}
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="country")
 	private List<Destination> destinations;
 

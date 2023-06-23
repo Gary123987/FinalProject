@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -48,37 +50,48 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Blog> blogs;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userCreated")
 	private List<Destination> destinationsCreated;
-
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "usersFavorited")
 	private List<Destination> favoriteDestinations;
+
 
 	@ManyToMany
 	@JoinTable(name = "user_follower", joinColumns = @JoinColumn(name = "followed_id"), inverseJoinColumns = @JoinColumn(name = "follower_id"))
 	private List<User> following;
-
+	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "following")
 	private List<User> followers;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Place> placesCreated;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<DestinationImage> destinationImages;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<PlaceImage> placeImages;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<BlogRating> blogRatings;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<PlaceRating> placeRatings;
 
@@ -218,7 +231,6 @@ public class User {
 		this.placesCreated = placesCreated;
 	}
 
-	
 	public void addPlace(Place place) {
 		if (placesCreated == null) {
 			placesCreated = new ArrayList<>();
@@ -240,6 +252,7 @@ public class User {
 		}
 
 	}
+
 	public List<User> getFollowing() {
 		return following;
 	}
@@ -247,7 +260,7 @@ public class User {
 	public void setFollowing(List<User> following) {
 		this.following = following;
 	}
-	
+
 	public void addFollowing(User user) {
 		if (following == null) {
 			following = new ArrayList<>();
@@ -274,7 +287,7 @@ public class User {
 	public void setFollowers(List<User> followers) {
 		this.followers = followers;
 	}
-	
+
 	public void addFollowers(User user) {
 		if (followers == null) {
 			followers = new ArrayList<>();
@@ -328,7 +341,7 @@ public class User {
 	public void setDestinationsCreated(List<Destination> destinationsCreated) {
 		this.destinationsCreated = destinationsCreated;
 	}
-	
+
 	public void addDesstinationsCreated(Destination des) {
 		if (destinationsCreated == null) {
 			destinationsCreated = new ArrayList<>();

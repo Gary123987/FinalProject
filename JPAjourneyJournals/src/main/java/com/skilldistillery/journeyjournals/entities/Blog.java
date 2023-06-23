@@ -21,6 +21,8 @@ import javax.persistence.OneToOne;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Blog {
 
@@ -50,22 +52,27 @@ public class Blog {
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
+
 	@OneToOne
 	@JoinColumn(name = "place_id")
 	private Place place;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name = "blog_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "blog")
 	private List<BlogRating> ratings;
 

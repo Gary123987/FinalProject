@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Category {
 	
@@ -23,6 +25,7 @@ public class Category {
 		super();
 	}
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "categories")
 	private List<Blog> blogs;
 

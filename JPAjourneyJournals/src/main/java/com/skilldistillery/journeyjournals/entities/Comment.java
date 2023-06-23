@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Comment {
 	
@@ -51,6 +53,7 @@ public class Comment {
 	@JoinColumn(name="inreplyto_id")
 	private Comment parentComment;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "parentComment")
 	private List<Comment> replies;
 

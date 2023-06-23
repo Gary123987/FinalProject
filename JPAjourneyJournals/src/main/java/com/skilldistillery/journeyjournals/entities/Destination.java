@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Destination {
 
@@ -36,6 +38,7 @@ public class Destination {
 
 	private boolean enabled;
 
+
 	@ManyToOne
 	@JoinColumn(name = "country_id")
 	private Country country;
@@ -44,13 +47,16 @@ public class Destination {
 	@JoinColumn(name = "user_id")
 	private User userCreated;
 
+
 	@ManyToMany
 	@JoinTable(name = "favorite_destination", joinColumns = @JoinColumn(name = "destination_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> usersFavorited;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "destination")
 	private List<DestinationImage> images;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "destination")
 	private List<Place> places;
 
