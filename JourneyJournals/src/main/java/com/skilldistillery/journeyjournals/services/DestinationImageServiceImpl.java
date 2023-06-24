@@ -24,25 +24,25 @@ public class DestinationImageServiceImpl implements DestinationImageService {
 	}
 
 	@Override
-	public DestinationImage show(String username, int tid) {
+	public DestinationImage show(String username, int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DestinationImage create(String username, DestinationImage todo) {
+	public DestinationImage create(String username, DestinationImage image) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DestinationImage update(String username, int tid, DestinationImage todo) {
+	public DestinationImage update(String username, int tid, DestinationImage image) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean destroy(String username, int tid) {
+	public boolean destroy(String username, int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -9,7 +9,7 @@ public interface DestinationService {
 
 	public Destination show(String username, int id);
 
-	public Destination create(String username, Destination des);
+	public Destination create(String username, Destination des, int countryId);
 
 	public Destination update(String username, int id, Destination des);
 
