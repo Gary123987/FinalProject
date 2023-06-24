@@ -37,5 +37,16 @@ public class PlaceController {
 	private List<Place> indexAll(){
 		return placeServ.index();
 	}
+	
+	@GetMapping("placesUser")
+	private List<Place> findPlacesByUser(Principal principal, HttpServletResponse res) {
+		List<Place> places = placeServ.indexByUser(principal.getName());
+		
+		if(places == null) {
+			res.setStatus(404);
+			return null;
+		}
+		return places;
+	}
 
 }
