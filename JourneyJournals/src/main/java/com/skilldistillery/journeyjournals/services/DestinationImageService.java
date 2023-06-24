@@ -7,10 +7,12 @@ import com.skilldistillery.journeyjournals.entities.DestinationImage;
 public interface DestinationImageService {
 	
 	public List<DestinationImage> index(String username);
+	
+	public List<DestinationImage> index();
 
 	public DestinationImage show(String username, int id);
 
-	public DestinationImage create(String username, DestinationImage image);
+	public DestinationImage create(String username, DestinationImage image, int destinationId);
 
 	public DestinationImage update(String username, int id, DestinationImage image);
 
