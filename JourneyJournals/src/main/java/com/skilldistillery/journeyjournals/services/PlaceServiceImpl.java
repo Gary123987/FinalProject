@@ -59,7 +59,7 @@ public class PlaceServiceImpl implements PlaceService {
 			updatePlace.setDescription(place.getDescription());
 			updatePlace.setImageUrl(place.getImageUrl());
 			
-			return repo.saveAndFlush(place);
+			return repo.saveAndFlush(updatePlace);
 		}
 		return null;
 	}

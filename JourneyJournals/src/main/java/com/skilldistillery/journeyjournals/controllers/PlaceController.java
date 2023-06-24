@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +64,23 @@ public class PlaceController {
 			return null;
 		}
 		return place;
+	}
+	
+	@PutMapping("places/{id}")
+	private Place updatePlace(@RequestBody Place place, @PathVariable int id, Principal principal, HttpServletResponse res) {
+		
+		Place updatedPlace = null;
+		
+		try {
+			updatedPlace = placeServ.update(principal.getName(), id, place);
+			if (updatedPlace == null) {
+				res.setStatus(404);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		return updatedPlace;
 	}
 
 }
