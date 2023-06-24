@@ -1,6 +1,7 @@
 package com.skilldistillery.journeyjournals.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,6 +31,11 @@ public class PlaceController {
 		}
 		
 		return place;
+	}
+	
+	@GetMapping("places")
+	private List<Place> indexAll(){
+		return placeServ.index();
 	}
 
 }

@@ -16,9 +16,14 @@ public class PlaceServiceImpl implements PlaceService {
 	
 	@Autowired 
 	private PlaceRepository repo;
+	
+	@Override
+	public List<Place> index() {
+		return repo.findAll();
+	}
 
 	@Override
-	public List<Place> index(String username) {
+	public List<Place> indexByUser(String username) {
 		User user = userRepo.findByUsername(username);
 		return user.getPlacesCreated();
 	}

@@ -6,7 +6,9 @@ import com.skilldistillery.journeyjournals.entities.Place;
 
 
 public interface PlaceService {
-	public List<Place> index(String username);
+	public List<Place> index();
+	
+	public List<Place> indexByUser(String username);
 
 	public Place show(String username, int tid);
 
