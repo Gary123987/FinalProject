@@ -1,0 +1,13 @@
+div {
+  width: 100%;
+  height: 100%;
+}
+
+#back {
+  background-image: url('https://preview.redd.it/you-didnt-say-the-magic-word-v0-mm24hdzgc5oa1.jpg?width=541&format=pjpg&auto=webp&s=7a40875dd1b6f86739c950e0ec3857dd7a2f105a');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}

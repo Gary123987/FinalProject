@@ -11,6 +11,9 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { BlogComponent } from './components/blog/blog.component';
+import { DestinationComponent } from './components/destination/destination.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { CreateAccountComponent } from './components/create-account/create-accou
     LogoutComponent,
     NotfoundComponent,
     UserHomeComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    BlogComponent,
+    DestinationComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

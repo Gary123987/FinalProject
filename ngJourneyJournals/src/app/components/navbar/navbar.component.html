@@ -11,17 +11,12 @@
           <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Home</a>
         </li>
         <li class="nav-item">
-          <!-- <a class="nav-link" [routerLink]="['/about']">About</a> -->
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-            [routerLink]="['/contact']">
-            Contact
-          </a>
-
+        <li style="color: white;" *ngIf=" checkLogin() && loggedInUser">
+          {{loggedInUser.username}}
         </li>
         <li class="nav-item" *ngIf=" checkLogin()">
-          <!-- <a class="nav-link " [routerLink]="['/todo']">Todos</a> -->
+
         </li>
         <li class="nav-item" *ngIf="! checkLogin()">
           <a class="nav-link " [routerLink]="['/register']">Register</a>
