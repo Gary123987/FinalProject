@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Place {
@@ -40,11 +41,12 @@ public class Place {
 	@OneToOne(mappedBy = "place")
 	private Blog blog;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="destination_id")
 	private Destination destination;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name= "user_id")
 	private User user;

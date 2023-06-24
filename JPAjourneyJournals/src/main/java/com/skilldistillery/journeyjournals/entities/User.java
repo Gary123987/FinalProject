@@ -58,11 +58,11 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Comment> comments;
 	
-	@JsonIgnore
+	
 	@OneToMany(mappedBy = "userCreated")
 	private List<Destination> destinationsCreated;
 	
-	@JsonIgnore
+	
 	@ManyToMany(mappedBy = "usersFavorited")
 	private List<Destination> favoriteDestinations;
 

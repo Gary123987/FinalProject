@@ -23,8 +23,6 @@ public class Continent {
 	
 	private String description;
 	
-	
-	@JsonIgnore
 	@OneToMany(mappedBy = "continent")
 	private List<Country> countries;
 

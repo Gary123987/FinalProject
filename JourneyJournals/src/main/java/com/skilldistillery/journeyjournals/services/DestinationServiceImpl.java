@@ -19,30 +19,29 @@ public class DestinationServiceImpl implements DestinationService {
 
 	@Override
 	public List<Destination> index(String username) {
+		return repo.findByUserCreated_Username(username);
+	}
+
+	@Override
+	public Destination show(String username, int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Destination show(String username, int tid) {
+	public Destination create(String username, Destination des) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Destination create(String username, Destination todo) {
+	public Destination update(String username, int id, Destination des) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Destination update(String username, int tid, Destination todo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean destroy(String username, int tid) {
+	public boolean destroy(String username, int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
