@@ -9,23 +9,20 @@
 </img-comparison-slider>
 
 <div class="container min-vh-50 d-flex justify-content-center align-items-center">
-  <form id="myForm" class="position-absolute top-50 start-50 translate-middle" style="">
+  <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
     <legend class="text-center">Sign In</legend>
     <input class="form-control" type="text" name="username" [(ngModel)]="loginUser.username" placeholder="User name">
     <br>
     <input class="form-control" type="password" name="password" [(ngModel)]="loginUser.password" placeholder="Password">
     <br>
-    <button class="btn btn-outline-primary" (click)="login(loginUser)">Login</button>
+    <button class="btn btn-primary" (click)="login(loginUser)">Login</button>
   </form>
 </div>
 
-
 <div id="curvy-banner">
-
   <p id="aboutUs"> Through vivid storytelling and stunning visuals,
     the blog takes readers on immersive journeys to
     breathtaking destinations, providing insightful travel tips, personal anecdotes, and inspiring experiences along the
     way. Whether you're a seasoned globetrotter or an armchair traveler, Journey Journals is the perfect companion to
     ignite your wanderlust and inspire your next exploration.</p>
-
 </div>

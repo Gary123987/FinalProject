@@ -1,10 +1,33 @@
-<form >
-  <input type="text" name="firstName" [(ngModel)] = "newUser.firstName" placeholder="first name"/> <br>
-  <input type="text" name="lastName" [(ngModel)] = "newUser.lastName" placeholder="last name"/> <br>
-  <input type="text" name="username" [(ngModel)] = "newUser.username" placeholder="username"/><br>
-  <input type="password" name="password" [(ngModel)] = "newUser.password" placeholder="password"/><br>
-  <input type="text" name="about" [(ngModel)] = "newUser.about" placeholder="about me"/><br>
-  <input type="text" name="imageUrl" [(ngModel)] = "newUser.imageUrl" placeholder="image (URL)" /><br>
+<div id="back">
+  <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+    <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+      <legend class="text-center">Your Adventure Starts Now!</legend>
+      <div class="col-md-6">
+        <input class="form-control" type="text" name="firstName" [(ngModel)]="newUser.firstName"
+          placeholder="first name" />
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" type="text" name="lastName" [(ngModel)]="newUser.lastName"
+          placeholder="last name" />
+      </div>
+      <div class="col-12">
+        <input class="form-control" type="text" name="username" [(ngModel)]="newUser.username" placeholder="username" />
+      </div>
+      <div class="col-12">
+        <input class="form-control" type="password" name="password" [(ngModel)]="newUser.password"
+          placeholder="password" />
+      </div>
+      <div class="col-md-6">
+        <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newUser.imageUrl"
+          placeholder="image (URL)" />
+      </div>
+      <div class="col-12">
+        <textarea class="form-control" name="about" id="" cols="30" rows="10" [(ngModel)]="newUser.about"
+          placeholder="about me"></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit" (click)="register(newUser)">Create Account</button>
+    </form>
+  </div>
 
-  <button type="submit" (click)="register(newUser)">Create Account</button>
-</form>
+
+</div>
