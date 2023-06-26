@@ -53,11 +53,11 @@ public class PlaceController {
 		return places;
 	}
 	
-	@PostMapping("places")
-	private Place createPlace(@RequestBody Place place, Principal principal, HttpServletResponse res) {
+	@PostMapping("places/{id}/destination")
+	private Place createPlace(@RequestBody Place place, Principal principal, HttpServletResponse res, @PathVariable int id) {
 		
 		try {
-			place = placeServ.create(principal.getName(), place);
+			place = placeServ.create(principal.getName(), place, id);
 			res.setStatus(201);
 		} catch (Exception e) {
 			e.printStackTrace();
