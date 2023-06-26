@@ -10,12 +10,12 @@ public interface PlaceService {
 	
 	public List<Place> indexByUser(String username);
 
-	public Place show(String username, int tid);
+	public Place show(String username, int id);
 
-	public Place create(String username, Place todo);
+	public Place create(String username, Place place, int destinationId);
 
-	public Place update(String username, int tid, Place todo);
+	public Place update(String username, int id, Place palce);
 
-	public boolean destroy(String username, int tid);
+	public boolean destroy(String username, int id);
 
 }

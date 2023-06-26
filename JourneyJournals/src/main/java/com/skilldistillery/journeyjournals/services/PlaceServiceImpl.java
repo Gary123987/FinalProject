@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.journeyjournals.entities.Destination;
 import com.skilldistillery.journeyjournals.entities.Place;
 import com.skilldistillery.journeyjournals.entities.User;
+import com.skilldistillery.journeyjournals.repositories.DestinationRepository;
 import com.skilldistillery.journeyjournals.repositories.PlaceRepository;
 import com.skilldistillery.journeyjournals.repositories.UserRepository;
 @Service
@@ -16,6 +18,9 @@ public class PlaceServiceImpl implements PlaceService {
 	
 	@Autowired 
 	private PlaceRepository repo;
+	
+	@Autowired
+	private DestinationRepository destRepo;
 	
 	@Override
 	public List<Place> index() {
@@ -35,9 +40,11 @@ public class PlaceServiceImpl implements PlaceService {
 	}
 
 	@Override
-	public Place create(String username, Place place) {
+	public Place create(String username, Place place, int id) {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
+			Destination destination = destRepo.findById(id);
+			place.setDestination(destination);
 			place.setUser(user);
 			return repo.saveAndFlush(place);
 		}
