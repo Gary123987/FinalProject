@@ -7,13 +7,13 @@ import com.skilldistillery.journeyjournals.entities.Blog;
 public interface BlogService {
 	public List<Blog> index();
 
-	public Blog show(int tid);
+	public Blog show(int id);
 
-	public Blog create(String username, Blog todo);
+	public Blog create(String username, Blog blog, int placeId);
 
-	public Blog update(String username, int tid, Blog todo);
+	public Blog update(String username, int id, Blog blog);
 
-	public boolean destroy(String username, int tid);
+	public boolean destroy(String username, int id);
 
 	List<Blog> indexByUser(String username);
 

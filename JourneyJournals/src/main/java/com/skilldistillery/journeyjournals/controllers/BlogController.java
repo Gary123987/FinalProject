@@ -53,10 +53,10 @@ public class BlogController {
 		return blog;
 	}
 	
-	@PostMapping("blogsCreate")
-	private Blog createBlogs(@RequestBody Blog blog, Principal principal, HttpServletResponse res) {
+	@PostMapping("blogsCreate/{id}/place")
+	private Blog createBlogs(@RequestBody Blog blog, Principal principal, HttpServletResponse res, @PathVariable("id") int placeId) {
 		try {
-			Blog blogCreated = blogServ.create(principal.getName(), blog);
+			Blog blogCreated = blogServ.create(principal.getName(), blog, placeId);
 			return blogCreated;
 		} catch (Exception e) {
 			e.printStackTrace(); 

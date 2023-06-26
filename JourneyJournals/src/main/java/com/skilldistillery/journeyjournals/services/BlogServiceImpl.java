@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.journeyjournals.entities.Blog;
+import com.skilldistillery.journeyjournals.entities.Place;
 import com.skilldistillery.journeyjournals.entities.User;
 import com.skilldistillery.journeyjournals.repositories.BlogRepository;
+import com.skilldistillery.journeyjournals.repositories.PlaceRepository;
 import com.skilldistillery.journeyjournals.repositories.UserRepository;
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -17,6 +19,9 @@ public class BlogServiceImpl implements BlogService {
 	
 	@Autowired 
 	private BlogRepository blogRepo;
+	
+	@Autowired
+	private PlaceRepository placeRepo;
 
 
 	@Override
@@ -31,9 +36,11 @@ public class BlogServiceImpl implements BlogService {
 	}
 
 	@Override
-	public Blog create(String username, Blog blog) {
+	public Blog create(String username, Blog blog, int placeId) {
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
+			Place place = placeRepo.findById(placeId);
+			blog.setPlace(place);
 			blog.setUser(user);
 			user.addBlog(blog);
 			userRepo.saveAndFlush(user);
