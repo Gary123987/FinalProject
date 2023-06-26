@@ -41,7 +41,7 @@ public class Place {
 	@OneToOne(mappedBy = "place")
 	private Blog blog;
 	
-	@JsonIgnoreProperties("userCreated")
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="destination_id")
 	private Destination destination;
