@@ -12,6 +12,7 @@ export class HomeComponent {
 
   loginUser: User = new User();
 
+
   constructor(private auth: AuthService, private router: Router) {
 
   }
@@ -28,5 +29,6 @@ export class HomeComponent {
     })
 
   }
+
 
 }

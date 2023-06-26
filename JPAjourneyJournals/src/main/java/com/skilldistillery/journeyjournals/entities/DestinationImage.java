@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="destination_image")
 public class DestinationImage {
@@ -34,11 +36,12 @@ public class DestinationImage {
 	@Column(name="updated_at")
 	private LocalDateTime updatedAt;
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="destination_id")
 	private Destination destination;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

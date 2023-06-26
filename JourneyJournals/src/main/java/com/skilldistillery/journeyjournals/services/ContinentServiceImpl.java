@@ -11,40 +11,15 @@ import com.skilldistillery.journeyjournals.repositories.UserRepository;
 @Service
 public class ContinentServiceImpl implements ContinentService {
 	
-	@Autowired
-	private UserRepository userRepo;
 	
 	@Autowired 
 	private ContinentRepository repo;
 
 	@Override
-	public List<Continent> index(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Continent> index() {
+		return repo.findAll();
 	}
 
-	@Override
-	public Continent show(String username, int tid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Continent create(String username, Continent todo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Continent update(String username, int tid, Continent todo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean destroy(String username, int tid) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }

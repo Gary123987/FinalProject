@@ -6,37 +6,37 @@ import { User } from "./user";
 
 export class Blog {
 
-  id : number;
-  title : string;
-  description : string;
-  tripStart : string;
-  tripEnd : string;
-  imageUrl : string;
-  createdAt : string;
-  updatedAt : string;
-  enabled : boolean;
-  comments :  Comment[] | null;
-  categories : Category[] | null;
-  blogRatings : BlogRating[] | null;
-  user : User | null;
-  place : Place | null;
+  id: number;
+  title: string;
+  description: string;
+  tripStart: string;
+  tripEnd: string;
+  imageUrl: string;
+  createdAt: string;
+  updatedAt: string;
+  enabled: boolean;
+  comments: Comment[];
+  categories: Category[];
+  blogRatings: BlogRating[];
+  user: User | null;
+  place: Place | null;
 
   constructor(
-  id = 0,
-  title = '',
-  description = '',
-  tripStart = '',
-  tripEnd = '',
-  imageUrl = '',
-  createdAt = '',
-  updatedAt = '',
-  enabled = false,
-  comments = [],
-  categories = [],
-  blogRatings = [],
-  user = null,
-  place = null
-  ){
+    id = 0,
+    title = '',
+    description = '',
+    tripStart = '',
+    tripEnd = '',
+    imageUrl = '',
+    createdAt = '',
+    updatedAt = '',
+    enabled = false,
+    comments = [],
+    categories = [],
+    blogRatings = [],
+    user = null,
+    place = null
+  ) {
     this.id = id
     this.title = title
     this.description = description
