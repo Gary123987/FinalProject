@@ -10,7 +10,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class BlogServiceService {
 
-private url = environment.baseUrl + 'api/blogs';
+  private url = environment.baseUrl + 'api/blogs';
 
   constructor(
     private auth: AuthService,
@@ -20,85 +20,86 @@ private url = environment.baseUrl + 'api/blogs';
 
   public indexByUser(): Observable<Blog[]> {
     return this.http.get<Blog[]>(this.url + 'User', this.getHttpOptions()).pipe(
-      catchError( (err: any) => {
+      catchError((err: any) => {
         console.error('Error fetching blogs list');
         return throwError(
           () =>
-          new Error(
-            "error retrieving blogs: " + err
-          )
+            new Error(
+              "error retrieving blogs: " + err
+            )
         )
       })
     );
   }
 
-  public show(id: number): Observable<Blog> {
-    return this.http.get<Blog>(this.url + '/' + id, this.getHttpOptions()).pipe(
-      catchError( (err: any) => {
-        console.error('Error fetching blog');
+
+  public indexAll(): Observable<Blog[]> {
+    return this.http.get<Blog[]>(this.url + 'All', this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('Error fetching blog list');
         return throwError(
           () =>
-          new Error(
-            "error showing blogs: " + err
-          )
-        )
-      })
-    );
-   }
-
-
-
-    public indexAll(): Observable<Blog[]> {
-      return this.http.get<Blog[]>(this.url + 'All', this.getHttpOptions()).pipe(
-        catchError( (err: any) => {
-          console.error('Error fetching blog list');
-          return throwError(
-            () =>
             new Error(
               "error retrieving blogs: " + err
             )
-          )
-        })
-      );
+        )
+      })
+    );
 
-    }
-    create(newBlog: Blog): Observable<Blog> {
+  }
 
-      return this.http.post<Blog>(this.url + 'Create', newBlog, this.getHttpOptions()).pipe(
-        catchError( (err: any) => {
-          console.error('Error fetching blog list');
-          return throwError(
-            () => new Error(
-              "error creating: " + err
+
+  public show(id: number): Observable<Blog> {
+    return this.http.get<Blog>(this.url + '/' + id, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('Error fetching blog');
+        return throwError(
+          () =>
+            new Error(
+              "error showing blogs: " + err
             )
-          )
-        })
-      )
-    }
-    update(id: number, blog: Blog): Observable<Blog>  {
+        )
+      })
+    );
+  }
 
-     return this.http.put<Blog>(this.url + 'Update' + '/' + id, blog, this.getHttpOptions()).pipe(catchError( (err: any) => {
+
+  create(newBlog: Blog): Observable<Blog> {
+    return this.http.post<Blog>(this.url + 'Create', newBlog, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('Error fetching blog list');
+        return throwError(
+          () => new Error(
+            "error creating: " + err
+          )
+        )
+      })
+    )
+  }
+
+  update(id: number, blog: Blog): Observable<Blog> {
+    return this.http.put<Blog>(this.url + 'Update' + '/' + id, blog, this.getHttpOptions()).pipe(catchError((err: any) => {
       console.error('Error editing blog list');
       return throwError(
         () =>
-        new Error(
-          "error editing blogs: " + err
-        )
+          new Error(
+            "error editing blogs: " + err
+          )
       )
     }));
-    }
-    destroy(id: number): Observable<void> {
-     return this.http.delete<void>(this.url + 'Delete' + '/' + id, this.getHttpOptions()).pipe(
-      catchError( (err: any) => {
-      console.error('Error deleting blog list');
-      return throwError(
-        () =>
-        new Error(
-          "error deleting blogs: " + err
-        )
-      );
-    }))
-    }
+  }
+  destroy(id: number): Observable<void> {
+    return this.http.delete<void>(this.url + 'Delete' + '/' + id, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('Error deleting blog list');
+        return throwError(
+          () =>
+            new Error(
+              "error deleting blogs: " + err
+            )
+        );
+      }))
+  }
 
   getHttpOptions() {
     let options = {

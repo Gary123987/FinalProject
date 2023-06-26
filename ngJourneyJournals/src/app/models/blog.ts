@@ -17,7 +17,7 @@ export class Blog {
   enabled: boolean;
   comments: Comment[];
   categories: Category[];
-  blogRatings: BlogRating[];
+  ratings: BlogRating[];
   user: User | null;
   place: Place | null;
 
@@ -33,7 +33,7 @@ export class Blog {
     enabled = false,
     comments = [],
     categories = [],
-    blogRatings = [],
+    ratings = [],
     user = null,
     place = null
   ) {
@@ -48,7 +48,7 @@ export class Blog {
     this.enabled = enabled
     this.comments = comments
     this.categories = categories
-    this.blogRatings = blogRatings
+    this.ratings = ratings
     this.user = user
     this.place = place
   }

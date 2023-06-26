@@ -1,1 +1,23 @@
-<p id="p">blog-list works!</p>
+<p id="p"></p>
+<table class="table table-dark table-hover table-bordered">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Description</th>
+      <th>Post Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let blog of blogs">
+      <td><img src="{{blog.imageUrl}}" alt="Image of {{blog.title}}" width="125" height="auto"></td>
+      <td>{{blog.title}}</td>
+      <td>{{blog.tripStart}}</td>
+      <td>{{blog.tripEnd}}</td>
+      <td>{{blog.description}}</td>
+      <td *ngFor="let rate of blog.ratings ">{{rate.ratingValue}}</td>
+    </tr>
+  </tbody>
+</table>
