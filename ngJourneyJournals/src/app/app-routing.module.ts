@@ -8,6 +8,7 @@ import { Blog } from './models/blog';
 import { BlogComponent } from './components/blog/blog.component';
 import { DestinationComponent } from './components/destination/destination.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { BlogListComponent } from './components/blog-list/blog-list.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'userhome', component: UserHomeComponent },
   { path: 'register', component: CreateAccountComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'bloglist', component: BlogListComponent },
   { path: 'destination', component: DestinationComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: '**', component: NotfoundComponent },
