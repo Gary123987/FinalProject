@@ -15,6 +15,7 @@ import { BlogComponent } from './components/blog/blog.component';
 import { DestinationComponent } from './components/destination/destination.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BlogListComponent } from './components/blog-list/blog-list.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

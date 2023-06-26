@@ -31,8 +31,8 @@
       <td>{{blog.title}}</td>
       <td>{{blog.tripStart}}</td>
       <td>{{blog.tripEnd}}</td>
-      <td>{{blog.description}}</td>
-      <td *ngFor="let rate of blog.ratings ">{{rate.ratingValue}}</td>
+      <td id="scrollable-td">{{blog.description}}</td>
+      <td *ngFor="let rate of blog.ratings">{{rate.ratingValue}}</td>
     </tr>
   </tbody>
 </table>

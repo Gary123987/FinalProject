@@ -2,15 +2,14 @@
   <div id="container-one">
     <div id="userInfo">
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="UserImageUrl">
+        <img src="{{user?.imageUrl}}" class="card-img-top" alt="UserImageUrl" width="250" height="auto">
         <div class="card-body">
-          <h5 class="card-title">User name</h5>
-          <p class="card-text">the about content.</p>
+          <h5 class="card-title">{{user?.username}}</h5>
+          <p class="card-text">{{user?.about}}</p>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Firstname</li>
-          <li class="list-group-item">lastname</li>
-          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">{{user?.firstName}}</li>
+          <li class="list-group-item">{{user?.lastName}}</li>
         </ul>
         <div class="card-body">
           <a href="#" class="card-link">Update button</a>

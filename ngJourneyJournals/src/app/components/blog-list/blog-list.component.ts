@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from 'src/app/models/blog';
-import { BlogRating } from 'src/app/models/blog-rating';
 import { User } from 'src/app/models/user';
 import { BlogServiceService } from 'src/app/services/blog-service.service';
 
@@ -40,5 +39,7 @@ export class BlogListComponent implements OnInit {
   displayTable(): void {
     this.selected = null;
   }
+
+
 
 }

@@ -20,7 +20,7 @@ export class HomeComponent {
   login(user: User) {
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedUser) => {
-        this.router.navigateByUrl('/userhome');
+        this.router.navigateByUrl('/userhome?id=' + loggedUser.id);
       },
       error: (error) => {
         console.error('register()' + error);
