@@ -6,8 +6,8 @@
       </li>
       <li class="nav-item">
       </li>
-      <li style="color: white;" *ngIf=" checkLogin() && loggedInUser">
-        {{loggedInUser.username}}
+      <li style="color: white;" *ngIf=" getUserName()">
+        {{ getUserName()}}
       </li>
       <li class="nav-item" *ngIf=" checkLogin()">
 

@@ -9,29 +9,32 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   loggedInUser: User | null = null;
 
   constructor(private auth: AuthService) { }
 
-  ngOnInit() {
-    if (this.auth.checkLogin()) {
-      this.auth.getLoggedInUser().subscribe(
-        user => {
-          this.loggedInUser = user;
-        },
-        error => {
-          console.log('Error retrieving logged-in user:', error);
-        }
-      );
-    }
-  }
+  // ngOnInit() {
+  //   if (this.auth.checkLogin()) {
+  //     this.auth.getLoggedInUser().subscribe(
+  //       user => {
+  //         this.loggedInUser = user;
+  //       },
+  //       error => {
+  //         console.log('Error retrieving logged-in user:', error);
+  //       }
+  //     );
+  //   }
+  // }
 
   checkLogin(): boolean {
     return this.auth.checkLogin();
   }
 
+  getUserName() {
+    return this.auth.getLoggedInUserName();
+  }
 
 
 }

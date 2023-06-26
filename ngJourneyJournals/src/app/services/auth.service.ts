@@ -15,7 +15,7 @@ export class AuthService {
 
   private url = environment.baseUrl
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   register(user: User): Observable<User> {
     // Create POST request to register a new account
@@ -46,6 +46,7 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        localStorage.setItem('username', username);
         return newUser;
       }),
       catchError((err: any) => {
@@ -59,6 +60,8 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    localStorage.removeItem('username');
+
   }
 
   getLoggedInUser(): Observable<User> {
@@ -79,7 +82,7 @@ export class AuthService {
         catchError((err: any) => {
           console.log(err);
           return throwError(
-            () => new Error( 'AuthService.getUserById(): error retrieving user: ' + err )
+            () => new Error('AuthService.getUserById(): error retrieving user: ' + err)
           );
         })
       );
@@ -98,6 +101,10 @@ export class AuthService {
 
   getCredentials(): string | null {
     return localStorage.getItem('credentials');
+  }
+
+  getLoggedInUserName() {
+    return localStorage.getItem('username')
   }
 
 }
