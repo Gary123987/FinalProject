@@ -14,6 +14,7 @@ import { CreateAccountComponent } from './components/create-account/create-accou
 import { BlogComponent } from './components/blog/blog.component';
 import { DestinationComponent } from './components/destination/destination.component';
 import { GalleryComponent } from './components/gallery/gallery.component';
+import { BlogListComponent } from './components/blog-list/blog-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { GalleryComponent } from './components/gallery/gallery.component';
     CreateAccountComponent,
     BlogComponent,
     DestinationComponent,
-    GalleryComponent
+    GalleryComponent,
+    BlogListComponent
   ],
   imports: [
     BrowserModule,

@@ -51,7 +51,7 @@ public class Place {
 	@JoinColumn(name= "user_id")
 	private User user;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"place", "user"})
 	@OneToMany(mappedBy="place")
 	private List<PlaceImage> images;
 	

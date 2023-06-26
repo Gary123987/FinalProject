@@ -53,20 +53,23 @@ public class BlogRatingServiceImpl implements BlogRatingService {
 	@Override
 	public double averageRatingByBlogId(int blogId) {
 		Blog blog = blogRepo.findById(blogId);
-		double averageRating;
+		double averageRating = 0.0;
 
 		if (blog != null) {
 			List<BlogRating> ratings = blog.getRatings();
-			averageRating = 0.0;
+			int sum = 0;
+
 			for (BlogRating blogRating : ratings) {
 				int value = blogRating.getRatingValue();
-				value += value;
-				int sum = value;
+				sum += value;
+			}
+
+			if (!ratings.isEmpty()) {
 				averageRating = sum / ratings.size();
 			}
-			return averageRating;
 		}
-		return 0.0;
+
+		return averageRating;
 	}
 
 	@Override
