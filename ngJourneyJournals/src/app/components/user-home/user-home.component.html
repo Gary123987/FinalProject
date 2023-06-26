@@ -1,33 +1,57 @@
+<div id="container">
+  <div id="container-one">
+    <div id="userInfo">
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="UserImageUrl">
+        <div class="card-body">
+          <h5 class="card-title">User name</h5>
+          <p class="card-text">the about content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Firstname</li>
+          <li class="list-group-item">lastname</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Update button</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+    <div id="favoredDestinations">
+      <table class="table table-dark table-hover table-bordered">
+        <caption>Favorite Destinations</caption>
+        <tbody>
+          <tr>
+            <td>Favored destinations</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<div name="listofUserBlogs">
-  <ul *ngFor="let blog of blogs">
-    <li>{{blog.title}}</li>
-    <li>{{blog.description}}</li>
-    <li>{{blog.tripStart}}</li>
-    <li>{{blog.tripEnd}}</li>
-    <ul *ngFor="let comment of blog.comments">
-  <li>{{comment.title}}</li>
-  <li>{{comment.body}}</li>
-</ul>
-</ul>
-</div>
+  <div id="container-two">
+    <div class="container d-flex justify-content-center">
+      <h1>My blogs</h1>
+    </div>
+    <div id="column-container">
+      <div id="column" *ngFor="let blog of blogs;">
+        <img src="{{blog.imageUrl}}" alt="{{blog.title}}" width="150" height="auto">
+      </div>
+    </div>
+  </div>
 
-<div name="addForm" >
-<form>
-  Title: <input type="text" name="title"  [(ngModel)]="newBlog.title">
-  Description: <input type="text" name="description"  [(ngModel)]="newBlog.description">
-  Trip start: <input type="date" name="tripStart"  [(ngModel)]="newBlog.tripStart">
-  Trip End: <input type="date" name="tripEnd"  [(ngModel)]="newBlog.tripEnd">
-  Image URL: <input type="text" name="imageUrl"  [(ngModel)]="newBlog.imageUrl">
-  <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
-  <input type="hidden" name="placeId" value="1">
-
-  <button (click)="addBlog(newBlog)" >Add Blog</button>
-</form>
-
-</div>
-
-<div name="editForm">
-
-
+  <div id="container-three">
+    <div id="users-followed">
+      <table class="table table-dark table-hover table-bordered">
+        <caption>Users Followed</caption>
+        <tbody>
+          <tr>
+            <td>Users Followed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="tbd"></div>
 </div>

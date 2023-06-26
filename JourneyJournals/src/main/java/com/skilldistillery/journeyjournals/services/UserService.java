@@ -1,18 +1,18 @@
 package com.skilldistillery.journeyjournals.services;
 
-import java.util.Set;
+import java.util.List;
 
 import com.skilldistillery.journeyjournals.entities.User;
 
 public interface UserService {
-	public Set<User> index(String username);
+	public List<User> index();
 
-	public User show(String username, int tid);
+	public User show(String username, int id);
 
-	public User create(String username, User todo);
+	public User create(String username, User user);
 
-	public User update(String username, int tid, User todo);
+	public User update(String username, int id, User user);
 
-	public boolean destroy(String username, int tid);
+	public boolean destroy(String username, int id);
 
 }
