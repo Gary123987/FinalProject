@@ -1,4 +1,4 @@
-<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary  fixed-top" data-bs-theme="dark">
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
   <div class="container-fluid">
     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
       <li class="nav-item">
@@ -7,7 +7,7 @@
       <li class="nav-item">
       </li>
       <li style="color: white;" *ngIf=" getUserName()">
-        {{ getUserName()}}
+        <a class="nav-link active" aria-current="page" [routerLink]="['/userhome']">{{ getUserName()}}</a>
       </li>
       <li class="nav-item" *ngIf=" checkLogin()">
 

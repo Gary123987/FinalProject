@@ -1,9 +1,3 @@
 #p {
   margin-top: 100px;
 }
-
-
-#scrollable-td {
-  max-height: 260px;
-  overflow-y: auto;
-}
