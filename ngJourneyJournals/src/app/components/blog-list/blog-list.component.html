@@ -1,20 +1,20 @@
-<p id="p"></p>
-
-<div *ngIf="selected">
-  <h1>{{selected.title}}</h1>
-  <img src="{{selected.imageUrl}}" alt="picture of{{selected.place}}" height="auto" width="275">
-  <blockquote>From: {{selected.tripStart}} To: {{selected.tripEnd}}</blockquote>
-  <p>{{selected.description}}</p>
-  <small *ngFor="let rate of selected.ratings">Current Rating: {{rate.ratingValue}}
+<div id="container" *ngIf="selected">
+  <div id="details">
+    <h1>{{selected.title}}</h1>
+    <img src="{{selected.imageUrl}}" alt="picture of{{selected.place}}" height="auto" width="275">
+    <blockquote>From: {{selected.tripStart}} To: {{selected.tripEnd}}</blockquote>
+    <p style="overflow-y: auto; max-height: 200px;">{{selected.description}}</p>
+    <small *ngFor="let rate of selected.ratings">Current Rating: {{rate.ratingValue}}
+      <br>
+      <small>Raters Comment {{rate.ratingComment}}</small>
+    </small>
     <br>
-    <small>Raters Comment {{rate.ratingComment}}</small>
-  </small>
-  <br>
-  <br>
-  <button (click)="displayTable()">Back</button>
+    <br>
+    <button (click)="displayTable()">Back</button>
+  </div>
 </div>
 
-<div *ngIf="!selected" class="container">
+<div id="list" *ngIf="!selected" class="container-fluid">
   <div class="row">
     <div class="col-md-4" *ngFor="let blog of blogs" (click)="displayBlog(blog)">
       <div class="card rounded bg-dark text-light mb-4">
