@@ -97,4 +97,25 @@ export class AuthService {
     return localStorage.getItem('username')
   }
 
+  getUserByUsername(username: string): Observable<User> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'X-Requested-With': 'XMLHttpRequest',
+      }),
+      params: {
+        username: username,
+      }
+    };
+
+    return this.http.get<User>(this.url + 'usersName', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error('AuthService.getUserByUsername(): error retrieving user.')
+        );
+      })
+    );
+  }
+
+
 }

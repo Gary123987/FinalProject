@@ -34,6 +34,15 @@ public class UserController {
 		return user;
 	}
 	
+	@GetMapping("usersName")
+	private User findByUsername(HttpServletResponse res, Principal principal) {
+		User u = service.findByUsername(principal.getName());
+		if(u == null) {
+			res.setStatus(404);
+		}
+		return u;
+	}
+	
 	@GetMapping("users/{id}")
 	private User ShowById(HttpServletResponse res, @PathVariable int id, Principal principal) {
 		User u = service.show(principal.getName(), id);
@@ -42,4 +51,5 @@ public class UserController {
 		}
 		return u;
 	}
+	
 }

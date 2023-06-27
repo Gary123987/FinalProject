@@ -2,21 +2,18 @@
   <div class="container-fluid">
     <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px">
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" [routerLink]="['/home']">Home</a>
+        <a class="nav-link active" aria-current="page" [routerLink]="['/userhome']" *ngIf="checkLogin()">Profile</a>
       </li>
       <li class="nav-item">
       </li>
       <li style="color: white;" *ngIf=" getUserName()">
-        <a class="nav-link active" aria-current="page" [routerLink]="['/userhome']">{{ getUserName()}}</a>
-      </li>
-      <li class="nav-item" *ngIf=" checkLogin()">
-
+        <a class="nav-link active" aria-current="page">{{ getUserName()}}</a>
       </li>
       <li class="nav-item" *ngIf="! checkLogin()">
         <a class="nav-link " [routerLink]="['/register']">Register</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/home']">Login</a>
+        <a class="nav-link " [routerLink]="['/home']" *ngIf="! checkLogin()">Login</a>
       </li>
       <app-logout *ngIf="checkLogin()"></app-logout>
     </ul>

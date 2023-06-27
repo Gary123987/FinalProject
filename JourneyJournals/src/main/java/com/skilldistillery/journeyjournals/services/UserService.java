@@ -14,5 +14,6 @@ public interface UserService {
 	public User update(String username, int id, User user);
 
 	public boolean destroy(String username, int id);
+	User findByUsername(String username);
 
 }
