@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class User {
@@ -75,7 +76,7 @@ public class User {
 	@ManyToMany(mappedBy = "following")
 	private List<User> followers;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"user"})
 	@OneToMany(mappedBy = "user")
 	private List<Place> placesCreated;
 

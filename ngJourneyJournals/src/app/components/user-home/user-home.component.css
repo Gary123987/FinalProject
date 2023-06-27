@@ -1,5 +1,11 @@
 #container {
-  margin-top: 60px;
+  padding: 0;
+  background-image: url('https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1548&q=80');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 30px;
   display: flex;
   width: 100vw;
   height: 100vh;
@@ -17,7 +23,8 @@
 }
 
 #userInfo {
-  margin-top: -180px;
+  margin-top: 60px;
+  margin-bottom: 20px;
 }
 
 #container-two {

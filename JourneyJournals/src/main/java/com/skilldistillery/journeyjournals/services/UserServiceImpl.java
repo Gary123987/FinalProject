@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User findByUsername(String username) {
+		return userRepo.findByUsername(username);
+	}
+	
+	@Override
 	public User show(String username, int id) {
 		User user = userRepo.findByUsernameAndId(username, id);
 		if (user == null) {
@@ -55,5 +60,6 @@ public class UserServiceImpl implements UserService {
 		user.setEnabled(false);
 		return !userRepo.existsById(id);
 	}
+
 
 }

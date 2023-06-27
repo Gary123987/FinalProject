@@ -15,19 +15,6 @@ export class NavbarComponent {
 
   constructor(private auth: AuthService) { }
 
-  // ngOnInit() {
-  //   if (this.auth.checkLogin()) {
-  //     this.auth.getLoggedInUser().subscribe(
-  //       user => {
-  //         this.loggedInUser = user;
-  //       },
-  //       error => {
-  //         console.log('Error retrieving logged-in user:', error);
-  //       }
-  //     );
-  //   }
-  // }
-
   checkLogin(): boolean {
     return this.auth.checkLogin();
   }
