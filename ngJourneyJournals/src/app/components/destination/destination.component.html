@@ -33,7 +33,7 @@
   <ul class="list-group" *ngFor="let c of continents">
     <li class="list-group-item">{{c.name}}
       <ul class="list-group" *ngFor="let co of c.countries">
-        <li class="list-group-item">{{co.name}}
+        <li class="list-group-item" [routerLink]="['/register']">{{co.name}}
         </li>
       </ul>
     </li>
