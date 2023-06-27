@@ -20,10 +20,6 @@ export class UserHomeComponent implements OnInit {
   places: Place[] = [];
   destinations: Destination[] = [];
   user: User | null = null;
-  userId: any = 0;
-
-  diffUser = this.getUserName();
-
 
   constructor(
     private placeServ: PlaceService,
@@ -34,13 +30,19 @@ export class UserHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.queryParamMap.get('id');
     this.reload();
-    this.show(this.userId);
+    this.getUserName();
   }
 
   getUserName() {
-    return this.auth.getLoggedInUserName();
+    this.auth.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   reload() {
@@ -51,16 +53,6 @@ export class UserHomeComponent implements OnInit {
       error: (err) => {
         console.error(err);
       },
-    })
-  }
-  show(userId: number) {
-    this.userService.show(userId).subscribe({
-      next: (data) => {
-        this.user = data;
-      },
-      error: (err) => {
-        console.error(err);
-      }
     })
   }
 
