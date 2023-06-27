@@ -1,19 +1,65 @@
-<div name="addForm">
-  <form>
-    Title: <input type="text" name="title" [(ngModel)]="newBlog.title">
-    Description: <input type="text" name="description" [(ngModel)]="newBlog.description">
-    Trip start: <input type="date" name="tripStart" [(ngModel)]="newBlog.tripStart">
-    Trip End: <input type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd">
-    Image URL: <input type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl">
-    <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
-    <input type="hidden" name="placeId" value="1">
+<div id="addForm" >
+  <select id="addForm2" >
+    <option *ngFor="let c of countries" selected value="{{c.id}}">{{c.name}}</option>
+  </select>
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">Add a New Blog Post!</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="title" [(ngModel)]="newBlog.title"
+            placeholder="title" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="description" [(ngModel)]="newBlog.description"
+            placeholder="description" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart"  />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd"
+          />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
 
-    <button (click)="addBlog(newBlog)">Add Blog</button>
-  </form>
-
+        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)">Create Destination</button>
+      </form>
+    </div>
 </div>
 
-<div name="editForm">
+<div name="editBlog">
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">Add a New Blog Post!</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="title" [(ngModel)]="newBlog.title"
+            placeholder="title" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="description" [(ngModel)]="newBlog.description"
+            placeholder="description" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart"  />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd"
+          />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
 
+        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)">Create Destination</button>
+      </form>
+    </div>
 
 </div>

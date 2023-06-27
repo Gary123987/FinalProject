@@ -6,6 +6,8 @@ import { Country } from 'src/app/models/country';
 import { Continent } from 'src/app/models/continent';
 import { Destination } from 'src/app/models/destination';
 import { DestinationService } from 'src/app/services/destination.service';
+import { Place } from 'src/app/models/place';
+import { PlaceService } from 'src/app/services/place.service';
 
 @Component({
   selector: 'app-destination',
@@ -17,18 +19,21 @@ export class DestinationComponent implements OnInit{
   countries: Country[] = [];
   continents: Continent[] = [];
   destinations: Destination [] = [];
+  places: Place [] = [];
 
   constructor(
   private continentServ: ContinentService,
   private countryServ: CountryService,
   private auth: AuthService,
   private destinationServ: DestinationService,
+  private placeServ: PlaceService,
   ){}
 
   ngOnInit(){
   this.loadContinents();
   this.loadCountries();
   this.loadDestinations();
+  this.loadPlaces();
   }
 
   checkedLogin(){
@@ -63,6 +68,17 @@ export class DestinationComponent implements OnInit{
     this.destinationServ.indexByUser().subscribe({
       next: (destinationList) => {
         this.destinations = destinationList;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+
+  }
+  loadPlaces(){
+    this.placeServ.indexByUser().subscribe({
+      next: (placeList) => {
+        this.places = placeList;
       },
       error: (err) => {
         console.log(err);

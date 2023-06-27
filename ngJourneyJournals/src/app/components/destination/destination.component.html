@@ -16,6 +16,20 @@
               <ul class="list-group mt-2">
                 <li *ngFor="let d of co.destinations" class="list-group-item">
                   <img class="img-fluid" src="{{d.imageUrl}}" alt="{{d.name}}" width="200">
+                  <ul>
+                    <li>{{d.name}}</li>
+                    <!-- <li><iframe src="https://www.google.com/maps?q={{d.city}},{{d.state}}&z=10&output=embed" height="auto" width="200" style="border:0" allowfullscreen></iframe></li> -->
+                    <li>{{d.description}}</li>
+                    <li *ngFor="let place of d.places">
+                      <ul>
+                        <li>{{place.name}}</li>
+                        <li>{{place.street}}</li>
+                        <li>{{place.zipcode}}</li>
+                        <li>{{place.description}}</li>
+                      </ul>
+                    </li>
+
+                  </ul>
                 </li>
               </ul>
             </li>
