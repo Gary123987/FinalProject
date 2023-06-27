@@ -1,1 +1,27 @@
-<p>destination works!</p>
+<div style="margin-top: 200px;" *ngIf="checkedLogin()">
+  <ul *ngFor="let c of continents" >
+
+<li>{{c.name}}
+  <ul *ngFor="let co of c.countries" >
+    <li>{{co.name}}</li>
+  </ul>
+</li>
+
+
+  </ul>
+
+</div>
+
+<div style="margin-top: 200px;" *ngIf="! checkedLogin()">
+  <ul *ngFor="let c of continents" >
+
+<li>{{c.name}}
+  <ul *ngFor="let co of c.countries" >
+    <li>{{co.name}}</li>
+  </ul>
+</li>
+
+
+  </ul>
+
+</div>

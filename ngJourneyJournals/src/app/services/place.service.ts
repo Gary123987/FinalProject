@@ -78,7 +78,7 @@ export class PlaceService {
   }
 
   update(id: number, place: Place): Observable<Place> {
-    return this.http.put<Place>(this.url + 'Update' + '/' + id, Place, this.getHttpOptions()).pipe(catchError((err: any) => {
+    return this.http.put<Place>(this.url + '/' + id, Place, this.getHttpOptions()).pipe(catchError((err: any) => {
       console.error('Error editing place');
       return throwError(
         () =>
@@ -89,7 +89,7 @@ export class PlaceService {
     }));
   }
   destroy(id: number): Observable<void> {
-    return this.http.delete<void>(this.url + 'Delete' + '/' + id, this.getHttpOptions()).pipe(
+    return this.http.delete<void>(this.url + '/' + id, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('Error deleting place');
         return throwError(
