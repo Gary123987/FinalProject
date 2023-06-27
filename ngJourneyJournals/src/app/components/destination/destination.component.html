@@ -1,27 +1,41 @@
-<div style="margin-top: 200px;" *ngIf="checkedLogin()">
-  <ul *ngFor="let c of continents" >
-
-<li>{{c.name}}
-  <ul *ngFor="let co of c.countries" >
-    <li>{{co.name}}</li>
-  </ul>
-</li>
-
-
-  </ul>
-
+<div class="container mt-5" *ngIf="checkedLogin()">
+  <div id="accordion">
+    <div *ngFor="let c of continents" class="card">
+      <div class="card-header" id="heading{{c.name}}">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse " aria-expanded="true" aria-controls="collapse">
+            {{c.name}}
+          </button>
+        </h5>
+      </div>
+      <div id="collapse{{c.name}}" class="collapse show" aria-labelledby="heading " data-parent="#accordion">
+        <div class="card-body">
+          <ul class="list-group">
+            <li *ngFor="let co of c.countries" class="list-group-item">
+              {{co.name}}
+              <ul class="list-group mt-2">
+                <li *ngFor="let d of co.destinations" class="list-group-item">
+                  <img class="img-fluid" src="{{d.imageUrl}}" alt="{{d.name}}" width="200">
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+
+
+
 <div style="margin-top: 200px;" *ngIf="! checkedLogin()">
-  <ul *ngFor="let c of continents" >
-
-<li>{{c.name}}
-  <ul *ngFor="let co of c.countries" >
-    <li>{{co.name}}</li>
+  <ul class="list-group" *ngFor="let c of continents">
+    <li class="list-group-item">{{c.name}}
+      <ul class="list-group" *ngFor="let co of c.countries">
+        <li class="list-group-item">{{co.name}}
+        </li>
+      </ul>
+    </li>
   </ul>
-</li>
-
-
-  </ul>
-
 </div>
