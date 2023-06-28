@@ -16,6 +16,7 @@ import { DestinationComponent } from './components/destination/destination.compo
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CountryComponent } from './components/country/country.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BlogComponent,
     DestinationComponent,
     GalleryComponent,
-    BlogListComponent
+    BlogListComponent,
+    CountryComponent
   ],
   imports: [
     BrowserModule,
