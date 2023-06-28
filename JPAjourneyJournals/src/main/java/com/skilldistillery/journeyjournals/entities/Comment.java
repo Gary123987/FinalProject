@@ -18,6 +18,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Comment {
@@ -40,6 +41,7 @@ public class Comment {
 	
 	private boolean enabled;
 	
+	@JsonIgnoreProperties({"destinationsCreated", "favoriteDestinations"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment show(String username, int tid) {
+	public Comment show(int tid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
