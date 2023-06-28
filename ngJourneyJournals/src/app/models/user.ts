@@ -18,6 +18,7 @@ export class User {
   destinationCreated: Destination[];
   destinationFavored: Destination[];
   user: User[]
+  placesCreated: Place[];
 
   constructor(
     id: number = 0,
@@ -33,7 +34,8 @@ export class User {
     places = [],
     destinationCreated = [],
     destinationFavored = [],
-    user = []
+    user = [],
+    placesCreated = []
   ) {
     this.id = id,
       this.firstName = firstName,
@@ -49,6 +51,7 @@ export class User {
       this.destinationCreated = destinationCreated;
     this.destinationFavored = destinationFavored;
     this.user = user;
+    this.placesCreated = placesCreated;
   }
 
 }

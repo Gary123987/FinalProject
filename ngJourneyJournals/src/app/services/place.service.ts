@@ -65,7 +65,7 @@ export class PlaceService {
 
 
   create(newPlace: Place, id: number): Observable<Place> {
-    return this.http.post<Place>(this.url + '/' + id + 'destination', newPlace, this.getHttpOptions()).pipe(
+    return this.http.post<Place>(this.url + '/' + id + '/destination', newPlace, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('creating place');
         return throwError(

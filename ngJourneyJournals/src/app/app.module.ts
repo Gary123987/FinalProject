@@ -16,6 +16,7 @@ import { DestinationComponent } from './components/destination/destination.compo
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { PlaceComponent } from './components/place/place.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DestinationComponent,
     GalleryComponent,
     BlogListComponent,
+    PlaceComponent,
 
   ],
   imports: [

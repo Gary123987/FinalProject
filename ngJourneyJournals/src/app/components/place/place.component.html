@@ -1,0 +1,11 @@
+
+<div id="places" *ngFor="let d of destinations">
+<div *ngFor="let p of d.places">
+<h1>{{p.name}}</h1>
+<img src="{{p.imageUrl}}" alt="{{p.name}}" width="200">
+<blockquote>{{p.description}}</blockquote>
+<small>{{p.street}} <small>{{p.zipcode}}</small></small>
+
+</div>
+<button (click)="showAddForm(d.id)">Add Place</button>
+</div>
