@@ -1,21 +1,17 @@
-<div *ngIf="!selectedBlog">
+<div id="blog" *ngIf="!selectedBlog">
   <div *ngIf="!showingForm">
     <div id="blogs" *ngFor="let p of places">
       <h1>Blogs about {{p.name}}</h1>
-      <div *ngFor="let blog of blogs">
+      <div *ngFor="let blog of p.blogs">
         <h3>{{blog.title}}</h3>
         <img src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200" (click)="displayDetails(blog)">
 
-        <button (click)="showAddForm(blog.id)">Add Post</button>
       </div>
+      <button (click)="showAddForm(p.id);">Add Post</button>
     </div>
   </div>
 </div>
-asjdfaskldf
 
-<div *ngFor="let blog of blogs">
-  {{blog.title}}asdasdf
-</div>
 
 <div id="addForm" *ngIf="showingForm">
   <div id="back">

@@ -37,9 +37,9 @@ public class Place {
 	
 	private boolean enabled;
 	
-	@JsonIgnore
-	@OneToOne(mappedBy = "place")
-	private Blog blog;
+	@JsonIgnoreProperties({"place"})
+	@OneToMany(mappedBy = "place")
+	private List<Blog> blogs;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -136,12 +136,13 @@ public class Place {
 		this.destination = destination;
 	}
 
-	public Blog getBlog() {
-		return blog;
+
+	public List<Blog> getBlogs() {
+		return blogs;
 	}
 
-	public void setBlog(Blog blog) {
-		this.blog = blog;
+	public void setBlogs(List<Blog> blogs) {
+		this.blogs = blogs;
 	}
 
 	public Place() {

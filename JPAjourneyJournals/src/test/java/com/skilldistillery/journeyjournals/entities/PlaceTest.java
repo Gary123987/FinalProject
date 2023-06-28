@@ -44,11 +44,19 @@ class PlaceTest {
 	void test() {
 		assertNotNull(place);
 		assertEquals(place.getName(), "Los Angeles");
-		assertEquals(place.getBlog(), em.find(Blog.class, 1));
 		assertEquals(place.getDestination(), em.find(Destination.class, 1));
 		assertEquals(place.getUser(), em.find(User.class, 1));
 		assertTrue(place.getImages().contains(em.find(PlaceImage.class, 1)));
 		assertEquals(5, place.getRatings().get(0).getRatingValue());
+	}
+	
+	@Test
+	void test_one_to_many() {
+		assertNotNull(place);
+		assertNotNull(place.getBlogs());
+		assertTrue(place.getBlogs().size() > 0);
+		
+		
 	}
 
 }

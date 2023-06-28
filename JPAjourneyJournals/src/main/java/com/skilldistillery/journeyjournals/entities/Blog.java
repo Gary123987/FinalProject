@@ -16,7 +16,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -54,13 +53,13 @@ public class Blog {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
-	@JsonIgnoreProperties({"blogs", "comments", "following"})
+	@JsonIgnoreProperties({"blogs", "comments", "following", "destinationsCreated", "favoriteDestinations", "placesCreated"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	
-	@OneToOne
+	@JsonIgnoreProperties({"blogs"})
+	@ManyToOne
 	@JoinColumn(name = "place_id")
 	private Place place;
 
