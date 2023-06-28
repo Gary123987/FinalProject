@@ -5,7 +5,9 @@ import java.util.List;
 import com.skilldistillery.journeyjournals.entities.Comment;
 
 public interface CommentService {
-	public List<Comment> index(String username);
+	public List<Comment> indexByUser(String username);
+	
+	public List<Comment> indexByBlog(int bid);
 
 	public Comment show(int tid);
 

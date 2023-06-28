@@ -46,7 +46,7 @@ public class Comment {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties("comments")
 	@ManyToOne
 	@JoinColumn(name="blog_id")
 	private Blog blog;
