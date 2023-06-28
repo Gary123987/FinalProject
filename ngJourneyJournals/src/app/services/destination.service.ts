@@ -49,7 +49,7 @@ export class DestinationService {
 
 
   create(newDestination: Destination, id: number): Observable<Destination> {
-    return this.http.post<Destination>(this.url + '/' + id + 'destination', newDestination, this.getHttpOptions()).pipe(
+    return this.http.post<Destination>(this.url + '/' + id + '/country', newDestination, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('creating destination');
         return throwError(

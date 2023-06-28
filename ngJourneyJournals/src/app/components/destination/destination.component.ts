@@ -14,45 +14,50 @@ import { PlaceService } from 'src/app/services/place.service';
   templateUrl: './destination.component.html',
   styleUrls: ['./destination.component.css']
 })
-export class DestinationComponent implements OnInit{
+export class DestinationComponent implements OnInit {
 
+  newDes: Destination = new Destination();
+  editDes: Destination | null = null;
   countries: Country[] = [];
   continents: Continent[] = [];
-  destinations: Destination [] = [];
-  places: Place [] = [];
+  destinations: Destination[] = [];
+  places: Place[] = [];
+  countryId: any;
+  selected: Destination | null = null;
+  showingForm: boolean = false;
 
   constructor(
-  private continentServ: ContinentService,
-  private countryServ: CountryService,
-  private auth: AuthService,
-  private destinationServ: DestinationService,
-  private placeServ: PlaceService,
-  ){}
+    private continentServ: ContinentService,
+    private countryServ: CountryService,
+    private auth: AuthService,
+    private destinationServ: DestinationService,
+    private placeServ: PlaceService,
+  ) { }
 
-  ngOnInit(){
-  this.loadContinents();
-  this.loadCountries();
-  this.loadDestinations();
-  this.loadPlaces();
+  ngOnInit() {
+    this.loadContinents();
+    this.loadCountries();
+    this.loadDestinations();
+    this.loadPlaces();
   }
 
-  checkedLogin(){
-  return this.auth.checkLogin();
+  checkedLogin() {
+    return this.auth.checkLogin();
   }
 
-  loadContinents(){
-  this.continentServ.indexAll().subscribe({
-    next: (continentList) => {
-      console.log(this.continents)
-      this.continents = continentList;
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  })
+  loadContinents() {
+    this.continentServ.indexAll().subscribe({
+      next: (continentList) => {
+        console.log(this.continents)
+        this.continents = continentList;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
-  loadCountries(){
+  loadCountries() {
     this.countryServ.indexAll().subscribe({
       next: (countryList) => {
         this.countries = countryList;
@@ -64,7 +69,7 @@ export class DestinationComponent implements OnInit{
 
   }
 
-  loadDestinations(){
+  loadDestinations() {
     this.destinationServ.indexByUser().subscribe({
       next: (destinationList) => {
         this.destinations = destinationList;
@@ -75,7 +80,7 @@ export class DestinationComponent implements OnInit{
     })
 
   }
-  loadPlaces(){
+  loadPlaces() {
     this.placeServ.indexByUser().subscribe({
       next: (placeList) => {
         this.places = placeList;
@@ -87,4 +92,24 @@ export class DestinationComponent implements OnInit{
 
   }
 
+  showAddForm(id: number) {
+    this.countryId = id;
+    this.showingForm = !this.showingForm;
+  }
+
+  addDestination(destination: Destination) {
+    return this.destinationServ.create(destination, this.countryId).subscribe({
+      next: (createdDes) => {
+        this.newDes = new Destination();
+        this.loadDestinations();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  updateDestination() {
+
+  }
 }

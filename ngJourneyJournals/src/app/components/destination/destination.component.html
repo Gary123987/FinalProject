@@ -1,9 +1,10 @@
-<div class="container mt-5" *ngIf="checkedLogin()">
+<div class="container mt-5" *ngIf="checkedLogin() && !showingForm">
   <div id="accordion">
     <div *ngFor="let c of continents" class="card">
       <div class="card-header" id="heading{{c.name}}">
         <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse " aria-expanded="true" aria-controls="collapse">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse " aria-expanded="true"
+            aria-controls="collapse">
             {{c.name}}
           </button>
         </h5>
@@ -13,6 +14,7 @@
           <ul class="list-group">
             <li *ngFor="let co of c.countries" class="list-group-item">
               {{co.name}}
+              <button (click)="showAddForm(co.id)">Add new Destination</button>
               <ul class="list-group mt-2">
                 <li *ngFor="let d of co.destinations" class="list-group-item">
                   <img class="img-fluid" src="{{d.imageUrl}}" alt="{{d.name}}" width="200">
@@ -28,7 +30,6 @@
                         <li>{{place.description}}</li>
                       </ul>
                     </li>
-
                   </ul>
                 </li>
               </ul>
@@ -52,4 +53,42 @@
       </ul>
     </li>
   </ul>
+</div>
+
+
+
+
+
+
+<div id="addForm" *ngIf="showingForm">
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">ADD</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="name" [(ngModel)]="newDes.name" placeholder="Name" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="city" [(ngModel)]="newDes.city" placeholder="City" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="text" name="state" [(ngModel)]="newDes.state" placeholder="State" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="text" name="description" [(ngModel)]="newDes.description"
+            placeholder="about" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newDes.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="newDes.enabled">
+        <!-- <div class="col-12">
+          <textarea class="form-control" name="about" id="" cols="30" rows="5" [(ngModel)]="newUser.about"
+            placeholder="about me"></textarea>
+        </div> -->
+        <button class="btn btn-primary" type="submit" (click)="addDestination(newDes)">Create Account</button>
+      </form>
+    </div>
+  </div>
 </div>
