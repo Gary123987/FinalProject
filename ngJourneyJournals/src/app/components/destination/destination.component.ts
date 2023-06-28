@@ -16,14 +16,15 @@ import { PlaceService } from 'src/app/services/place.service';
 })
 export class DestinationComponent implements OnInit {
 
+  newDes: Destination = new Destination();
+  editDes: Destination | null = null;
   countries: Country[] = [];
   continents: Continent[] = [];
   destinations: Destination[] = [];
   places: Place[] = [];
+  countryId: any;
   selected: Destination | null = null;
-  selectedCountry: Country | null = null;
-  countryId: any = null;
-  @Output() countrySend: EventEmitter<Country> = new EventEmitter<Country>();
+  showingForm: boolean = false;
 
   constructor(
     private continentServ: ContinentService,
@@ -40,12 +41,6 @@ export class DestinationComponent implements OnInit {
     this.loadPlaces();
   }
 
-
-  sendCountry(country: Country) {
-    this.countrySend.emit(country);
-    console.log(country);
-
-  }
   checkedLogin() {
     return this.auth.checkLogin();
   }
@@ -53,8 +48,8 @@ export class DestinationComponent implements OnInit {
   loadContinents() {
     this.continentServ.indexAll().subscribe({
       next: (continentList) => {
-        this.continents = continentList;
         console.log(this.continents)
+        this.continents = continentList;
       },
       error: (err) => {
         console.log(err);
@@ -97,17 +92,24 @@ export class DestinationComponent implements OnInit {
 
   }
 
-  displayAddForm() { }
-
-  getCountryId(id: number) {
+  showAddForm(id: number) {
     this.countryId = id;
+    this.showingForm = !this.showingForm;
   }
 
-
-  showSelected(country: Country) {
-    this.selectedCountry = country;
+  addDestination(destination: Destination) {
+    return this.destinationServ.create(destination, this.countryId).subscribe({
+      next: (createdDes) => {
+        this.newDes = new Destination();
+        this.loadDestinations();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
+  updateDestination() {
 
-
+  }
 }
