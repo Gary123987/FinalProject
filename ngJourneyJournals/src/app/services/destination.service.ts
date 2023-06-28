@@ -62,7 +62,7 @@ export class DestinationService {
   }
 
   update(id: number, destination: Destination): Observable<Destination> {
-    return this.http.put<Destination>(this.url + '/' + id, Destination, this.getHttpOptions()).pipe(catchError((err: any) => {
+    return this.http.put<Destination>(this.url + '/' + id, destination, this.getHttpOptions()).pipe(catchError((err: any) => {
       console.error('Error editing destination');
       return throwError(
         () =>

@@ -121,6 +121,10 @@ export class DestinationComponent implements OnInit {
   displayList(): void {
     this.selectedCountry = null;
   }
+
+  displayUpdateForm(destination: Destination): void {
+    this.selected = destination;
+  }
   addDestination(destination: Destination) {
     return this.destinationServ.create(destination, this.countryId).subscribe({
       next: (createdDes) => {

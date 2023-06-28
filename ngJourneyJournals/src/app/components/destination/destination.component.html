@@ -69,6 +69,7 @@
           </div>
         </div>
       </div>
+      <button (click)="displayUpdateForm(d)">Update Destination</button>
     </div>
   </div>
   <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button>
@@ -76,32 +77,32 @@
   <button class="btn btn-secondary" (click)="displayList()">Back</button>
 </div>
 
-<div id="updateForm" *ngIf="editDes">
+<div id="updateForm" *ngIf="selected" >
   <div id="back">
     <div class="container min-vh-50 d-flex justify-content-center align-items-center">
       <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
-        <legend class="text-center">ADD</legend>
+        <legend class="text-center">Update</legend>
         <div class="col-md-6">
-          <input class="form-control" type="text" name="name" [(ngModel)]="editDes.name" placeholder="Name" />
+          <input class="form-control" type="text" name="name" [(ngModel)]="selected.name" placeholder="Name" />
         </div>
         <div class="col-md-6">
-          <input class="form-control" type="text" name="city" [(ngModel)]="editDes.city" placeholder="City" />
+          <input class="form-control" type="text" name="city" [(ngModel)]="selected.city" placeholder="City" />
         </div>
         <div class="col-12">
-          <input class="form-control" type="text" name="state" [(ngModel)]="editDes.state" placeholder="State" />
+          <input class="form-control" type="text" name="state" [(ngModel)]="selected.state" placeholder="State" />
         </div>
         <div class="col-md-6">
-          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editDes.imageUrl"
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="selected.imageUrl"
             placeholder="image (URL)" />
         </div>
         <div class="col-12">
-          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="editDes.description"
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="selected.description"
             placeholder="Tell us about "></textarea>
         </div>
-        <input type="hidden" name="enabled" value="1" [(ngModel)]="editDes.enabled">
-        <button class="btn btn-primary" type="submit" (click)="updateDestination( editDes.id, editDes)">Update
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="selected.enabled">
+        <button class="btn btn-primary" type="submit" (click)="updateDestination( selected.id, selected)">Update
           Destination</button>
-        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
+        <button class="btn btn-outline-secondary" (click)="selected = null">Back</button>
       </form>
     </div>
   </div>
