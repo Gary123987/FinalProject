@@ -17,6 +17,7 @@ export class PlaceComponent implements OnInit{
   editPlace: Place | null = null;
   places: Place[] = [];
   selected: Place | null = null;
+  selectedPlace: Place | null = null;
   showingForm: boolean = false;
   user: User | null = null;
   destinationId: any;
@@ -80,6 +81,14 @@ export class PlaceComponent implements OnInit{
   displayUpdateForm(place: Place): void {
     this.selected = place;
   }
+
+  displayDetails(place : Place | null) :void {
+    this.selectedPlace = place;
+  }
+
+
+
+
   addPlace(place: Place) {
     return this.placeServ.create(place, this.destinationId).subscribe({
       next: (createdPlace) => {

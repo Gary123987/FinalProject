@@ -1,11 +1,104 @@
-
-<div id="places" *ngFor="let d of destinations">
+<div *ngIf="!selectedPlace">
+<div *ngIf="!showingForm">
+<div id="places"  *ngFor="let d of destinations" >
+  <h1>Places in {{d.name}}</h1>
 <div *ngFor="let p of d.places">
-<h1>{{p.name}}</h1>
-<img src="{{p.imageUrl}}" alt="{{p.name}}" width="200">
-<blockquote>{{p.description}}</blockquote>
-<small>{{p.street}} <small>{{p.zipcode}}</small></small>
+<h3>{{p.name}}</h3>
+<img src="{{p.imageUrl}}" alt="{{p.name}}" width="200" (click)="displayDetails(p)">
 
 </div>
 <button (click)="showAddForm(d.id)">Add Place</button>
+</div>
+</div>
+</div>
+
+<div id="addForm" *ngIf="showingForm">
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">ADD</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="name" [(ngModel)]="newPlace.name" placeholder="Name" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="text" name="street" [(ngModel)]="newPlace.street" placeholder="Street" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="zipcode" [(ngModel)]="newPlace.zipcode"
+            placeholder="zipcode" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newPlace.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="newPlace.description"
+            placeholder="Tell us about this location"></textarea>
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="newPlace.enabled">
+        <button class="btn btn-primary" type="submit" (click)="addPlace(newPlace)" (click)="showingForm = false">Add this location</button>
+        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div id="countryDetails" *ngIf="selectedPlace" class="container-fluid" >
+  <h1 id="country-name">{{selectedPlace.name}}</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card rounded bg-dark text-light mb-4">
+        <img src="{{selectedPlace.imageUrl}}" alt="{{selectedPlace.name}}" class="card-img-top img-fluid" width="200">
+        <div class="card-body">
+          <h6 class="card-subtitle">{{selectedPlace.name}}</h6>
+          <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedPlace.description}}</p>
+          <div style="overflow-y: auto; max-height: 200px;">
+            <div class="card mb-3">
+              <div class="card-body">
+                <p class="card-text">{{selectedPlace.street}}, {{selectedPlace.zipcode}}</p>
+                <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedPlace.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="placesCreatedByUser(selectedPlace)" (click)="displayUpdateForm(selectedPlace)" >Update Location</button>
+      <button class="btn btn-primary" *ngIf="placesCreatedByUser(selectedPlace)" (click)="deletePlace(selectedPlace.id)">Delete Destination</button>
+    </div>
+  </div>
+  <!-- <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button> -->
+  <br>
+  <button class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
+</div>
+
+<div id="updateForm" *ngIf="selected" >
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">Update</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="name" [(ngModel)]="selected.name" placeholder="Name" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="city" [(ngModel)]="selected.street" placeholder="City" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="text" name="state" [(ngModel)]="selected.zipcode" placeholder="State" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="selected.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="selected.description"
+            placeholder="Tell us about "></textarea>
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="selected.enabled">
+        <button class="btn btn-primary" type="submit" (click)="updatePlace( selected.id, selected)">Update
+          Destination</button>
+        <button class="btn btn-outline-secondary" (click)="selected = null">Back</button>
+      </form>
+    </div>
+  </div>
 </div>
