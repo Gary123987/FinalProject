@@ -74,20 +74,17 @@
         <div class="col-12">
           <input class="form-control" type="text" name="state" [(ngModel)]="newDes.state" placeholder="State" />
         </div>
-        <div class="col-12">
-          <input class="form-control" type="text" name="description" [(ngModel)]="newDes.description"
-            placeholder="about" />
-        </div>
         <div class="col-md-6">
           <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newDes.imageUrl"
             placeholder="image (URL)" />
         </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="newDes.description"
+            placeholder="Tell us about "></textarea>
+        </div>
         <input type="hidden" name="enabled" value="1" [(ngModel)]="newDes.enabled">
-        <!-- <div class="col-12">
-          <textarea class="form-control" name="about" id="" cols="30" rows="5" [(ngModel)]="newUser.about"
-            placeholder="about me"></textarea>
-        </div> -->
-        <button class="btn btn-primary" type="submit" (click)="addDestination(newDes)">Create Account</button>
+        <button class="btn btn-primary" type="submit" (click)="addDestination(newDes)">Add Destination</button>
+        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
       </form>
     </div>
   </div>

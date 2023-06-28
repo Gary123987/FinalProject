@@ -101,7 +101,10 @@ export class DestinationComponent implements OnInit {
     return this.destinationServ.create(destination, this.countryId).subscribe({
       next: (createdDes) => {
         this.newDes = new Destination();
+        this.loadContinents();
+        this.loadCountries();
         this.loadDestinations();
+        this.loadPlaces();
       },
       error: (err) => {
         console.log(err);

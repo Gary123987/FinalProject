@@ -1,3 +1,17 @@
 #form {
   margin-top: 200px;
 }
+
+#myForm {
+  margin-top: 30px;
+  color: white;
+  width: 500px;
+  height: auto;
+  padding: 50px;
+  background-color: rgba(2, 62, 138, .3);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 2px solid #023e8a;
+  border-radius: 8px;
+}
