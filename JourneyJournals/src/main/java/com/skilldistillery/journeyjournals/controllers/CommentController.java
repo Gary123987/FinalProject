@@ -1,5 +1,6 @@
 package com.skilldistillery.journeyjournals.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,9 +36,9 @@ public class CommentController {
 	@Autowired
 	private BlogService blogServ;
 	
-	@GetMapping("commentUser/{username}")
-	private List<Comment> getCommentsByUser (@PathVariable String username) {
-		User user = userServ.findByUsername(username);
+	@GetMapping("commentUser")
+	private List<Comment> getCommentsByUser (Principal principal) {
+		User user = userServ.findByUsername(principal.getName());
 		return user.getComments();
 	}
 	
@@ -47,18 +48,18 @@ public class CommentController {
 	}
 	
 	@PostMapping("comment/create/{username}")
-	private Comment createComment (@RequestBody Comment comment, @PathVariable String username) {
-		return commentServ.create(username, comment);
+	private Comment createComment (@RequestBody Comment comment, Principal principal) {
+		return commentServ.create(principal.getName(), comment);
 	}
 	
 	@PutMapping("comment/update/{username}/{id}") 
-	private Comment updateComment(@PathVariable String username, @PathVariable int id, @RequestBody Comment comment) {
-		return commentServ.update(username, id, comment);
+	private Comment updateComment(Principal principal, @PathVariable int id, @RequestBody Comment comment) {
+		return commentServ.update(principal.getName(), id, comment);
 	}
 	
-	@DeleteMapping("comment/delete/{username}/{id}")
-	private void deleteComment(@PathVariable String username, @PathVariable int id, HttpServletResponse res) {
-		boolean b = commentServ.destroy(username, id);
+	@DeleteMapping("comment/delete/{id}")
+	private void deleteComment(@PathVariable String username, @PathVariable int id, HttpServletResponse res, Principal principal) {
+		boolean b = commentServ.destroy(principal.getName(), id);
 		if (!b) {
 			res.setStatus(400);
 		}
