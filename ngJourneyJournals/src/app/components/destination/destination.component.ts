@@ -1,8 +1,8 @@
+import { Country } from './../../models/country';
 import { CountryService } from 'src/app/services/country.service';
 import { ContinentService } from './../../services/continent.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { Country } from 'src/app/models/country';
 import { Continent } from 'src/app/models/continent';
 import { Destination } from 'src/app/models/destination';
 import { DestinationService } from 'src/app/services/destination.service';
@@ -14,45 +14,55 @@ import { PlaceService } from 'src/app/services/place.service';
   templateUrl: './destination.component.html',
   styleUrls: ['./destination.component.css']
 })
-export class DestinationComponent implements OnInit{
+export class DestinationComponent implements OnInit {
 
   countries: Country[] = [];
   continents: Continent[] = [];
-  destinations: Destination [] = [];
-  places: Place [] = [];
+  destinations: Destination[] = [];
+  places: Place[] = [];
+  selected: Destination | null = null;
+  selectedCountry: Country | null = null;
+  countryId: any = null;
+  @Output() countrySend: EventEmitter<Country> = new EventEmitter<Country>();
 
   constructor(
-  private continentServ: ContinentService,
-  private countryServ: CountryService,
-  private auth: AuthService,
-  private destinationServ: DestinationService,
-  private placeServ: PlaceService,
-  ){}
+    private continentServ: ContinentService,
+    private countryServ: CountryService,
+    private auth: AuthService,
+    private destinationServ: DestinationService,
+    private placeServ: PlaceService,
+  ) { }
 
-  ngOnInit(){
-  this.loadContinents();
-  this.loadCountries();
-  this.loadDestinations();
-  this.loadPlaces();
+  ngOnInit() {
+    this.loadContinents();
+    this.loadCountries();
+    this.loadDestinations();
+    this.loadPlaces();
   }
 
-  checkedLogin(){
-  return this.auth.checkLogin();
+
+  sendCountry(country: Country) {
+    this.countrySend.emit(country);
+    console.log(country);
+
+  }
+  checkedLogin() {
+    return this.auth.checkLogin();
   }
 
-  loadContinents(){
-  this.continentServ.indexAll().subscribe({
-    next: (continentList) => {
-      console.log(this.continents)
-      this.continents = continentList;
-    },
-    error: (err) => {
-      console.log(err);
-    }
-  })
+  loadContinents() {
+    this.continentServ.indexAll().subscribe({
+      next: (continentList) => {
+        this.continents = continentList;
+        console.log(this.continents)
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
-  loadCountries(){
+  loadCountries() {
     this.countryServ.indexAll().subscribe({
       next: (countryList) => {
         this.countries = countryList;
@@ -64,7 +74,7 @@ export class DestinationComponent implements OnInit{
 
   }
 
-  loadDestinations(){
+  loadDestinations() {
     this.destinationServ.indexByUser().subscribe({
       next: (destinationList) => {
         this.destinations = destinationList;
@@ -75,7 +85,7 @@ export class DestinationComponent implements OnInit{
     })
 
   }
-  loadPlaces(){
+  loadPlaces() {
     this.placeServ.indexByUser().subscribe({
       next: (placeList) => {
         this.places = placeList;
@@ -86,5 +96,18 @@ export class DestinationComponent implements OnInit{
     })
 
   }
+
+  displayAddForm() { }
+
+  getCountryId(id: number) {
+    this.countryId = id;
+  }
+
+
+  showSelected(country: Country) {
+    this.selectedCountry = country;
+  }
+
+
 
 }
