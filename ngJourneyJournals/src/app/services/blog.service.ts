@@ -63,7 +63,7 @@ export class BlogService {
   }
 
   create(newBlog: Blog, id: number): Observable<Blog> {
-    return this.http.post<Blog>(this.url + 'Created' + '/' + id + '/place', newBlog, this.getHttpOptions()).pipe(
+    return this.http.post<Blog>(this.url + 'Create' + '/' + id + '/place', newBlog, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('creating blog')
         return throwError(

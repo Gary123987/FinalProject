@@ -63,13 +63,7 @@ export class BlogComponent implements OnInit {
 
   }
 
-  findBlogsByPlaceId(id: number) {
-    for (let b of this.blogs) {
-      if (b.place?.id == id) {
-        this.filterdBlogs.push(b)
-      }
-    }
-  }
+
 
   loadBlogs() {
     this.blogServ.indexAll().subscribe({
