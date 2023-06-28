@@ -76,7 +76,36 @@
   <button class="btn btn-secondary" (click)="displayList()">Back</button>
 </div>
 
-
+<div id="updateForm" *ngIf="editDes">
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">ADD</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="name" [(ngModel)]="editDes.name" placeholder="Name" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="city" [(ngModel)]="editDes.city" placeholder="City" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="text" name="state" [(ngModel)]="editDes.state" placeholder="State" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="editDes.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="editDes.description"
+            placeholder="Tell us about "></textarea>
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="editDes.enabled">
+        <button class="btn btn-primary" type="submit" (click)="updateDestination( editDes.id, editDes)">Update
+          Destination</button>
+        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div style="margin-top: 200px;" *ngIf="! checkedLogin()">
   <ul class="list-group" *ngFor="let c of continents">
