@@ -52,7 +52,7 @@ export class BlogComponent implements OnInit {
   }
 
   loadPlaces() {
-    this.placeServ.indexByUser().subscribe({
+    this.placeServ.indexAll().subscribe({
       next: (placeList) => {
         this.places = placeList;
       },

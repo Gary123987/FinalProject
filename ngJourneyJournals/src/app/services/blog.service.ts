@@ -38,7 +38,7 @@ export class BlogService {
     );
   }
   indexAll(): Observable<Blog[]> {
-    return this.http.get<Blog[]>(this.url + 'All', this.getHttpOptions()).pipe(
+    return this.http.get<Blog[]>(this.url + 'All').pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(

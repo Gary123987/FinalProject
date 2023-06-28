@@ -32,6 +32,8 @@ public class SecurityConfig {
 	        .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()     // will hit the OPTIONS on the route
 	        .antMatchers(HttpMethod.GET, "/api/continents").permitAll() // For CORS, the preflight request
 	        .antMatchers(HttpMethod.GET, "/api/countries").permitAll() // For CORS, the preflight request
+	        .antMatchers(HttpMethod.GET, "/api/blogsAll").permitAll() // For CORS, the preflight request
+	        .antMatchers(HttpMethod.GET, "/api/places").permitAll() // For CORS, the preflight request
 	        .antMatchers("/api/**").authenticated() // Requests for our REST API must be authorized.
 	        .anyRequest().permitAll()               // All other requests are allowed without authentication.
 	        .and()
