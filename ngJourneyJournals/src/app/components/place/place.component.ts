@@ -63,7 +63,7 @@ export class PlaceComponent implements OnInit {
   }
 
   loadDestinations() {
-    this.destinationServ.indexByUser().subscribe({
+    this.destinationServ.indexAll().subscribe({
       next: (destinationList) => {
         this.destinations = destinationList;
       },

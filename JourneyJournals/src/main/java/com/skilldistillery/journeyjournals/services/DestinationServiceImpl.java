@@ -28,6 +28,9 @@ public class DestinationServiceImpl implements DestinationService {
 	public List<Destination> index(String username) {
 		return repo.findByUserCreated_Username(username);
 	}
+	public List<Destination> index() {
+		return repo.findAll();
+	}
 
 	@Override
 	public Destination show(String username, int id) {

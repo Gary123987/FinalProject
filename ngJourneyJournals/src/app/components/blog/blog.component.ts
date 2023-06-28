@@ -63,8 +63,6 @@ export class BlogComponent implements OnInit {
 
   }
 
-
-
   loadBlogs() {
     this.blogServ.indexAll().subscribe({
       next: (blogList) => {
@@ -74,7 +72,6 @@ export class BlogComponent implements OnInit {
         console.log(err);
       }
     })
-
   }
 
   showAddForm(id: number) {

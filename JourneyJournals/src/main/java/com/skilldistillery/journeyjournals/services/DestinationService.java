@@ -6,6 +6,7 @@ import com.skilldistillery.journeyjournals.entities.Destination;
 
 public interface DestinationService {
 	public List<Destination> index(String username);
+	public List<Destination> index();
 
 	public Destination show(String username, int id);
 
