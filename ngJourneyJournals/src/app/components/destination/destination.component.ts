@@ -24,6 +24,7 @@ export class DestinationComponent implements OnInit {
   places: Place[] = [];
   countryId: any;
   selected: Destination | null = null;
+  selectedCountry: Country | null = null;
   showingForm: boolean = false;
 
   constructor(
@@ -41,13 +42,10 @@ export class DestinationComponent implements OnInit {
     this.loadPlaces();
   }
 
-  // Inside your component class
-  // Inside your component class
   collapsedStates: { [key: string]: boolean } = {};
 
   generateContinentId(continent: Continent): string {
-    // Generate a unique identifier for the continent, e.g., using the continent's ID property
-    return continent.id.toString(); // Assuming 'id' is a property representing the continent's ID
+    return continent.id.toString();
   }
 
   isCollapsed(continentId: string): boolean {
@@ -116,6 +114,13 @@ export class DestinationComponent implements OnInit {
     this.showingForm = !this.showingForm;
   }
 
+  diplayCountry(country: Country): void {
+    this.selectedCountry = country;
+  }
+
+  displayList(): void {
+    this.selectedCountry = null;
+  }
   addDestination(destination: Destination) {
     return this.destinationServ.create(destination, this.countryId).subscribe({
       next: (createdDes) => {
