@@ -136,7 +136,15 @@ export class DestinationComponent implements OnInit {
     });
   }
 
-  updateDestination() {
+  updateDestination(id: number, editedDes: Destination) {
+    return this.destinationServ.update(id, editedDes).subscribe({
+      next: (updatedDes) => {
+        this.editDes = updatedDes;
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
 
   }
 }
