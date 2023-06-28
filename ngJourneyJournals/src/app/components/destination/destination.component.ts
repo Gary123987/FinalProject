@@ -41,6 +41,25 @@ export class DestinationComponent implements OnInit {
     this.loadPlaces();
   }
 
+  // Inside your component class
+  // Inside your component class
+  collapsedStates: { [key: string]: boolean } = {};
+
+  generateContinentId(continent: Continent): string {
+    // Generate a unique identifier for the continent, e.g., using the continent's ID property
+    return continent.id.toString(); // Assuming 'id' is a property representing the continent's ID
+  }
+
+  isCollapsed(continentId: string): boolean {
+    return this.collapsedStates[continentId];
+  }
+
+  toggleCollapse(continentId: string): void {
+    this.collapsedStates[continentId] = !this.isCollapsed(continentId);
+  }
+
+
+
   checkedLogin() {
     return this.auth.checkLogin();
   }

@@ -1,45 +1,56 @@
 <div class="container mt-5" *ngIf="checkedLogin() && !showingForm">
-  <div id="accordion">
-    <div *ngFor="let c of continents" class="card">
-      <div class="card-header" id="heading{{c.name}}">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse " aria-expanded="true"
-            aria-controls="collapse">
-            {{c.name}}
-          </button>
-        </h5>
-      </div>
-      <div id="collapse{{c.name}}" class="collapse show" aria-labelledby="heading " data-parent="#accordion">
-        <div class="card-body">
-          <ul class="list-group">
-            <li *ngFor="let co of c.countries" class="list-group-item">
-              {{co.name}}
-              <button (click)="showAddForm(co.id)">Add new Destination</button>
-              <ul class="list-group mt-2">
-                <li *ngFor="let d of co.destinations" class="list-group-item">
-                  <img class="img-fluid" src="{{d.imageUrl}}" alt="{{d.name}}" width="200">
-                  <ul>
-                    <li>{{d.name}}</li>
-                    <!-- <li><iframe src="https://www.google.com/maps?q={{d.city}},{{d.state}}&z=10&output=embed" height="auto" width="200" style="border:0" allowfullscreen></iframe></li> -->
-                    <li>{{d.description}}</li>
-                    <li *ngFor="let place of d.places">
-                      <ul>
-                        <li>{{place.name}}</li>
-                        <li>{{place.street}}</li>
-                        <li>{{place.zipcode}}</li>
-                        <li>{{place.description}}</li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
+  <div class="text-center">
+    <div *ngFor="let c of continents">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="mb-0">
+            <button class="btn btn-primary" (click)="toggleCollapse(c.name)">
+              <span class="name-divider"></span>{{c.name}}<span class="name-divider"></span>
+            </button>
+          </h5>
+        </div>
+        <div [hidden]="!isCollapsed(c.name)">
+          <div class="card-body">
+            <div *ngFor="let co of c.countries">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{co.name}}</h5>
+                  <button class="btn btn-primary" (click)="showAddForm(co.id)">Add new Destination</button>
+                  <div *ngFor="let d of co.destinations">
+                    <div class="card mb-3">
+                      <img src="{{d.imageUrl}}" alt="{{d.name}}" class="img-fluid" width="200">
+                      <div class="card-body">
+                        <h6 class="card-subtitle">{{d.name}}</h6>
+                        <!-- <iframe src="https://www.google.com/maps?q={{d.city}},{{d.state}}&z=10&output=embed" height="auto" width="200" style="border:0" allowfullscreen></iframe> -->
+                        <p class="card-text">{{d.description}}</p>
+                        <div *ngFor="let place of d.places">
+                          <div class="card mb-3">
+                            <div class="card-body">
+                              <h6 class="card-subtitle">{{place.name}}</h6>
+                              <p class="card-text">{{place.street}}</p>
+                              <p class="card-text">{{place.zipcode}}</p>
+                              <p class="card-text">{{place.description}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
 
 
 
@@ -54,11 +65,6 @@
     </li>
   </ul>
 </div>
-
-
-
-
-
 
 <div id="addForm" *ngIf="showingForm">
   <div id="back">
