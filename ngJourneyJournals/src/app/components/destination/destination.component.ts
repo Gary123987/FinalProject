@@ -8,6 +8,7 @@ import { Destination } from 'src/app/models/destination';
 import { DestinationService } from 'src/app/services/destination.service';
 import { Place } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-destination',
@@ -26,6 +27,7 @@ export class DestinationComponent implements OnInit {
   selected: Destination | null = null;
   selectedCountry: Country | null = null;
   showingForm: boolean = false;
+  user: User | null = null;
 
   constructor(
     private continentServ: ContinentService,
@@ -35,11 +37,23 @@ export class DestinationComponent implements OnInit {
     private placeServ: PlaceService,
   ) { }
 
+  getUserName() {
+    this.auth.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
   ngOnInit() {
     this.loadContinents();
     this.loadCountries();
     this.loadDestinations();
     this.loadPlaces();
+    this.getUserName();
   }
 
   collapsedStates: { [key: string]: boolean } = {};
@@ -129,10 +143,7 @@ export class DestinationComponent implements OnInit {
     return this.destinationServ.create(destination, this.countryId).subscribe({
       next: (createdDes) => {
         this.newDes = new Destination();
-        this.loadContinents();
-        this.loadCountries();
-        this.loadDestinations();
-        this.loadPlaces();
+      this.ngOnInit();
       },
       error: (err) => {
         console.log(err);
@@ -151,4 +162,21 @@ export class DestinationComponent implements OnInit {
     })
 
   }
+
+  deleteDestination(id: number) {
+    return this.destinationServ.destroy(id).subscribe({
+      next: () => {
+      this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  destinationsCreatedByUser(destination: Destination) {
+    return this.user?.role === 'admin' || this.user?.destinationCreated.includes(destination);
+
+  }
+
 }
