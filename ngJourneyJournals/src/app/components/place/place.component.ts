@@ -22,6 +22,7 @@ export class PlaceComponent implements OnInit{
   user: User | null = null;
   destinationId: any;
   destinations: Destination [] = [];
+  opacity : number = 1;
 
   constructor(
     private auth: AuthService,
@@ -86,7 +87,14 @@ export class PlaceComponent implements OnInit{
     this.selectedPlace = place;
   }
 
-
+  opactiyGetter() {
+    if (this.selected) {
+    return 'low'
+    }
+    else  {
+      return 'full'
+    }
+  }
 
 
   addPlace(place: Place) {

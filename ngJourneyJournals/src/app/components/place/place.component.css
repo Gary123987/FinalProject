@@ -1,3 +1,11 @@
 #places {
   margin-top: 200px;
 }
+
+.full {
+  opacity: 1;
+}
+
+.low {
+  opacity: 0.1;
+}
