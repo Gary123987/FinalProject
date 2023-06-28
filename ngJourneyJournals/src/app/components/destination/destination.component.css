@@ -1,5 +1,29 @@
+#back {
+  background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 30px;
+  width: 100vw;
+  height: 100vh;
+}
+
+
 #list {
-  margin-top: 500px;
+  padding-top: 200px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#cursor {
+  cursor: pointer;
+  text-decoration: underline;
+  color: lightyellow;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 #form {
