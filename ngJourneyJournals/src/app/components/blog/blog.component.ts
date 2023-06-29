@@ -96,7 +96,6 @@ export class BlogComponent implements OnInit {
     }
   }
 
-
   addBlog(blog: Blog) {
     return this.blogServ.create(blog, this.placeId).subscribe({
       next: () => {
@@ -137,7 +136,4 @@ export class BlogComponent implements OnInit {
     return this.user?.role === 'admin' || this.user?.blogs.includes(blog);
 
   }
-
-
-
 }

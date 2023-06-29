@@ -10,7 +10,9 @@ import { DestinationComponent } from './components/destination/destination.compo
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { PlaceComponent } from './components/place/place.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { PlaceListComponent } from './components/place-list/place-list.component';
+import { DestinationListComponent } from './components/destination-list/destination-list.component';
+
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -21,9 +23,10 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'place', component: PlaceComponent },
   { path: 'bloglist', component: BlogListComponent },
+  { path: 'placelist', component: PlaceListComponent },
+  { path: 'destinationlist', component: DestinationListComponent },
   { path: 'destination', component: DestinationComponent },
   { path: 'gallery', component: GalleryComponent },
-  { path: 'user-profile', component: UserProfileComponent },
   { path: '**', component: NotfoundComponent },
 ];
 

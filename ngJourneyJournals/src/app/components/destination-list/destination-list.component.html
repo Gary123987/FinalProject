@@ -1,0 +1,25 @@
+<div id="container" *ngIf="selected">
+  <div id="details">
+    <h1>{{selected.name}}</h1>
+    <img src="{{selected.imageUrl}}" alt="picture of{{selected.name}}" height="auto" width="275">
+    <blockquote>State/Province: {{selected.state}} City: {{selected.city}}</blockquote>
+    <p style="overflow-y: auto; max-height: 200px;">{{selected.description}}</p>
+    <br>
+    <button (click)="displayTable()">Back</button>
+  </div>
+</div>
+
+<div id="list" *ngIf="!selected" class="container-fluid">
+  <button class="btn btn-outline-primary" [routerLink]="['/userhome']">Back</button>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let des of destinations" (click)="displayBlog(des)">
+      <div class="card rounded bg-dark text-light mb-4">
+        <img src="{{des.imageUrl}}" class="card-img-top" alt="Image of {{des.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{des.name}}</h5>
+          <div style="overflow-y: auto; max-height: 200px;">{{des.description}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
