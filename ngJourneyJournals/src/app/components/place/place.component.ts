@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 import { Destination } from 'src/app/models/destination';
 import { Place } from 'src/app/models/place';
 import { User } from 'src/app/models/user';
@@ -23,11 +26,16 @@ export class PlaceComponent implements OnInit {
   destinationId: any;
   destinations: Destination[] = [];
   opacity: number = 1;
+  createdId: any;
 
   constructor(
     private auth: AuthService,
     private placeServ: PlaceService,
     private destinationServ: DestinationService,
+
+    private router: Router,
+    private sanitizer: DomSanitizer
+
   ) { }
 
   getUserName() {
@@ -39,6 +47,14 @@ export class PlaceComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  sanitizeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  encodeAddress(address: string): string {
+    return encodeURIComponent(address);
   }
 
   ngOnInit() {
@@ -77,6 +93,11 @@ export class PlaceComponent implements OnInit {
   showAddForm(id: number) {
     this.destinationId = id;
     this.showingForm = !this.showingForm;
+  }
+
+  gettingUserId(id: number) {
+   this.router.navigateByUrl('userhome/' + id);
+
   }
 
   displayUpdateForm(place: Place): void {
@@ -135,6 +156,10 @@ export class PlaceComponent implements OnInit {
   placesCreatedByUser(place: Place) {
     return this.user?.role === 'admin' || this.user?.placesCreated.includes(place);
 
+  }
+
+  viewUserProfile(user: User) {
+    this.router.navigate(['/userhome', user.id]);
   }
 
 }

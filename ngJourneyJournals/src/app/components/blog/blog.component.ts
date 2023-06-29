@@ -192,6 +192,7 @@ export class BlogComponent implements OnInit {
 
   }
 
+
   commentCreatedByUser(comment : Comment) {
     return this.user?.role === 'admin' || comment.user == this.user;
 

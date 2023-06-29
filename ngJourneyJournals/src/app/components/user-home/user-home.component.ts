@@ -1,13 +1,13 @@
+import { DestinationService } from 'src/app/services/destination.service';
 import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Blog } from 'src/app/models/blog';
-import { BlogServiceService } from 'src/app/services/blog-service.service';
 import { Destination } from 'src/app/models/destination';
-import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Place } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
+import { BlogService } from 'src/app/services/blog.service';
 
 @Component({
   selector: 'app-user-home',
@@ -23,15 +23,27 @@ export class UserHomeComponent implements OnInit {
 
   constructor(
     private placeServ: PlaceService,
-    private userService: UserService,
+    private destinationServ: DestinationService,
+    private blogServ: BlogService,
     private auth: AuthService,
     private route: ActivatedRoute
 
   ) { }
 
   ngOnInit(): void {
-    this.reload();
-    this.getUserName();
+
+     let userIdString: string | null = this.route.snapshot.paramMap.get('id');
+     if (userIdString){
+     let userId: number = parseInt(userIdString);
+     this.loadOtherUser(userId);
+      } else {
+        this.reload();
+        this.getUserName();
+      }
+  
+    this.loadDestinations();
+    this.loadBlogs();
+
   }
 
   getUserName() {
@@ -55,6 +67,47 @@ export class UserHomeComponent implements OnInit {
       },
     })
   }
+
+
+  loadOtherUser(userId: number) {
+    this.userService.show(userId).subscribe({
+      next: (user) => {
+        this.user = user;
+        this.places = user.placesCreated;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+
+  }
+
+  loadDestinations() {
+    this.destinationServ.indexByUser().subscribe({
+      next: (destinationList) => {
+        this.destinations = destinationList;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+
+  }
+
+  loadBlogs() {
+    this.blogServ.index().subscribe({
+      next: (blogList) => {
+        this.blogs = blogList;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+
+  }
+
+
 
 }
 

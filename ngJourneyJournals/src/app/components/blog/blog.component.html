@@ -1,52 +1,56 @@
-<div id="blog" *ngIf="!selectedBlog">
-  <div *ngIf="!showingForm">
-    <div id="blogs" *ngFor="let p of places">
-      <h1>Blogs about {{p.name}}</h1>
-      <div *ngFor="let blog of p.blogs">
-        <h3>{{blog.title}}</h3>
-        <img src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200" (click)="displayDetails(blog)">
-
+<div id="myBackground" *ngIf="!selectedBlog">
+  <div class="container" *ngIf="!showingForm">
+    <div style="overflow-y: auto; max-height: 860px;" class="row">
+      <div class="col-lg-4" *ngFor="let p of places">
+        <div class="card rounded bg-dark text-light mb-3">
+          <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
+            <h5 class="card-title">Post About {{p.name}}</h5>
+            <div *ngFor="let blog of p.blogs">
+              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-muted">{{blog.title}}</h4>
+              <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200"
+                (click)="displayDetails(blog)">
+            </div>
+            <button class="btn btn-primary" (click)="showAddForm(p.id)">Add Place</button>
+          </div>
+        </div>
       </div>
-      <button (click)="showAddForm(p.id);">Add Post</button>
     </div>
   </div>
 </div>
 
 
-<div id="addForm" *ngIf="showingForm">
-  <div id="back">
-    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
-      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
-        <legend class="text-center">ADD</legend>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="Title" [(ngModel)]="newBlog.title" placeholder="Title" />
-        </div>
-        <div class="col-12">
-          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart" />
-        </div>
-        <div class="col-md-6">
-          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd" />
-        </div>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
-            placeholder="image (URL)" />
-        </div>
-        <div class="col-12">
-          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="newBlog.description"
-            placeholder="Tell us about this location"></textarea>
-        </div>
-        <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
-        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)" (click)="showingForm = false">Add
-          A Post</button>
-        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
-      </form>
+
+<div *ngIf="showingForm" class="container min-vh-50 d-flex justify-content-center align-items-center">
+  <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+    <legend class="text-center">ADD</legend>
+    <div class="col-md-6">
+      <input class="form-control" type="text" name="Title" [(ngModel)]="newBlog.title" placeholder="Title" />
     </div>
-  </div>
+    <div class="col-12">
+      <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart" />
+    </div>
+    <div class="col-md-6">
+      <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd" />
+    </div>
+    <div class="col-md-6">
+      <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
+        placeholder="image (URL)" />
+    </div>
+    <div class="col-12">
+      <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="newBlog.description"
+        placeholder="Tell Us About Your Trip Here"></textarea>
+    </div>
+    <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
+    <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)" (click)="showingForm = false">Add
+      A Post</button>
+    <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
+  </form>
 </div>
 
 
-<div id="placeDetails" *ngIf="selectedBlog" class="container-fluid" [ngClass]="opactiyGetter()">
-  <h1 id="placeName">{{selectedBlog.title}}</h1>
+
+<div id="blogDetails" *ngIf="selectedBlog" class="container-fluid" [ngClass]="opactiyGetter()">
+  <h1 id="blogName">{{selectedBlog.title}}</h1>
   <div class="row">
     <div class="col-md-4">
       <div class="card rounded bg-dark text-light mb-4">
@@ -54,9 +58,10 @@
         <div class="card-body">
           <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedBlog.description}}</p>
           <div style="overflow-y: auto; max-height: 200px;">
+
             <div class="card mb-3">
               <div class="card-body">
-                <p class="card-text">{{selectedBlog.tripStart}}, {{selectedBlog.tripEnd}}</p>
+           
                 <p *ngFor="let c of selectedBlog.comments" style="overflow-y: auto; max-height: 200px;"
                   class="card-text">{{c.title}}<br>
                   <small>{{c.body}}</small>
@@ -65,18 +70,26 @@
                 </p>
               </div>
             </div>
+
+            <p class="card-text">Trip Start:{{selectedBlog.tripStart}} Trip End:{{selectedBlog.tripEnd}}</p>
+
+
           </div>
         </div>
       </div>
-      <button *ngIf="blogCreatedByUser(selectedBlog)" (click)="displayUpdateForm(selectedBlog)">Update
-        Post</button>
-      <button class="btn btn-primary" *ngIf="blogCreatedByUser(selectedBlog)"
+      <button id="one" class="btn btn-outline-danger" *ngIf="blogCreatedByUser(selectedBlog)"
         (click)="deleteBlog(selectedBlog.id)">Delete Post</button>
+
       <button (click)="showCommentForm = true">Add a New Comment</button>"
+
+      <button id="two" class="btn btn-outline-info" *ngIf="blogCreatedByUser(selectedBlog)"
+        (click)="displayUpdateForm(selectedBlog)">Update
+        Post</button>
+
     </div>
   </div>
-  <!-- <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button> -->
   <br>
+
   <button class="btn btn-secondary" (click)="displayDetails(null)" (click)="showCommentForm = false">Back</button>
   <div *ngIf="showCommentForm">
     <input type="text" name="title" placeholder="Title" [(ngModel)]="newCommentTitle"/><br>
@@ -91,6 +104,7 @@
   <input type="text" name="body" placeholder="selectedComment.body" [(ngModel)]="selectedComment.body"/><br>
   <button (click)="selectedComment = null">Cancel</button>
   <button (click)="updateComment(selectedComment)">Submit</button>
+  <button id="three" class="btn btn-outline-secondary" (click)="displayDetails(null)">Back</button>
 </div>
 
 <div id="updateForm" *ngIf="selected">

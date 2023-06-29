@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User show(String username, int id) {
-		User user = userRepo.findByUsernameAndId(username, id);
+	public User show(int id) {
+		User user = userRepo.findById( id);
 		if (user == null) {
 			return null;
 		}

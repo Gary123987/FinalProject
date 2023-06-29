@@ -34,7 +34,7 @@ export class PlaceService {
 
 
   public indexAll(): Observable<Place[]> {
-    return this.http.get<Place[]>(this.url, this.getHttpOptions()).pipe(
+    return this.http.get<Place[]>(this.url).pipe(
       catchError((err: any) => {
         console.error('Error fetching place list');
         return throwError(

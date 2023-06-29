@@ -1,11 +1,59 @@
-#places {
-  margin-top: 200px;
-}
-
 .full {
   opacity: 1;
 }
 
 .low {
   opacity: 0.1;
+}
+
+#myForm {
+  margin-top: 30px;
+  color: white;
+  width: 500px;
+  height: auto;
+  padding: 50px;
+  background-color: rgba(2, 62, 138, .3);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 2px solid #023e8a;
+  border-radius: 8px;
+}
+
+
+
+#myBackground {
+  background-image: url('https://images.unsplash.com/photo-1578191266140-236fc2fb65fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80');
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 100px;
+  width: 100vw;
+  height: 100vh;
+}
+
+#placeDetails {
+  padding-top: 100px;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1425342605259-25d80e320565?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#one {
+  margin-left: 100px;
+  margin-right: 35px;
+  margin-bottom: 10px;
+}
+
+#two {
+  margin-bottom: 10px;
+}
+
+#three {
+  margin-left: 100px;
+  margin-right: 131px;
 }
