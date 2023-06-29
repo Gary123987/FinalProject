@@ -18,7 +18,7 @@ export class CommentService {
   ) { }
 
 
-  public addNewCommentToBlog(comment : any): Observable<Comment> {
+  public addNewCommentToBlog(comment : Comment): Observable<Comment> {
     return this.http.post<Comment>(this.url + '/create', comment, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error('Error creating comment');

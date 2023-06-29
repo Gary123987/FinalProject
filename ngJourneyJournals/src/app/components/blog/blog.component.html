@@ -1,6 +1,6 @@
 <div id="myBackground" *ngIf="!selectedBlog">
   <div class="container" *ngIf="!showingForm">
-    <div style="overflow-y: auto; max-height: 500px;" class="row">
+    <div style="overflow-y: auto; max-height: 630px;" class="row">
       <div class="col-lg-4" *ngFor="let p of places">
         <div class="card rounded bg-dark text-light mb-3">
           <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
@@ -50,7 +50,7 @@
 <div id="blogDetails" *ngIf="selectedBlog" class="container-fluid" [ngClass]="opactiyGetter()">
   <button class="btn btn-secondary" (click)="displayDetails(null)" (click)="showCommentForm = false">Back</button>
   <h1 id="blogName">{{selectedBlog.title}}</h1>
-  <div style="overflow-y: auto; max-height: 610px;" class="row">
+  <div style="overflow-y: auto; max-height: 450px;" class="row">
     <div class="col-md-4">
       <div class="card rounded bg-dark text-light mb-4">
         <img src="{{selectedBlog.imageUrl}}" alt="{{selectedBlog.title}}" class="card-img-top img-fluid" width="200">
