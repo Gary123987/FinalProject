@@ -30,8 +30,17 @@ export class UserHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.reload();
-    this.getUserName();
+     let userIdString: string | null = this.route.snapshot.paramMap.get('id');
+     if (userIdString){
+     let userId: number = parseInt(userIdString);
+     this.loadOtherUser(userId);
+      } else {
+        this.reload();
+        this.getUserName();
+      }
+
+
+
   }
 
   getUserName() {
@@ -54,6 +63,20 @@ export class UserHomeComponent implements OnInit {
         console.error(err);
       },
     })
+  }
+
+  loadOtherUser(userId: number) {
+    this.userService.show(userId).subscribe({
+      next: (user) => {
+        this.user = user;
+        this.places = user.placesCreated;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+
+
   }
 
 }

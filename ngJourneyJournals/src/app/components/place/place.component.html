@@ -48,6 +48,7 @@
   <h1 id="placeName">{{selectedPlace.name}}</h1>
   <div class="row">
     <div class="col-md-4">
+
       <div class="card rounded bg-dark text-light mb-4">
         <img src="{{selectedPlace.imageUrl}}" alt="{{selectedPlace.name}}" class="card-img-top img-fluid" width="200">
         <div class="card-body">
@@ -65,6 +66,8 @@
       </div>
       <button *ngIf="placesCreatedByUser(selectedPlace)" (click)="displayUpdateForm(selectedPlace)" >Update Location</button>
       <button class="btn btn-primary" *ngIf="placesCreatedByUser(selectedPlace)" (click)="deletePlace(selectedPlace.id)">Delete Destination</button>
+      <button class="btn btn-primary" *ngIf="selectedPlace" (click)="gettingUserId(selectedPlace.user.id)"> View User's Profile </button>
+
     </div>
   </div>
   <!-- <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button> -->
