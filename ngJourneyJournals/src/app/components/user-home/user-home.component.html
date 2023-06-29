@@ -38,13 +38,13 @@
     <caption>My Places</caption>
     <div id="column-container">
       <div id="column" *ngFor="let place of places;">
-        <img [routerLink]="['/bloglist']" src="{{place.imageUrl}}" alt="{{place.name}}" width="150" height="auto">
+        <img [routerLink]="['/placelist']" src="{{place.imageUrl}}" alt="{{place.name}}" width="150" height="auto">
       </div>
     </div>
     <caption>My Destinations</caption>
     <div id="column-container">
       <div id="column" *ngFor="let des of destinations;">
-        <img [routerLink]="['/bloglist']" src="{{des.imageUrl}}" alt="{{des.name}}" width="150" height="auto">
+        <img [routerLink]="['/destinationlist']" src="{{des.imageUrl}}" alt="{{des.name}}" width="150" height="auto">
       </div>
     </div>
   </div>

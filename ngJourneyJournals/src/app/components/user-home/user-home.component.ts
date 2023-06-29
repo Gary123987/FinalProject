@@ -3,7 +3,6 @@ import { User } from 'src/app/models/user';
 import { Component, OnInit } from '@angular/core';
 import { Blog } from 'src/app/models/blog';
 import { Destination } from 'src/app/models/destination';
-import { UserService } from 'src/app/services/user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Place } from 'src/app/models/place';
