@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Place } from 'src/app/models/place';
 import { PlaceService } from 'src/app/services/place.service';
 import { BlogService } from 'src/app/services/blog.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-home',
@@ -22,6 +23,7 @@ export class UserHomeComponent implements OnInit {
   user: User | null = null;
 
   constructor(
+    private userService : UserService,
     private placeServ: PlaceService,
     private destinationServ: DestinationService,
     private blogServ: BlogService,
@@ -40,7 +42,7 @@ export class UserHomeComponent implements OnInit {
         this.reload();
         this.getUserName();
       }
-  
+
     this.loadDestinations();
     this.loadBlogs();
 
