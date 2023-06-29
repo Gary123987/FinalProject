@@ -20,7 +20,12 @@ export class UserHomeComponent implements OnInit {
   blogs: Blog[] = [];
   places: Place[] = [];
   destinations: Destination[] = [];
-  user: User | null = null;
+  profileUser: User | null = null;
+  loggedInUser: User | null = null;
+  users: User[] = []
+  editUser: User | null = null;
+
+  selected: User | null = null;
 
   constructor(
     private placeServ: PlaceService,
@@ -34,24 +39,24 @@ export class UserHomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-     let userIdString: string | null = this.route.snapshot.paramMap.get('id');
-     if (userIdString){
-     let userId: number = parseInt(userIdString);
-     this.loadOtherUser(userId);
-      } else {
-        this.reload();
-        this.getUserName();
-      }
-
+    let userIdString: string | null = this.route.snapshot.paramMap.get('id');
+    if (userIdString) {
+      let userId: number = parseInt(userIdString);
+      this.loadOtherUser(userId);
+    } else {
+      this.reload();
+      this.getUserName();
+    }
     this.loadDestinations();
     this.loadBlogs();
-
+    this.loadUser();
   }
 
   getUserName() {
     this.auth.getLoggedInUser().subscribe({
       next: (user) => {
-        this.user = user;
+        this.loggedInUser = user;
+        this.profileUser = user;
       },
       error: (err) => {
         console.error(err);
@@ -70,19 +75,41 @@ export class UserHomeComponent implements OnInit {
     })
   }
 
+  toggleUserEnabled(id: number) {
+    this.userService.toggleUserEnabled(id).subscribe({
+      next: () => {
+
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    })
+
+  }
+
+
+
+  loadUser() {
+    this.userService.index().subscribe({
+      next: (userlist) => {
+        this.users = userlist
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    })
+  }
 
   loadOtherUser(userId: number) {
     this.userService.show(userId).subscribe({
       next: (user) => {
-        this.user = user;
+        this.profileUser = user;
         this.places = user.placesCreated;
       },
       error: (err) => {
         console.error(err);
       },
     });
-
-
   }
 
   loadDestinations() {
@@ -108,9 +135,6 @@ export class UserHomeComponent implements OnInit {
     })
 
   }
-
-
-
 }
 
 

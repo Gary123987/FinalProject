@@ -20,7 +20,11 @@ export class HomeComponent {
   login(user: User) {
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedUser) => {
-        this.router.navigateByUrl('/userhome?id=' + loggedUser.id);
+        if (loggedUser.enabled === false) {
+          window.alert('This Account Has Been Disabled');
+        } else {
+          this.router.navigateByUrl('/userhome?id=' + loggedUser.id);
+        }
       },
       error: (error) => {
         console.error('register()' + error);

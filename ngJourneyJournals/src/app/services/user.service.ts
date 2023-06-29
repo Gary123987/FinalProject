@@ -55,4 +55,28 @@ export class UserService {
       })
     );
   }
+  update(id: number, user: User): Observable<User> {
+    return this.http.put<User>(this.url + '/' + id, user, this.getHttpOptions()).pipe(catchError((err: any) => {
+      console.error('Error editing blog');
+      return throwError(
+        () =>
+          new Error(
+            "error editing blog: " + err
+          )
+      )
+    }));
+  }
+  toggleUserEnabled(id: number): Observable<User> {
+    return this.http.put<User>(this.url + '/' + id + '/' + 'toggle', null, this.getHttpOptions()).pipe(catchError((err: any) => {
+      console.error('Error editing blog');
+      return throwError(
+        () =>
+          new Error(
+            "error editing blog: " + err
+          )
+      )
+    }));
+  }
+
+
 }
