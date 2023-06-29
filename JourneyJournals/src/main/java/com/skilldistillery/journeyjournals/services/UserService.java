@@ -11,7 +11,9 @@ public interface UserService {
 
 	public User create(String username, User user);
 
-	public User update(String username, int id, User user);
+	public User update( int id, User user);
+	
+	public User toggleUserEnabled(int id);
 
 	public boolean destroy(String username, int id);
 	User findByUsername(String username);
