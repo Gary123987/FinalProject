@@ -45,6 +45,7 @@
 
 <div id="imagebehind" *ngIf="selectedCountry " [ngClass]="opactiyGetter()">
   <div id="countryDetails" class="container-fluid">
+    <button class="btn btn-secondary" (click)="displayList()">Back</button>
     <h1 id="country-name">{{selectedCountry.name}}</h1>
     <div class="row">
       <div class="col-md-4" *ngFor="let d of selectedCountry.destinations">
@@ -56,20 +57,17 @@
             <button class="btn btn-primary">Discover {{d.name}}</button>
           </div>
         </div>
-        <button id="one" class="btn btn-outline-danger" *ngIf="destinationsCreatedByUser(d)"
+        <button class="btn btn-outline-danger" *ngIf="destinationsCreatedByUser(d)"
           (click)="deleteDestination(d.id)">Delete
           Destination</button>
-        <button id="two" class="btn btn-outline-info" *ngIf="destinationsCreatedByUser(d)"
-          (click)="displayUpdateForm(d)">Update
+        <button class="btn btn-outline-info" *ngIf="destinationsCreatedByUser(d)" (click)="displayUpdateForm(d)">Update
           Destination</button>
       </div>
     </div>
-    <button id="three" class="btn btn-secondary" (click)="displayList()">Back</button>
-    <button id="four" class="btn btn-outline-primary" (click)="showAddForm(selectedCountry.id)">Add new
+    <button class="btn btn-outline-primary" (click)="showAddForm(selectedCountry.id)">Add new
       Destination</button>
   </div>
 </div>
-
 
 <div id="back" *ngIf="selected" class="container min-vh-50 d-flex justify-content-center align-items-center">
   <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
