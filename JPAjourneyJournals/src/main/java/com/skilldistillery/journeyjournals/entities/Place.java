@@ -46,7 +46,7 @@ public class Place {
 	@JoinColumn(name="destination_id")
 	private Destination destination;
 	
-	@JsonIgnore
+	@JsonIgnoreProperties({"placesCreated", "placeImages", "placeRatings", "destinationsCreated", "favoriteDestinations", "following" , "blogRatings"})
 	@ManyToOne
 	@JoinColumn(name= "user_id")
 	private User user;

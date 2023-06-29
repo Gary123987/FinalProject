@@ -7,7 +7,7 @@ import com.skilldistillery.journeyjournals.entities.User;
 public interface UserService {
 	public List<User> index();
 
-	public User show(String username, int id);
+	public User show(int id);
 
 	public User create(String username, User user);
 

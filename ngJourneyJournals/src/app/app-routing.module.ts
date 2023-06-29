@@ -13,10 +13,12 @@ import { PlaceComponent } from './components/place/place.component';
 import { PlaceListComponent } from './components/place-list/place-list.component';
 import { DestinationListComponent } from './components/destination-list/destination-list.component';
 
+
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'userhome', component: UserHomeComponent },
+  { path: 'userhome/:id', component: UserHomeComponent },
   { path: 'register', component: CreateAccountComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'place', component: PlaceComponent },

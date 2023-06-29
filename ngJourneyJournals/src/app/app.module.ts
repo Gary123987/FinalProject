@@ -21,6 +21,7 @@ import { PlaceListComponent } from './components/place-list/place-list.component
 import { DestinationListComponent } from './components/destination-list/destination-list.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { DestinationListComponent } from './components/destination-list/destinat
     PlaceComponent,
     PlaceListComponent,
     DestinationListComponent,
+
 
   ],
   imports: [

@@ -58,7 +58,7 @@ public class Blog {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@JsonIgnoreProperties({"blogs"})
+	@JsonIgnoreProperties({"blogs", "user"})
 	@ManyToOne
 	@JoinColumn(name = "place_id")
 	private Place place;
