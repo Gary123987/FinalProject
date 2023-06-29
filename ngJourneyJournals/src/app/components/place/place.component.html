@@ -6,7 +6,7 @@
           <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
             <h5 class="card-title">Places in {{d.name}}</h5>
             <div *ngFor="let p of d.places">
-              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-muted">{{p.name}}</h4>
+              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-light">{{p.name}}</h4>
               <img class="card-img-top" src="{{p.imageUrl}}" alt="{{p.name}}" width="200" (click)="displayDetails(p)">
             </div>
             <button class="btn btn-primary" (click)="showAddForm(d.id)">Add Place</button>

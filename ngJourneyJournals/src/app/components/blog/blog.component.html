@@ -4,9 +4,9 @@
       <div class="col-lg-4" *ngFor="let p of places">
         <div class="card rounded bg-dark text-light mb-3">
           <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
-            <h5 class="card-title">Post About {{p.name}}</h5>
+            <h5 class="card-title text-light">Post About {{p.name}}</h5>
             <div *ngFor="let blog of p.blogs">
-              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-muted">{{blog.title}}</h4>
+              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-light">{{blog.title}}</h4>
               <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200"
                 (click)="displayDetails(blog)">
             </div>
@@ -57,13 +57,13 @@
         <div class="card-body">
           <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedBlog.description}}</p>
           <div style="overflow-y: auto; max-height: 200px;">
-            <div class="card mb-3">
+            <div class="card rounded bg-dark text-light mb-3">
               <div class="card-body">
                 <p *ngFor="let c of selectedBlog.comments" style="overflow-y: auto; max-height: 200px;"
                   class="card-text">{{c.title}}<br>
                   <small>{{c.body}}</small>
-                  <button *ngIf="commentCreatedByUser(c)" (click)="deleteComment(c)">Delete</button>
-                  <button *ngIf="commentCreatedByUser(c)" (click)="selectedComment = c">Update</button>
+                  <button class="btn btn-outline-info" *ngIf="commentCreatedByUser(c)" (click)="selectedComment = c">Update</button>
+                  <button class="btn btn-outline-danger" *ngIf="commentCreatedByUser(c)" (click)="deleteComment(c)">Delete</button>
                 </p>
               </div>
             </div>
@@ -80,20 +80,27 @@
     </div>
   </div>
   <div *ngIf="showCommentForm">
-    <input type="text" name="title" placeholder="Title" [(ngModel)]="newCommentTitle" /><br>
-    <input type="text" name="body" placeholder="Body" [(ngModel)]="newCommentBody" /><br>
-    <button (click)="newCommentBody = ''" (click)="newCommentTitle = ''"
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+    <input class="form-control" type="text" name="title" placeholder="Title" [(ngModel)]="newCommentTitle" /><br>
+    <input class="form-control" type="text" name="body" placeholder="Body" [(ngModel)]="newCommentBody" /><br>
+    <button class="btn btn-outline-primary" (click)="addComment(newCommentTitle, newCommentBody, this.selectedBlog)">Submit</button>
+    <button class="btn btn-outline-secondary" (click)="newCommentBody = ''" (click)="newCommentTitle = ''"
       (click)="showCommentForm = false">Cancel</button>
-    <button (click)="addComment(newCommentTitle, newCommentBody, this.selectedBlog)">Submit</button>
+      </form>
+    </div>
   </div>
 </div>
 
 <div *ngIf="selectedComment">
-  <input type="text" name="title" placeholder="selectedComment.title" [(ngModel)]="selectedComment.title" /><br>
-  <input type="text" name="body" placeholder="selectedComment.body" [(ngModel)]="selectedComment.body" /><br>
-  <button (click)="selectedComment = null">Cancel</button>
-  <button (click)="updateComment(selectedComment)">Submit</button>
-  <button id="three" class="btn btn-outline-secondary" (click)="displayDetails(null)">Back</button>
+  <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+    <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+  <input class="form-control" type="text" name="title" placeholder="selectedComment.title" [(ngModel)]="selectedComment.title" /><br>
+  <input class="form-control" type="text" name="body" placeholder="selectedComment.body" [(ngModel)]="selectedComment.body" /><br>
+  <button class="btn btn-outline-primary" (click)="updateComment(selectedComment)">Submit</button>
+  <button  class="btn btn-outline-secondary" (click)="selectedComment = null">Cancel</button>
+    </form>
+  </div>
 </div>
 
 <div id="updateForm" *ngIf="selected">
