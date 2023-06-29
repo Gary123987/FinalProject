@@ -28,12 +28,12 @@ export class UserHomeComponent implements OnInit {
   selected: User | null = null;
 
   constructor(
+    private userService : UserService,
     private placeServ: PlaceService,
     private destinationServ: DestinationService,
     private blogServ: BlogService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private userService: UserService
 
   ) { }
 
