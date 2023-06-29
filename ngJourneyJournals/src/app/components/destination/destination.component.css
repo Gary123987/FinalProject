@@ -30,6 +30,14 @@
   margin-top: 200px;
 }
 
+.full {
+  opacity: 1;
+}
+
+.low {
+  opacity: 0.1;
+}
+
 
 #myForm {
   margin-top: 30px;
@@ -46,11 +54,26 @@
 }
 
 #countryDetails {
-  margin-top: 80px;
-  background-color: #f5f5f5;
-  padding: 20px;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 70px;
+  padding: 70px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(2, 62, 138, .3);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 2px solid #023e8a;
+  border-radius: 8px;
+
+}
+
+#imagebehind {
+  background-image: url('https://images.unsplash.com/photo-1485321586038-4cc99992a06f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #country-name {
@@ -58,4 +81,19 @@
   font-size: 24px;
   color: #333;
   margin-bottom: 10px;
+}
+
+#one {
+  margin-left: 100px;
+  margin-right: 35px;
+  margin-bottom: 10px;
+}
+
+#two {
+  margin-bottom: 10px;
+}
+
+#three {
+  margin-left: 100px;
+  margin-right: 131px;
 }
