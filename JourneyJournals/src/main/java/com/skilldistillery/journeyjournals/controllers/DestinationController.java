@@ -67,6 +67,15 @@ public class DestinationController {
 		}
 		return des;
 	}
+	@GetMapping("destinationsAll")
+	private List<Destination> listOfDestinations(HttpServletResponse res) {
+		List<Destination> des = desService.index();
+		if(des == null) {
+			res.setStatus(404);
+			return null;
+		}
+		return des;
+	}
 	
 	@GetMapping("destinations/{id}")
 	private Destination showById(HttpServletResponse res, @PathVariable int id, Principal principal) {

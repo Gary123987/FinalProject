@@ -1,62 +1,109 @@
-<div id="addForm" >
-  <div id="back">
-    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
-      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
-        <legend class="text-center">Add a New Blog Post!</legend>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="title" [(ngModel)]="newBlog.title"
-            placeholder="title" />
-        </div>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="description" [(ngModel)]="newBlog.description"
-            placeholder="description" />
-        </div>
-        <div class="col-12">
-          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart"  />
-        </div>
-        <div class="col-12">
-          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd"
-          />
-        </div>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
-            placeholder="image (URL)" />
-        </div>
-        <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
+<div id="blog" *ngIf="!selectedBlog">
+  <div *ngIf="!showingForm">
+    <div id="blogs" *ngFor="let p of places">
+      <h1>Blogs about {{p.name}}</h1>
+      <div *ngFor="let blog of p.blogs">
+        <h3>{{blog.title}}</h3>
+        <img src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200" (click)="displayDetails(blog)">
 
-        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)">Create Destination</button>
-      </form>
+      </div>
+      <button (click)="showAddForm(p.id);">Add Post</button>
     </div>
+  </div>
 </div>
 
-<div name="editBlog">
+
+<div id="addForm" *ngIf="showingForm">
   <div id="back">
     <div class="container min-vh-50 d-flex justify-content-center align-items-center">
       <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
-        <legend class="text-center">Add a New Blog Post!</legend>
+        <legend class="text-center">ADD</legend>
         <div class="col-md-6">
-          <input class="form-control" type="text" name="title" [(ngModel)]="newBlog.title"
-            placeholder="title" />
-        </div>
-        <div class="col-md-6">
-          <input class="form-control" type="text" name="description" [(ngModel)]="newBlog.description"
-            placeholder="description" />
+          <input class="form-control" type="text" name="Title" [(ngModel)]="newBlog.title" placeholder="Title" />
         </div>
         <div class="col-12">
-          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart"  />
+          <input class="form-control" type="date" name="tripStart" [(ngModel)]="newBlog.tripStart" />
         </div>
-        <div class="col-12">
-          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd"
-          />
+        <div class="col-md-6">
+          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="newBlog.tripEnd" />
         </div>
         <div class="col-md-6">
           <input class="form-control" type="text" name="imageUrl" [(ngModel)]="newBlog.imageUrl"
             placeholder="image (URL)" />
         </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="newBlog.description"
+            placeholder="Tell us about this location"></textarea>
+        </div>
         <input type="hidden" name="enabled" value="1" [(ngModel)]="newBlog.enabled">
-
-        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)">Create Destination</button>
+        <button class="btn btn-primary" type="submit" (click)="addBlog(newBlog)" (click)="showingForm = false">Add
+          A Post</button>
+        <button class="btn btn-outline-secondary" (click)="showingForm = false">Back</button>
       </form>
     </div>
+  </div>
+</div>
 
+
+<div id="placeDetails" *ngIf="selectedBlog" class="container-fluid" [ngClass]="opactiyGetter()">
+  <h1 id="placeName">{{selectedBlog.title}}</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card rounded bg-dark text-light mb-4">
+        <img src="{{selectedBlog.imageUrl}}" alt="{{selectedBlog.title}}" class="card-img-top img-fluid" width="200">
+        <div class="card-body">
+          <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedBlog.description}}</p>
+          <div style="overflow-y: auto; max-height: 200px;">
+            <div class="card mb-3">
+              <div class="card-body">
+                <p class="card-text">{{selectedBlog.tripStart}}, {{selectedBlog.tripEnd}}</p>
+                <p *ngFor="let r of selectedBlog.ratings" style="overflow-y: auto; max-height: 200px;"
+                  class="card-text">{{r.ratingValue}}
+                  <small>{{r.ratingComment}}</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="blogCreatedByUser(selectedBlog)" (click)="displayUpdateForm(selectedBlog)">Update
+        Post</button>
+      <button class="btn btn-primary" *ngIf="blogCreatedByUser(selectedBlog)"
+        (click)="deleteBlog(selectedBlog.id)">Delete Post</button>
+    </div>
+  </div>
+  <!-- <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button> -->
+  <br>
+  <button class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
+</div>
+
+<div id="updateForm" *ngIf="selected">
+  <div id="back">
+    <div class="container min-vh-50 d-flex justify-content-center align-items-center">
+      <form id="myForm" class="position-absolute top-50 start-50 translate-middle row g-3">
+        <legend class="text-center">Update</legend>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="Title" [(ngModel)]="selected.title" placeholder="Title" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="date" name="tripStart" [(ngModel)]="selected.tripStart" />
+        </div>
+        <div class="col-12">
+          <input class="form-control" type="date" name="tripEnd" [(ngModel)]="selected.tripEnd" />
+        </div>
+        <div class="col-md-6">
+          <input class="form-control" type="text" name="imageUrl" [(ngModel)]="selected.imageUrl"
+            placeholder="image (URL)" />
+        </div>
+        <div class="col-12">
+          <textarea class="form-control" name="description" cols="30" rows="5" [(ngModel)]="selected.description"
+            placeholder="Tell us about "></textarea>
+        </div>
+        <input type="hidden" name="enabled" value="1" [(ngModel)]="selected.enabled">
+        <button class="btn btn-primary" type="submit" (click)="updateBlog( selected.id, selected)">Update
+          Post</button>
+        <button class="btn btn-outline-secondary" (click)="selected = null">Back</button>
+      </form>
+    </div>
+  </div>
 </div>

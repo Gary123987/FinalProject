@@ -1,3 +1,4 @@
+import { Blog } from "./blog";
 import { PlaceImage } from "./place-image";
 import { PlaceRating } from "./place-rating";
 
@@ -11,8 +12,9 @@ export class Place {
   enabled: boolean;
   images: PlaceImage[];
   ratings: PlaceRating[];
+  blogs: Blog[];
 
-  constructor(id = 0, name = '', street = '', zipcode = '', description = '', imageUrl = '', enabled = false, images = [], ratings = []) {
+  constructor(id = 0, name = '', street = '', zipcode = '', description = '', imageUrl = '', enabled = false, images = [], ratings = [], blogs = []) {
     this.id = id;
     this.name = name;
     this.street = street;
@@ -22,5 +24,6 @@ export class Place {
     this.enabled = enabled;
     this.images = images;
     this.ratings = ratings;
+    this.blogs = blogs;
   }
 }

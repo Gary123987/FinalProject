@@ -11,16 +11,18 @@ import { PlaceService } from 'src/app/services/place.service';
   templateUrl: './place.component.html',
   styleUrls: ['./place.component.css']
 })
-export class PlaceComponent implements OnInit{
+export class PlaceComponent implements OnInit {
 
   newPlace: Place = new Place();
   editPlace: Place | null = null;
   places: Place[] = [];
   selected: Place | null = null;
+  selectedPlace: Place | null = null;
   showingForm: boolean = false;
   user: User | null = null;
   destinationId: any;
-  destinations: Destination [] = [];
+  destinations: Destination[] = [];
+  opacity: number = 1;
 
   constructor(
     private auth: AuthService,
@@ -49,7 +51,7 @@ export class PlaceComponent implements OnInit{
   }
 
   loadPlaces() {
-    this.placeServ.indexByUser().subscribe({
+    this.placeServ.indexAll().subscribe({
       next: (placeList) => {
         this.places = placeList;
       },
@@ -61,7 +63,7 @@ export class PlaceComponent implements OnInit{
   }
 
   loadDestinations() {
-    this.destinationServ.indexByUser().subscribe({
+    this.destinationServ.indexAll().subscribe({
       next: (destinationList) => {
         this.destinations = destinationList;
       },
@@ -80,11 +82,26 @@ export class PlaceComponent implements OnInit{
   displayUpdateForm(place: Place): void {
     this.selected = place;
   }
+
+  displayDetails(place: Place | null): void {
+    this.selectedPlace = place;
+  }
+
+  opactiyGetter() {
+    if (this.selected) {
+      return 'low'
+    }
+    else {
+      return 'full'
+    }
+  }
+
+
   addPlace(place: Place) {
     return this.placeServ.create(place, this.destinationId).subscribe({
       next: (createdPlace) => {
         this.newPlace = new Place();
-      this.ngOnInit();
+        this.ngOnInit();
       },
       error: (err) => {
         console.log(err);
@@ -107,7 +124,7 @@ export class PlaceComponent implements OnInit{
   deletePlace(id: number) {
     return this.placeServ.destroy(id).subscribe({
       next: () => {
-      this.ngOnInit();
+        this.ngOnInit();
       },
       error: (err) => {
         console.log(err);

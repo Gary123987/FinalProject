@@ -41,7 +41,7 @@ public class Comment {
 	
 	private boolean enabled;
 	
-	@JsonIgnoreProperties({"destinationsCreated", "favoriteDestinations"})
+	@JsonIgnoreProperties({"destinationsCreated", "favoriteDestinations", "following", "comments"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

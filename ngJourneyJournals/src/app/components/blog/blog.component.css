@@ -1,3 +1,15 @@
-#addForm{
+#addForm {
   margin-top: 200px;
+}
+
+#blog {
+  margin-top: 200px;
+}
+
+.full {
+  opacity: 1;
+}
+
+.low {
+  opacity: 0.1;
 }

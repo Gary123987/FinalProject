@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="blog_rating")
@@ -39,6 +39,7 @@ public class BlogRating {
 	@Column(name="rating_comment")
 	private String ratingComment;
 	
+	@JsonIgnoreProperties({"comments", "following", "destinationsCreated", "favoriteDestinations","placesCreated" })
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")

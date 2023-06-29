@@ -31,6 +31,19 @@ export class DestinationService {
       })
     );
   }
+  public indexAll(): Observable<Destination[]> {
+    return this.http.get<Destination[]>(this.url + 'All').pipe(
+      catchError((err: any) => {
+        console.error('Error fetching destinations list');
+        return throwError(
+          () =>
+            new Error(
+              "error retrieving destinations: " + err
+            )
+        )
+      })
+    );
+  }
 
 
   public show(id: number): Observable<Destination> {

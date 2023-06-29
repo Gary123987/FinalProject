@@ -16,11 +16,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -53,13 +53,13 @@ public class Blog {
 	@Column(name = "created_at")
 	private LocalDateTime createdAt;
 	
-
+	@JsonIgnoreProperties({"blogs", "comments", "following", "destinationsCreated", "favoriteDestinations", "placesCreated"})
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
-
-	@OneToOne
+	@JsonIgnoreProperties({"blogs"})
+	@ManyToOne
 	@JoinColumn(name = "place_id")
 	private Place place;
 
@@ -67,7 +67,7 @@ public class Blog {
 	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name = "blog_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
 

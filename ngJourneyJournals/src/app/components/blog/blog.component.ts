@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from 'src/app/models/blog';
-import { Country } from 'src/app/models/country';
-import { BlogServiceService } from 'src/app/services/blog-service.service';
-import { CountryService } from 'src/app/services/country.service';
+import { Place } from 'src/app/models/place';
+import { User } from 'src/app/models/user';
+import { AuthService } from 'src/app/services/auth.service';
+import { BlogService } from 'src/app/services/blog.service';
+import { PlaceService } from 'src/app/services/place.service';
 
 @Component({
   selector: 'app-blog',
@@ -10,67 +12,129 @@ import { CountryService } from 'src/app/services/country.service';
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
+
   newBlog: Blog = new Blog();
   editBlog: Blog | null = null;
+  blogs: Blog[] = [];
+  places: Place[] = []
   selected: Blog | null = null;
-  countries: Country [] = [];
-
+  selectedBlog: Blog | null = null;
+  showingForm: boolean = false;
+  user: User | null = null;
+  placeId: any;
+  opacity: number = 1;
+  filterdBlogs: Blog[] = [];
 
   constructor(
-    private blogServ: BlogServiceService,
-    private countryServ: CountryService,
-    ) {
+    private auth: AuthService,
+    private placeServ: PlaceService,
+    private blogServ: BlogService
+  ) { }
 
-  }
-  ngOnInit(): void {
-  this.loadCountries();
-  }
-
-  addBlog(newBlog: Blog) {
-    this.blogServ.create(newBlog).subscribe({
-      next: (createdBlog) => {
-        this.newBlog = createdBlog;
+  getUserName() {
+    this.auth.getLoggedInUser().subscribe({
+      next: (user) => {
+        this.user = user;
       },
       error: (err) => {
-        console.error("error HERE!!!!");
         console.error(err);
       },
     });
   }
 
-  updateBlog(id: number, editBlog: Blog) {
-    this.blogServ.update(id, editBlog).subscribe({
-      next: (updatedBlog) => {
-        this.editBlog = updatedBlog;
-      },
-      error: (err) => {
-        console.error("ERROR HERE!!!!!!!");
-        console.error(err);
-      },
-    });
+  ngOnInit() {
+    this.loadPlaces();
+    this.loadBlogs();
+    this.getUserName();
+  }
+  checkedLogin() {
+    return this.auth.checkLogin();
   }
 
-  deleteBlog(id: number) {
-    this.blogServ.destroy(id).subscribe({
-      next: () => {
-
-      },
-      error: (err) => {
-        console.error("ERROR!!!!");
-        console.error(err);
-      },
-    });
-  }
-
-  loadCountries(){
-    this.countryServ.indexAll().subscribe({
-      next: (countryList) => {
-        this.countries = countryList;
+  loadPlaces() {
+    this.placeServ.indexAll().subscribe({
+      next: (placeList) => {
+        this.places = placeList;
       },
       error: (err) => {
         console.log(err);
       }
     })
+
+  }
+
+  loadBlogs() {
+    this.blogServ.indexAll().subscribe({
+      next: (blogList) => {
+        this.blogs = blogList;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  showAddForm(id: number) {
+    this.placeId = id;
+    this.showingForm = !this.showingForm;
+  }
+
+  displayUpdateForm(Blog: Blog): void {
+    this.selected = Blog;
+  }
+
+  displayDetails(blog: Blog | null): void {
+    this.selectedBlog = blog;
+  }
+
+  opactiyGetter() {
+    if (this.selected) {
+      return 'low'
+    }
+    else {
+      return 'full'
+    }
+  }
+
+
+  addBlog(blog: Blog) {
+    return this.blogServ.create(blog, this.placeId).subscribe({
+      next: () => {
+        this.newBlog = new Blog();
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  updateBlog(id: number, editedBlog: Blog) {
+    return this.blogServ.update(id, editedBlog).subscribe({
+      next: (updatedBlog) => {
+        this.editBlog = updatedBlog;
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    })
+
+  }
+
+  deleteBlog(id: number) {
+    return this.blogServ.destroy(id).subscribe({
+      next: () => {
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  blogCreatedByUser(blog: Blog) {
+    return this.user?.role === 'admin' || this.user?.blogs.includes(blog);
 
   }
 
