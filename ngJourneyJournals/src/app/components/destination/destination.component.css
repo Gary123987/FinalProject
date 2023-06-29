@@ -4,9 +4,6 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-top: 30px;
-  width: 100vw;
-  height: 100vh;
 }
 
 
@@ -38,9 +35,7 @@
   opacity: 0.1;
 }
 
-
 #myForm {
-  margin-top: 30px;
   color: white;
   width: 500px;
   height: auto;
@@ -54,9 +49,7 @@
 }
 
 #countryDetails {
-  width: 100vw;
-  height: 100vh;
-  margin-top: 70px;
+  margin-top: 30px;
   padding: 70px 20px 20px 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -66,7 +59,6 @@
   background-size: contain;
   border: 2px solid #023e8a;
   border-radius: 8px;
-
 }
 
 #imagebehind {
