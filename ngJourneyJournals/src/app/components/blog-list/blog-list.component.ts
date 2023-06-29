@@ -22,7 +22,7 @@ export class BlogListComponent implements OnInit {
   }
 
   reload() {
-    this.blogServ.indexAll().subscribe({
+    this.blogServ.indexByUser().subscribe({
       next: (bloglist) => {
         this.blogs = bloglist;
       },

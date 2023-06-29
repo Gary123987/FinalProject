@@ -15,6 +15,7 @@
 </div>
 
 <div id="list" *ngIf="!selected" class="container-fluid">
+  <button class="btn btn-outline-primary" [routerLink]="['/userhome']">Back</button>
   <div class="row">
     <div class="col-md-4" *ngFor="let blog of blogs" (click)="displayBlog(blog)">
       <div class="card rounded bg-dark text-light mb-4">
