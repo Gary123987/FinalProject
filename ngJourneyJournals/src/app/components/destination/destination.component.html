@@ -1,4 +1,4 @@
-<div id="back" class="background-image" *ngIf="!selectedCountry">
+<div id="back" *ngIf="!selectedCountry">
   <div id="list" *ngIf="checkedLogin() && !showingForm">
     <div class="text-center">
       <div *ngFor="let c of continents">
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div id="imagebehind" class="background-image">
+<div id="imagebehind">
   <div id="countryDetails" *ngIf="selectedCountry " class="container-fluid" [ngClass]="opactiyGetter()">
     <h1 id="country-name">{{selectedCountry.name}}</h1>
     <div class="row">
@@ -104,15 +104,4 @@
       </form>
     </div>
   </div>
-</div>
-
-<div style="margin-top: 200px;" *ngIf="! checkedLogin()">
-  <ul class="list-group" *ngFor="let c of continents">
-    <li class="list-group-item">{{c.name}}
-      <ul class="list-group" *ngFor="let co of c.countries">
-        <li class="list-group-item" [routerLink]="['/register']">{{co.name}}
-        </li>
-      </ul>
-    </li>
-  </ul>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Destination } from 'src/app/models/destination';
 import { Place } from 'src/app/models/place';
 import { User } from 'src/app/models/user';
@@ -28,6 +29,7 @@ export class PlaceComponent implements OnInit {
     private auth: AuthService,
     private placeServ: PlaceService,
     private destinationServ: DestinationService,
+    private sanitizer: DomSanitizer
   ) { }
 
   getUserName() {
@@ -39,6 +41,14 @@ export class PlaceComponent implements OnInit {
         console.error(err);
       },
     });
+  }
+
+  sanitizeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  encodeAddress(address: string): string {
+    return encodeURIComponent(address);
   }
 
   ngOnInit() {
