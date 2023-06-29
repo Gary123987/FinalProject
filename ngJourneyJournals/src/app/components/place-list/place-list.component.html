@@ -1,0 +1,28 @@
+<div id="container" *ngIf="selected">
+  <div id="details">
+    <h1>{{selected.name}}</h1>
+    <img src="{{selected.imageUrl}}" alt="picture of{{selected.name}}" height="auto" width="275">
+    <blockquote>Street:{{selected.street}} ZipCode: {{selected.zipcode}}</blockquote>
+    <p style="overflow-y: auto; max-height: 200px;">{{selected.description}}</p>
+    <iframe
+      [src]="sanitizeUrl('https://www.google.com/maps?q=' + encodeAddress(selected.street) +',' + encodeAddress(selected.zipcode) + '&z=10&output=embed')"
+      width="100%" height="350" frameborder="0" allowfullscreen></iframe>
+    <button (click)="displayTable()">Back</button>
+  </div>
+</div>
+
+<div id="list" *ngIf="!selected" class="container-fluid">
+  <button class="btn btn-outline-primary" [routerLink]="['/userhome']">Back</button>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let place of places" (click)="displayBlog(place)">
+      <div class="card rounded bg-dark text-light mb-4">
+        <img src="{{place.imageUrl}}" class="card-img-top" alt="Image of {{place.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{place.name}}</h5>
+          <p class="card-text">Street:{{place.street}} ZipCode:{{place.zipcode}}</p>
+          <div style="overflow-y: auto; max-height: 200px;">{{place.description}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

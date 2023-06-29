@@ -139,11 +139,20 @@ export class DestinationComponent implements OnInit {
   displayUpdateForm(destination: Destination): void {
     this.selected = destination;
   }
+
+  opactiyGetter() {
+    if (this.selected) {
+      return 'low'
+    }
+    else {
+      return 'full'
+    }
+  }
   addDestination(destination: Destination) {
     return this.destinationServ.create(destination, this.countryId).subscribe({
       next: (createdDes) => {
         this.newDes = new Destination();
-      this.ngOnInit();
+        this.ngOnInit();
       },
       error: (err) => {
         console.log(err);
@@ -166,7 +175,7 @@ export class DestinationComponent implements OnInit {
   deleteDestination(id: number) {
     return this.destinationServ.destroy(id).subscribe({
       next: () => {
-      this.ngOnInit();
+        this.ngOnInit();
       },
       error: (err) => {
         console.log(err);
