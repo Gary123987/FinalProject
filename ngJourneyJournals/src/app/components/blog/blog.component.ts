@@ -1,9 +1,11 @@
+import { Comment } from './../../models/comment';
 import { Component, OnInit } from '@angular/core';
 import { Blog } from 'src/app/models/blog';
 import { Place } from 'src/app/models/place';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { BlogService } from 'src/app/services/blog.service';
+import { CommentService } from 'src/app/services/comment.service';
 import { PlaceService } from 'src/app/services/place.service';
 
 @Component({
@@ -24,11 +26,19 @@ export class BlogComponent implements OnInit {
   placeId: any;
   opacity: number = 1;
   filterdBlogs: Blog[] = [];
+  showCommentForm : boolean = false;
+  showCommentUpdateForm : boolean = false;
+  newCommentTitle : string = '';
+  newCommentBody : string='';
+  comment : Comment = new Comment();
+  selectedComment : Comment | null= null
+  updatedComment : Comment  = new Comment()
 
   constructor(
     private auth: AuthService,
     private placeServ: PlaceService,
-    private blogServ: BlogService
+    private blogServ: BlogService,
+    private commentServ : CommentService
   ) { }
 
   getUserName() {
@@ -96,6 +106,51 @@ export class BlogComponent implements OnInit {
     }
   }
 
+  addComment(title :string, body : string, blog : Blog) {
+    this.comment.body = body
+    this.comment.title = title
+    this.comment.enabled = true
+    this.comment.blog = blog
+    this.comment.user = this.user
+    return this.commentServ.addNewCommentToBlog(this.comment).subscribe({
+      next: (comment) => {
+        this.newCommentBody = ''
+        this.newCommentBody = ''
+        this.showCommentForm = false
+        this.ngOnInit()
+      }
+    })
+  }
+
+  updateComment(comment : Comment){
+    let id = comment.id
+    console.log(id)
+    console.log(comment)
+    this.commentServ.updateCommentToBlog(comment, id).subscribe({
+      next: (comment) => {
+        this.selectedComment = null
+        this.ngOnInit()
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  deleteComment(comment : Comment) {
+    let id = comment.id
+    return this.commentServ.deleteComment(comment, id).subscribe({
+      next: () => {
+        this.selectedComment = null;
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+
   addBlog(blog: Blog) {
     return this.blogServ.create(blog, this.placeId).subscribe({
       next: () => {
@@ -136,4 +191,12 @@ export class BlogComponent implements OnInit {
     return this.user?.role === 'admin' || this.user?.blogs.includes(blog);
 
   }
+
+
+  commentCreatedByUser(comment : Comment) {
+    return this.user?.role === 'admin' || comment.user == this.user;
+
+  }
+
+
 }

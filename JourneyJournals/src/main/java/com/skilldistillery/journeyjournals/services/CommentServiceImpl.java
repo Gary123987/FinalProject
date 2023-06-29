@@ -49,12 +49,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public Comment update(String username, int tid, Comment comment) {
-		User user = userRepo.findByUsername(username);
+	public Comment update(int tid, Comment comment) {
 		Comment oldComment = repo.findById(tid);
-		if (user != oldComment.getUser()) {
-			return null;
-		}
 		oldComment.setBody(comment.getBody());
 		oldComment.setTitle(comment.getTitle());
 		return repo.saveAndFlush(oldComment);
@@ -62,13 +58,9 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public boolean destroy(String username, int tid) {
-		User user = userRepo.findByUsername(username);
 		Comment comment = repo.findById(tid);
-		if (user == comment.getUser()) {
 			repo.delete(comment);
 			return true;
-		}
-		return false;
 	}
 
 }

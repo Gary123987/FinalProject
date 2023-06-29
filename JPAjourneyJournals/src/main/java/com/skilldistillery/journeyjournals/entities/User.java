@@ -51,7 +51,7 @@ public class User {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@JsonIgnoreProperties({"user", "ratings"})
+	@JsonIgnoreProperties({"user", "ratings", "comments"})
 	@OneToMany(mappedBy = "user")
 	private List<Blog> blogs;
 

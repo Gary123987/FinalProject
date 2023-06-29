@@ -47,18 +47,18 @@ public class CommentController {
 		return commentServ.indexByBlog(bid);
 	}
 	
-	@PostMapping("comment/create/{username}")
+	@PostMapping("comment/create")
 	private Comment createComment (@RequestBody Comment comment, Principal principal) {
 		return commentServ.create(principal.getName(), comment);
 	}
 	
-	@PutMapping("comment/update/{username}/{id}") 
-	private Comment updateComment(Principal principal, @PathVariable int id, @RequestBody Comment comment) {
-		return commentServ.update(principal.getName(), id, comment);
+	@PutMapping("comment/update/{id}") 
+	private Comment updateComment(@PathVariable int id, @RequestBody Comment comment) {
+		return commentServ.update(id, comment);
 	}
 	
 	@DeleteMapping("comment/delete/{id}")
-	private void deleteComment(@PathVariable String username, @PathVariable int id, HttpServletResponse res, Principal principal) {
+	private void deleteComment(@PathVariable int id, HttpServletResponse res, Principal principal) {
 		boolean b = commentServ.destroy(principal.getName(), id);
 		if (!b) {
 			res.setStatus(400);

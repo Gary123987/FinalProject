@@ -11,6 +11,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 export class BlogServiceService {
 
   private url = environment.baseUrl + 'api/blogs';
+  private commentUrl = environment.baseUrl + 'api/comment/create'
 
   constructor(
     private auth: AuthService,
@@ -26,6 +27,20 @@ export class BlogServiceService {
           () =>
             new Error(
               "error retrieving blogs: " + err
+            )
+        )
+      })
+    );
+  }
+
+  public addNewCommentToBlog(comment : Comment, username : string): Observable<Comment> {
+    return this.http.post<Comment>(this.url + '/' + username, this.getHttpOptions()).pipe(
+      catchError((err: any) => {
+        console.error('Error creating comment');
+        return throwError(
+          () =>
+            new Error(
+              "error creating comment: " + err
             )
         )
       })
