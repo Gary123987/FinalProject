@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'userhome/:id', component: UserHomeComponent },
   { path: 'register', component: CreateAccountComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'place/:placeId', component: BlogComponent },
   { path: 'place', component: PlaceComponent },
   { path: 'bloglist', component: BlogListComponent },
   { path: 'placelist', component: PlaceListComponent },

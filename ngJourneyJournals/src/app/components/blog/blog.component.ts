@@ -1,5 +1,6 @@
 import { Comment } from './../../models/comment';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
 import { Blog } from 'src/app/models/blog';
 import { Place } from 'src/app/models/place';
 import { User } from 'src/app/models/user';
@@ -26,19 +27,23 @@ export class BlogComponent implements OnInit {
   placeId: any;
   opacity: number = 1;
   filterdBlogs: Blog[] = [];
-  showCommentForm : boolean = false;
-  showCommentUpdateForm : boolean = false;
-  newCommentTitle : string = '';
-  newCommentBody : string='';
-  comment : Comment = new Comment();
-  selectedComment : Comment | null= null
-  updatedComment : Comment  = new Comment()
+  showCommentForm: boolean = false;
+  showCommentUpdateForm: boolean = false;
+  newCommentTitle: string = '';
+  newCommentBody: string = '';
+  comment: Comment = new Comment();
+  selectedComment: Comment | null = null
+  updatedComment: Comment = new Comment()
+  showFirstDiv: boolean = true;
+
 
   constructor(
     private auth: AuthService,
     private placeServ: PlaceService,
     private blogServ: BlogService,
-    private commentServ : CommentService
+    private commentServ: CommentService,
+    private route: ActivatedRoute,
+
   ) { }
 
   getUserName() {
@@ -54,11 +59,37 @@ export class BlogComponent implements OnInit {
 
   ngOnInit() {
     this.loadPlaces();
-    this.loadBlogs();
+    // this.loadBlogs();
     this.getUserName();
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        let placeString = params.get('placeId');
+        if (placeString) {
+          let placeId = parseInt(placeString);
+          if (!isNaN(placeId)) {
+            // this.findBlogByPlaceId(placeId)
+            this.loadBlogsByPlaceId(placeId);
+          }
+        } else (
+          this.loadBlogs()
+        )
+      }
+    })
+
   }
   checkedLogin() {
     return this.auth.checkLogin();
+  }
+
+  findBlogByPlaceId(placeId: number) {
+    this.blogServ.show(placeId).subscribe({
+      next: (blog) => {
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
   loadPlaces() {
@@ -71,6 +102,27 @@ export class BlogComponent implements OnInit {
       }
     })
 
+  }
+
+  hasBlogs(): boolean {
+    return this.blogs.length != 0;
+  }
+
+  loadBlogsByPlaceId(placeId: number) {
+    this.blogServ.indexAll().subscribe({
+      next: (blogList) => {
+        blogList.forEach(blog => {
+          if (blog.place?.id === placeId) {
+            console.log(placeId);
+            console.log(blog);
+            this.blogs.push(blog);
+          }
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
   }
 
   loadBlogs() {
@@ -95,6 +147,9 @@ export class BlogComponent implements OnInit {
 
   displayDetails(blog: Blog | null): void {
     this.selectedBlog = blog;
+    this.showFirstDiv = false;
+
+    console.log('Mmmmmmmmmmmmmmmmm')
   }
 
   opactiyGetter() {
@@ -106,7 +161,7 @@ export class BlogComponent implements OnInit {
     }
   }
 
-  addComment(title :string, body : string, blog : Blog) {
+  addComment(title: string, body: string, blog: Blog) {
     this.comment.body = body
     this.comment.title = title
     this.comment.enabled = true
@@ -117,12 +172,12 @@ export class BlogComponent implements OnInit {
         this.newCommentBody = ''
         this.newCommentBody = ''
         this.showCommentForm = false
-        this.ngOnInit()
+        this.ngOnInit()//reload method
       }
     })
   }
 
-  updateComment(comment : Comment){
+  updateComment(comment: Comment) {
     let id = comment.id
     console.log(id)
     console.log(comment)
@@ -137,7 +192,7 @@ export class BlogComponent implements OnInit {
     })
   }
 
-  deleteComment(comment : Comment) {
+  deleteComment(comment: Comment) {
     let id = comment.id
     return this.commentServ.deleteComment(comment, id).subscribe({
       next: () => {
@@ -173,7 +228,6 @@ export class BlogComponent implements OnInit {
         console.error(err);
       }
     })
-
   }
 
   deleteBlog(id: number) {
@@ -189,14 +243,10 @@ export class BlogComponent implements OnInit {
 
   blogCreatedByUser(blog: Blog) {
     return this.user?.role === 'admin' || this.user?.blogs.includes(blog);
-
   }
 
-
-  commentCreatedByUser(comment : Comment) {
+  commentCreatedByUser(comment: Comment) {
     return this.user?.role === 'admin' || comment.user == this.user;
 
   }
-
-
 }
