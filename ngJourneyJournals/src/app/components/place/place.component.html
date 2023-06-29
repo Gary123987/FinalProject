@@ -1,6 +1,6 @@
 <div id="myBackground" *ngIf="!selectedPlace">
   <div class="container" *ngIf="!showingForm">
-    <div style="overflow-y: auto; max-height: 860px;" class="row">
+    <div style="overflow-y: auto; max-height: 500px;" class="row">
       <div class="col-lg-4" *ngFor="let d of destinations">
         <div class="card rounded bg-dark text-light mb-3">
           <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
@@ -50,41 +50,36 @@
 
 
 <div id="placeDetails" *ngIf="selectedPlace" class="container-fluid" [ngClass]="opactiyGetter()">
+  <button class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
   <h1 id="placeName">{{selectedPlace.name}}</h1>
-  <div class="row justify-content-center"> <!-- Added justify-content-center class to center the content -->
+  <div style="overflow-y: auto; max-height: 610px;" class="row justify-content-center">
     <div class="col-md-4">
-
       <div class="card rounded bg-dark text-light mb-4">
         <img src="{{selectedPlace.imageUrl}}" alt="{{selectedPlace.name}}" class="card-img-top img-fluid" width="200">
         <div class="card-body">
           <h6 class="card-subtitle">{{selectedPlace.name}}</h6>
           <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedPlace.description}}</p>
           <div style="overflow-y: auto; max-height: 200px;">
+            <button class="btn btn-primary">Whos Tablking about: {{selectedPlace.name}}</button>
             <p class="card-text">{{selectedPlace.street}}, {{selectedPlace.zipcode}}</p>
           </div>
         </div>
       </div>
-
-     
-      <button class="btn btn-primary" *ngIf="selectedPlace" (click)="gettingUserId(selectedPlace.user.id)"> View User's Profile </button>
-
-
-      <button id="one" class="btn btn-outline-danger" *ngIf="placesCreatedByUser(selectedPlace)"
+      <button class="btn btn-primary" *ngIf="selectedPlace" (click)="gettingUserId(selectedPlace.user.id)"> View User's
+        Profile </button>
+      <button class="btn btn-outline-danger" *ngIf="placesCreatedByUser(selectedPlace)"
         (click)="deletePlace(selectedPlace.id)">Delete Destination</button>
-      <button id="two" class="btn btn-outline-info" *ngIf="placesCreatedByUser(selectedPlace)"
+      <button class="btn btn-outline-info" *ngIf="placesCreatedByUser(selectedPlace)"
         (click)="displayUpdateForm(selectedPlace)">Update
         Location</button>
     </div>
-    <div class="col-md-8"> <!-- Added a new column for Google Maps -->
+    <div class="col-md-8">
       <iframe
         [src]="sanitizeUrl('https://www.google.com/maps?q=' + encodeAddress(selectedPlace.street) +',' + encodeAddress(selectedPlace.zipcode) + '&z=10&output=embed')"
         width="100%" height="450" frameborder="0" allowfullscreen></iframe>
-
     </div>
   </div>
-  <button id="three" class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
 </div>
-
 
 <div id="updateForm" *ngIf="selected">
   <div id="back">

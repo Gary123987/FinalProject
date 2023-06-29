@@ -39,15 +39,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User update(String username, int id, User user) {
+	public User update(int id, User user) {
 		if (userRepo.existsById(id)) {
-			User updated = userRepo.findByUsernameAndId(username, id);
+			User updated = userRepo.findById( id);
 			if (updated != null) {
 				updated.setUsername(user.getUsername());
 				updated.setFirstName(user.getFirstName());
 				updated.setLastName(user.getLastName());	
 				updated.setAbout(user.getAbout());
 				updated.setImageUrl(user.getImageUrl());
+				updated.setEnabled(user.isEnabled());
 				return userRepo.saveAndFlush(updated);
 			}
 		}
@@ -59,6 +60,17 @@ public class UserServiceImpl implements UserService {
 	User user = userRepo.findByUsernameAndId(username, id);
 		user.setEnabled(false);
 		return !userRepo.existsById(id);
+	}
+
+	@Override
+	public User toggleUserEnabled(int id) {
+	User managedUser =userRepo.findById(id);
+	if(managedUser != null) {
+		managedUser.setEnabled(!managedUser.isEnabled());
+		return userRepo.saveAndFlush(managedUser);
+	}
+		
+		return null;
 	}
 
 

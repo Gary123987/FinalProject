@@ -2,13 +2,13 @@
   <div id="container-one">
     <div id="userInfo">
       <div class="card rounded bg-dark text-light" style="width: 18rem;">
-        <img src="{{user?.imageUrl}}" class="card-img-top" alt="UserImageUrl" width="250" height="auto">
+        <img src="{{profileUser?.imageUrl}}" class="card-img-top" alt="UserImageUrl" width="250" height="auto">
         <div class="card-body rounded bg-dark text-light">
-          <h5 class="card-title">{{user?.username}}</h5>
-          <p class="card-text" style="overflow-y: auto; max-height: 150px;">{{user?.about}}</p>
+          <h5 class="card-title">{{profileUser?.username}}</h5>
+          <p class="card-text" style="overflow-y: auto; max-height: 150px;">{{profileUser?.about}}</p>
         </div>
         <ul class="list-group list-group-flush ">
-          <li class="list-group-item bg-dark text-light">{{user?.firstName}}, {{user?.lastName}}</li>
+          <li class="list-group-item bg-dark text-light">{{profileUser?.firstName}}, {{profileUser?.lastName}}</li>
         </ul>
         <div class="card-body rounded bg-dark text-light">
           <a href="#" class="card-link">Update Profile</a>
@@ -52,12 +52,20 @@
 
   <div id="container-three">
     <button [routerLink]="['/destination']">Add Destination</button>
-    <div id="users-followed">
+    <div id="users-followed" *ngIf="loggedInUser?.role === 'admin' ">
       <table class="table table-dark table-hover table-bordered">
-        <caption>Users Followed</caption>
-        <tbody>
+        <caption>Active Users</caption>
+        <thead>
           <tr>
-            <td>Users Followed</td>
+            <th>User name</th>
+            <th>Active Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td><input type="checkbox" [(ngModel)]="user.enabled" (change)="toggleUserEnabled(user.id)" name="enabled">
+            </td>
           </tr>
         </tbody>
       </table>
