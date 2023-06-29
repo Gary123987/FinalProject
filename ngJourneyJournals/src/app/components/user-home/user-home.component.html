@@ -1,17 +1,16 @@
 <div id="container">
   <div id="container-one">
     <div id="userInfo">
-      <div class="card" style="width: 18rem;">
+      <div class="card rounded bg-dark text-light" style="width: 18rem;">
         <img src="{{user?.imageUrl}}" class="card-img-top" alt="UserImageUrl" width="250" height="auto">
-        <div class="card-body">
+        <div class="card-body rounded bg-dark text-light">
           <h5 class="card-title">{{user?.username}}</h5>
           <p class="card-text" style="overflow-y: auto; max-height: 150px;">{{user?.about}}</p>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{user?.firstName}}</li>
-          <li class="list-group-item">{{user?.lastName}}</li>
+        <ul class="list-group list-group-flush ">
+          <li class="list-group-item bg-dark text-light">{{user?.firstName}}, {{user?.lastName}}</li>
         </ul>
-        <div class="card-body">
+        <div class="card-body rounded bg-dark text-light">
           <a href="#" class="card-link">Update Profile</a>
         </div>
       </div>
@@ -30,21 +29,23 @@
 
   <div id="container-two">
     <caption>My Blogs</caption>
-    <div id="column-container">
+    <div id="column-container" style="overflow-y: auto; max-height: 150px;">
       <div id="column" *ngFor="let blog of blogs;">
-        <img [routerLink]="['/bloglist']" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="150" height="auto">
+        <img [routerLink]="['/bloglist']" src="{{blog.imageUrl}}" alt="{{blog.title}}">
       </div>
     </div>
+
     <caption>My Places</caption>
-    <div id="column-container">
+    <div id="column-container" style="overflow-y: auto; max-height: 150px;">
       <div id="column" *ngFor="let place of places;">
-        <img [routerLink]="['/placelist']" src="{{place.imageUrl}}" alt="{{place.name}}" width="150" height="auto">
+        <img [routerLink]="['/placelist']" src="{{place.imageUrl}}" alt="{{place.name}}">
       </div>
     </div>
+
     <caption>My Destinations</caption>
-    <div id="column-container">
+    <div id="column-container" style="overflow-y: auto; max-height: 150px;">
       <div id="column" *ngFor="let des of destinations;">
-        <img [routerLink]="['/destinationlist']" src="{{des.imageUrl}}" alt="{{des.name}}" width="150" height="auto">
+        <img [routerLink]="['/destinationlist']" src="{{des.imageUrl}}" alt="{{des.name}}">
       </div>
     </div>
   </div>
