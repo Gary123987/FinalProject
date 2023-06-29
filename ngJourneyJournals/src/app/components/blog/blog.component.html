@@ -57,9 +57,11 @@
             <div class="card mb-3">
               <div class="card-body">
                 <p class="card-text">{{selectedBlog.tripStart}}, {{selectedBlog.tripEnd}}</p>
-                <p *ngFor="let r of selectedBlog.ratings" style="overflow-y: auto; max-height: 200px;"
-                  class="card-text">{{r.ratingValue}}
-                  <small>{{r.ratingComment}}</small>
+                <p *ngFor="let c of selectedBlog.comments" style="overflow-y: auto; max-height: 200px;"
+                  class="card-text">{{c.title}}<br>
+                  <small>{{c.body}}</small>
+                  <button *ngIf="commentCreatedByUser(c)" (click)="deleteComment(c)">Delete</button>
+                  <button *ngIf="commentCreatedByUser(c)" (click)="selectedComment = c">Update</button>
                 </p>
               </div>
             </div>
@@ -70,11 +72,25 @@
         Post</button>
       <button class="btn btn-primary" *ngIf="blogCreatedByUser(selectedBlog)"
         (click)="deleteBlog(selectedBlog.id)">Delete Post</button>
+      <button (click)="showCommentForm = true">Add a New Comment</button>"
     </div>
   </div>
   <!-- <button class="btn btn-primary" (click)="showAddForm(selectedCountry.id)">Add new Destination</button> -->
   <br>
-  <button class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
+  <button class="btn btn-secondary" (click)="displayDetails(null)" (click)="showCommentForm = false">Back</button>
+  <div *ngIf="showCommentForm">
+    <input type="text" name="title" placeholder="Title" [(ngModel)]="newCommentTitle"/><br>
+    <input type="text" name="body" placeholder="Body" [(ngModel)]="newCommentBody"/><br>
+    <button (click)="newCommentBody = ''" (click)="newCommentTitle = ''" (click)="showCommentForm = false">Cancel</button>
+    <button (click)="addComment(newCommentTitle, newCommentBody, this.selectedBlog)">Submit</button>
+  </div>
+</div>
+
+<div *ngIf="selectedComment">
+  <input type="text" name="title" placeholder="selectedComment.title" [(ngModel)]="selectedComment.title"/><br>
+  <input type="text" name="body" placeholder="selectedComment.body" [(ngModel)]="selectedComment.body"/><br>
+  <button (click)="selectedComment = null">Cancel</button>
+  <button (click)="updateComment(selectedComment)">Submit</button>
 </div>
 
 <div id="updateForm" *ngIf="selected">

@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Blog } from '../models/blog';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,8 @@ export class BlogService {
     };
     return options;
   }
+
+
 
   index(): Observable<Blog[]> {
     return this.http.get<Blog[]>(this.url + 'User', this.getHttpOptions()).pipe(

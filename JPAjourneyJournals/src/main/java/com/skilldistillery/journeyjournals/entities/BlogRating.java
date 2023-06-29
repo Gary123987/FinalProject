@@ -39,11 +39,12 @@ public class BlogRating {
 	@Column(name="rating_comment")
 	private String ratingComment;
 	
-	@JsonIgnoreProperties({"comments", "following", "destinationsCreated", "favoriteDestinations","placesCreated" })
+	@JsonIgnoreProperties({"comments", "following", "destinationsCreated", "favoriteDestinations","placesCreated", "blogs" })
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	@MapsId(value="userId")
 	private User user;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="blog_id")

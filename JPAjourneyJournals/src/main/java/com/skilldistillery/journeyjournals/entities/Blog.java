@@ -67,7 +67,7 @@ public class Blog {
 	@JoinTable(name = "blog_category", joinColumns = @JoinColumn(name = "blog_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
-	@JsonIgnore
+	@JsonIgnoreProperties({"blog" , "comments", "following", "destinationsCreated", "favoriteDestinations", "placesCreated"})
 	@OneToMany(mappedBy = "blog")
 	private List<Comment> comments;
 

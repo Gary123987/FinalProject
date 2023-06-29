@@ -41,7 +41,7 @@ public class Comment {
 	
 	private boolean enabled;
 	
-	@JsonIgnoreProperties({"destinationsCreated", "favoriteDestinations", "following", "comments"})
+	@JsonIgnoreProperties({"destinationsCreated", "favoriteDestinations", "following", "comments", "placesCreated", "blogs"})
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -51,7 +51,7 @@ public class Comment {
 	@JoinColumn(name="blog_id")
 	private Blog blog;
 	
-	
+	@JsonIgnoreProperties({"user"})
 	@ManyToOne
 	@JoinColumn(name="inreplyto_id")
 	private Comment parentComment;

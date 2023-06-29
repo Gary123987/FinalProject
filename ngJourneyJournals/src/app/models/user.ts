@@ -1,6 +1,7 @@
 import { Destination } from './destination';
 import { Blog } from "./blog";
 import { Place } from './place';
+import { Comment } from './../models/comment';
 
 export class User {
 
@@ -19,6 +20,7 @@ export class User {
   destinationFavored: Destination[];
   user: User[]
   placesCreated: Place[];
+  comments : Comment[]
 
   constructor(
     id: number = 0,
@@ -35,7 +37,8 @@ export class User {
     destinationCreated = [],
     destinationFavored = [],
     user = [],
-    placesCreated = []
+    placesCreated = [],
+    comments = []
   ) {
     this.id = id,
       this.firstName = firstName,
@@ -52,6 +55,7 @@ export class User {
     this.destinationFavored = destinationFavored;
     this.user = user;
     this.placesCreated = placesCreated;
+    this.comments = comments
   }
 
 }
