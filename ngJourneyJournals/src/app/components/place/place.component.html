@@ -51,7 +51,7 @@
 
 <div id="placeDetails" *ngIf="selectedPlace" class="container-fluid" [ngClass]="opactiyGetter()">
   <h1 id="placeName">{{selectedPlace.name}}</h1>
-  <div class="row">
+  <div class="row justify-content-center"> <!-- Added justify-content-center class to center the content -->
     <div class="col-md-4">
       <div class="card rounded bg-dark text-light mb-4">
         <img src="{{selectedPlace.imageUrl}}" alt="{{selectedPlace.name}}" class="card-img-top img-fluid" width="200">
@@ -68,14 +68,16 @@
       <button id="two" class="btn btn-outline-info" *ngIf="placesCreatedByUser(selectedPlace)"
         (click)="displayUpdateForm(selectedPlace)">Update
         Location</button>
+    </div>
+    <div class="col-md-8"> <!-- Added a new column for Google Maps -->
       <iframe
         [src]="sanitizeUrl('https://www.google.com/maps?q=' + encodeAddress(selectedPlace.street) +',' + encodeAddress(selectedPlace.zipcode) + '&z=10&output=embed')"
-        width="600" height="450" frameborder="0" allowfullscreen></iframe>
-
+        width="100%" height="450" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
   <button id="three" class="btn btn-secondary" (click)="displayDetails(null)">Back</button>
 </div>
+
 
 <div id="updateForm" *ngIf="selected">
   <div id="back">
