@@ -27,8 +27,8 @@
           <h5 class="card-title text-light">Post About {{blog.title}}</h5>
           <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
             <div>
-              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-light">{{blog.title}}</h4>
-              <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200">
+              <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200"
+                (click)="displayDetails(blog)">
             </div>
           </div>
         </div>
