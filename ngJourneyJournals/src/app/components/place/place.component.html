@@ -69,7 +69,7 @@
       <button class="btn btn-primary" *ngIf="selectedPlace" (click)="gettingUserId(selectedPlace.user.id)"> View User's
         Profile </button>
       <button class="btn btn-outline-danger" *ngIf="placesCreatedByUser(selectedPlace)"
-        (click)="deletePlace(selectedPlace.id)">Delete Destination</button>
+        (click)="deletePlace(selectedPlace.id)">Delete Location</button>
       <button class="btn btn-outline-info" *ngIf="placesCreatedByUser(selectedPlace)"
         (click)="displayUpdateForm(selectedPlace)">Update
         Location</button>
@@ -106,7 +106,7 @@
         </div>
         <input type="hidden" name="enabled" value="1" [(ngModel)]="selected.enabled">
         <button class="btn btn-primary" type="submit" (click)="updatePlace( selected.id, selected)">Update
-          Destination</button>
+          Location</button>
         <button class="btn btn-outline-secondary" (click)="selected = null">Back</button>
       </form>
     </div>
