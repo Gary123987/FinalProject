@@ -96,7 +96,7 @@ export class PlaceComponent implements OnInit {
   }
 
   gettingUserId(id: number) {
-   this.router.navigateByUrl('userhome/' + id);
+    this.router.navigateByUrl('userhome/' + id);
 
   }
 
@@ -152,6 +152,8 @@ export class PlaceComponent implements OnInit {
       }
     })
   }
+
+
 
   placesCreatedByUser(place: Place) {
     return this.user?.role === 'admin' || this.user?.placesCreated.includes(place);

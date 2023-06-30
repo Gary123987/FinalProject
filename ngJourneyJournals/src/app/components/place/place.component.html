@@ -1,5 +1,5 @@
 <div id="myBackground" *ngIf="!selectedPlace">
-  <div class="container" *ngIf="!showingForm">
+  <div class="container" *ngIf="!showingForm && checkedLogin()">
     <div style="overflow-y: auto; max-height: 630px;" class="row">
       <div class="col-lg-4" *ngFor="let d of destinations">
         <div class="card rounded bg-dark text-light mb-3">
@@ -60,7 +60,7 @@
           <h6 class="card-subtitle">{{selectedPlace.name}}</h6>
           <p style="overflow-y: auto; max-height: 200px;" class="card-text">{{selectedPlace.description}}</p>
           <div style="overflow-y: auto; max-height: 200px;">
-            <button [routerLink]="['/place/' + selectedPlace.id]" class="btn btn-primary">Whos Tablking about:
+            <button [routerLink]="['/place/' + selectedPlace.id]" class="btn btn-primary">Whos Talking about:
               {{selectedPlace.name}}</button>
             <p class="card-text">{{selectedPlace.street}}, {{selectedPlace.zipcode}}</p>
           </div>

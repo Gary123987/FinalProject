@@ -1,5 +1,5 @@
 <div id="myBackground" *ngIf="!blogs[0] && showFirstDiv">
-  <div class="container" *ngIf="!showingForm">
+  <div class="container" *ngIf="!showingForm  &&  checkedLogin()">
     <div style="overflow-y: auto; max-height: 630px;" class="row">
       <div class="col-lg-4" *ngFor="let p of places">
         <div class="card rounded bg-dark text-light mb-3">
@@ -19,16 +19,18 @@
 </div>
 
 <div id="myBackground" *ngIf="showFirstDiv && hasBlogs()">
-  <button class="btn btn-secondary" (click)="showFirstDiv = true; blogs = []">Exit</button>
-  <div class="container" *ngIf="!showingForm">
-    <div style="overflow-y: auto; max-height: 630px;" class="row">
-      <div class="col-lg-4" *ngFor="let blog of blogs">
-        <div class="card rounded bg-dark text-light mb-3">
-          <h5 class="card-title text-light">Post About {{blog.title}}</h5>
-          <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
-            <div>
-              <h4 style="margin-top: 10px;" class="card-subtitle mb-2 text-light">{{blog.title}}</h4>
-              <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200">
+  <div *ngIf="checkedLogin()">
+    <button class="btn btn-secondary" (click)="showFirstDiv = true; blogs = []">View All</button>
+    <div class="container" *ngIf="!showingForm">
+      <div style="overflow-y: auto; max-height: 630px;" class="row">
+        <div class="col-lg-4" *ngFor="let blog of blogs">
+          <div class="card rounded bg-dark text-light mb-3">
+            <h5 class="card-title text-light">Post About {{blog.title}}</h5>
+            <div style="overflow-y: auto; max-height: 538.75px;" class="card-body">
+              <div>
+                <img class="card-img-top" src="{{blog.imageUrl}}" alt="{{blog.title}}" width="200"
+                  (click)="displayDetails(blog)">
+              </div>
             </div>
           </div>
         </div>
