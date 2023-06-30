@@ -19,7 +19,7 @@
 </div>
 
 <div id="myBackground" *ngIf="showFirstDiv && hasBlogs()">
-  <button class="btn btn-secondary" (click)="showFirstDiv = true; blogs = []">Exit</button>
+  <button class="btn btn-secondary" (click)="showFirstDiv = true; blogs = []">View All</button>
   <div class="container" *ngIf="!showingForm">
     <div style="overflow-y: auto; max-height: 630px;" class="row">
       <div class="col-lg-4" *ngFor="let blog of blogs">
